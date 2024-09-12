@@ -2,12 +2,15 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ExcelController;
+use App\Models\Pengadaan;
 
 Route::get('/', function () {
     return view('home', ['title' => 'Home']);
 });
 Route::get('/dashboard', function () {
-    return view('dashboard', ['title' => 'Dashboard']);
+    $data = Pengadaan::all();
+
+    return view('dashboard', ['title' => 'Dashboard', 'data' => $data]);
 });
 
 Route::get('/upload-excel', [ExcelController::class, 'index'])->name('upload.excel');

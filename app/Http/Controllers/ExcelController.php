@@ -10,6 +10,10 @@ use PhpOffice\PhpSpreadsheet\Spreadsheet;
 
 class ExcelController extends Controller
 {
+    public function index()
+    {
+        return view('upload-excel', ['title' => 'Upload Excel']);
+    }
     public function upload(Request $request)
     {
         $request->validate([
@@ -24,6 +28,7 @@ class ExcelController extends Controller
 
         // Convert the worksheet to array and filter out hidden rows/columns
         $data = $import->array($worksheet->toArray());
+        // dd($data);
 
         return view('upload-excel', ['data' => $data, 'title' => 'Upload Excel']);
     }
