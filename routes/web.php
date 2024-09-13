@@ -8,9 +8,13 @@ Route::get('/', function () {
     return view('home', ['title' => 'Home']);
 });
 Route::get('/dashboard', function () {
+    return view('dashboard', ['title' => 'Dashboard']);
+});
+
+Route::get('/data-pengadaan/{category}', function ($category) {
     $data = Pengadaan::all();
 
-    return view('dashboard', ['title' => 'Dashboard', 'data' => $data]);
+    return view('data-pengadaan', ['title' => 'Data Pengadaan' . ' ' . strtoupper($category), 'data' => $data]);
 });
 
 Route::get('/upload-excel', [ExcelController::class, 'index'])->name('upload.excel');

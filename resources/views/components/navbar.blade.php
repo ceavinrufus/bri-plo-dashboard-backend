@@ -2,6 +2,27 @@
     $navLinks = [
         ['name' => 'Home', 'url' => '/', 'active' => request()->is('/')],
         ['name' => 'Dashboard', 'url' => '/dashboard', 'active' => request()->is('dashboard')],
+        [
+            'name' => 'Data Pengadaan',
+            'url' => '/data-pengadaan',
+            'children' => [
+                [
+                    'name' => 'BCP',
+                    'description' => 'Building Construction Procurement',
+                    'url' => '/data-pengadaan/bcp',
+                ],
+                [
+                    'name' => 'IGP',
+                    'description' => '...',
+                    'url' => '/data-pengadaan/igp',
+                ],
+                [
+                    'name' => 'PSR',
+                    'description' => '...',
+                    'url' => '/data-pengadaan/psr',
+                ],
+            ],
+        ],
         ['name' => 'Upload Excel', 'url' => '/upload-excel', 'active' => request()->is('upload-excel')],
     ];
 @endphp
@@ -17,7 +38,7 @@
                 <div class="hidden md:block">
                     <div class="ml-10 flex items-baseline space-x-4">
                         @foreach ($navLinks as $navLink)
-                            <x-nav-link href="{{ $navLink['url'] }}" :active="$navLink['active']">
+                            <x-nav-link href="{{ $navLink['url'] }}" :active="array_key_exists('active', $navLink) ? $navLink['active'] : false" :children="array_key_exists('children', $navLink) ? $navLink['children'] : null">
                                 {{ $navLink['name'] }}
                             </x-nav-link>
                         @endforeach
@@ -97,7 +118,7 @@
         <div class="space-y-1 px-2 pb-3 pt-2 sm:px-3">
             <!-- Current: "bg-gray-900 text-white", Default: "text-gray-300 hover:bg-gray-700 hover:text-white" -->
             @foreach ($navLinks as $navLink)
-                <x-nav-link href="{{ $navLink['url'] }}" :active="$navLink['active']" isMobile="true">
+                <x-nav-link href="{{ $navLink['url'] }}" :active="array_key_exists('active', $navLink) ? $navLink['active'] : false" :isMobile="true" :children="array_key_exists('children', $navLink) ? $navLink['children'] : null">
                     {{ $navLink['name'] }}
                 </x-nav-link>
             @endforeach
