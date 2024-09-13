@@ -11,10 +11,9 @@ Route::get('/dashboard', function () {
     return view('dashboard', ['title' => 'Dashboard']);
 });
 
-Route::get('/data-pengadaan/{category}', function ($category) {
-    $data = Pengadaan::all();
-
-    return view('data-pengadaan', ['title' => 'Data Pengadaan' . ' ' . strtoupper($category), 'data' => $data]);
+Route::get('/data-pengadaan/{pengadaan:departemen}', function (Pengadaan $pengadaan) {
+    $data = Pengadaan::where('departemen', $pengadaan->departemen)->get();
+    return view('data-pengadaan', ['title' => 'Data Pengadaan' . ' ' . strtoupper($pengadaan->departemen), 'data' => $data]);
 });
 
 Route::get('/upload-excel', [ExcelController::class, 'index'])->name('upload.excel');

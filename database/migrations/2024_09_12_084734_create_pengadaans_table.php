@@ -13,11 +13,12 @@ return new class extends Migration
     {
         Schema::create('pengadaans', function (Blueprint $table) {
             $table->id();
+            $table->enum('departemen', ['bcp', 'igp', 'psr']);
             $table->string('nama_pengadaan');
             $table->date('tanggal_nodin')->nullable();
             $table->date('tanggal_spk')->nullable();
             $table->integer('hari_pengerjaan')->nullable();
-            $table->string('metode')->nullable();
+            $table->enum('metode', ['Pemilihan Langsung', 'Penunjukkan Langsung', 'Lelang'])->nullable();
             $table->string('progres')->nullable();
             $table->integer('hari_proses')->nullable();
             $table->string('progres_pengadaan')->nullable();
