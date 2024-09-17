@@ -1,7 +1,6 @@
 @php
     $navLinks = [
-        ['name' => 'Home', 'url' => '/', 'active' => request()->is('/')],
-        ['name' => 'Dashboard', 'url' => '/dashboard', 'active' => request()->is('dashboard')],
+        ['name' => 'Dashboard', 'url' => '/', 'active' => request()->is('/')],
         [
             'name' => 'Data Pengadaan',
             'url' => '/data-pengadaan',
@@ -23,7 +22,55 @@
                 ],
             ],
         ],
-        ['name' => 'Upload Excel', 'url' => '/upload-excel', 'active' => request()->is('upload-excel')],
+        [
+            'name' => 'Progress Pengadaan',
+            'url' => '/progress-pengadaan',
+            'children' => [
+                [
+                    'name' => 'BCP',
+                    'description' => 'Building Construction Procurement',
+                    'url' => '/progress-pengadaan/bcp',
+                ],
+                [
+                    'name' => 'IGP',
+                    'description' => '...',
+                    'url' => '/progress-pengadaan/igp',
+                ],
+                [
+                    'name' => 'PSR',
+                    'description' => '...',
+                    'url' => '/progress-pengadaan/psr',
+                ],
+            ],
+        ],
+        [
+            'name' => 'Progress Pekerjaan',
+            'url' => '/progress-pekerjaan',
+            'children' => [
+                [
+                    'name' => 'BCG',
+                    'description' => '...',
+                    'url' => '/progress-pekerjaan/bcg',
+                ],
+                [
+                    'name' => 'IGM',
+                    'description' => '...',
+                    'url' => '/progress-pekerjaan/igm',
+                ],
+            ],
+        ],
+        [
+            'name' => 'Monitoring Dokumen',
+            'url' => '/monitoring-dokumen',
+            'children' => [
+                [
+                    'name' => 'SPK',
+                    'description' => '...',
+                    'url' => '/monitoring-dokumen/spk',
+                ],
+            ],
+        ],
+        // ['name' => 'Upload Excel', 'url' => '/upload-excel', 'active' => request()->is('upload-excel')],
     ];
 @endphp
 
