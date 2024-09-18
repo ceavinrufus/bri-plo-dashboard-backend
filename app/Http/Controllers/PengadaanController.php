@@ -7,37 +7,41 @@ use Illuminate\Http\Request;
 
 class PengadaanController extends Controller
 {
+    // Function to return data based on departemen
     public function index(Pengadaan $pengadaan)
     {
-        // Ambil data dari model Pengadaan sesuai departemen
+        // Fetch data from the Pengadaan model based on the departemen
         $data = Pengadaan::where('departemen', $pengadaan->departemen)->get();
 
-        // Modifikasi data untuk menambahkan kolom nomor di urutan pertama dan menghapus kolom yang tidak diinginkan
+        // Modify data to add 'nomor' field and remove unwanted fields
         $data = $data->map(function ($item, $index) {
-            // Ubah item ke array
+            // Convert the item to an array
             $itemArray = $item->toArray();
-            // Hapus kolom yang tidak diinginkan
+
+            // Remove unwanted fields
             unset($itemArray['id']);
             unset($itemArray['departemen']);
             unset($itemArray['created_at']);
             unset($itemArray['updated_at']);
 
-            // Tempatkan kolom 'nomor' di urutan pertama
+            // Place 'nomor' at the start
             $itemArray = array_merge(['nomor' => $index + 1], $itemArray);
 
             return $itemArray;
         });
 
-        // Kembalikan ke view dengan data yang sudah dimodifikasi
-        return view('data-pengadaan', [
-            'title' => 'Data Pengadaan ' . strtoupper($pengadaan->departemen),
-            'data' => $data
-        ]);
+        // Return the data as a JSON response
+        return response()->json([
+            'status' => 'success',
+            'message' => 'Data fetched successfully',
+            'data' => $data,
+        ], 200);
     }
 
+    // Function to store data and return a JSON response
     public function store(Request $request)
     {
-        // Validasi data yang dikirim dari form
+        // Validate the incoming request
         $validated = $request->validate([
             'departemen' => 'required|in:bcp,igp,psr',
             'nama_pengadaan' => 'required|string|max:255',
@@ -50,10 +54,14 @@ class PengadaanController extends Controller
             'progres_pengadaan' => 'nullable|string|max:255',
         ]);
 
-        // Simpan data ke tabel pengadaans
-        Pengadaan::create($validated);
+        // Create a new Pengadaan record
+        $pengadaan = Pengadaan::create($validated);
 
-        // Redirect kembali ke halaman data pengadaan
-        return redirect()->back()->with('success', 'Data pengadaan berhasil ditambahkan!');
+        // Return a JSON response indicating success
+        return response()->json([
+            'status' => 'success',
+            'message' => 'Pengadaan data successfully added!',
+            'data' => $pengadaan,
+        ], 201);
     }
 }
