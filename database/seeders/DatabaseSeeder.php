@@ -2,8 +2,9 @@
 
 namespace Database\Seeders;
 
+use App\Models\Department;
+use App\Models\Pengadaan;
 use App\Models\User;
-// use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder
@@ -13,11 +14,28 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-        // User::factory(10)->create();
-
-        User::factory()->create([
-            'name' => 'Test User',
-            'email' => 'test@example.com',
+        // Seed departments
+        Department::create([
+            'code' => 'bcp',
+            'name' => 'Building Construction Procurement',
         ]);
+
+        Department::create([
+            'code' => 'igp',
+            'name' => 'IT Goods and Services Procurement',
+        ]);
+
+        Department::create([
+            'code' => 'psr',
+            'name' => '...',
+        ]);
+
+        // Seed a user
+        User::factory()->create([
+            'name' => 'Ceavin Rufus',
+            'email' => 'ceavin.dev@gmail.com',
+        ]);
+
+        Pengadaan::factory(10)->create();
     }
 }

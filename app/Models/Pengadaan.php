@@ -10,14 +10,20 @@ class Pengadaan extends Model
     use HasFactory;
 
     protected $fillable = [
+        'kode_user',
+        'nodin_user',
+        'tanggal_nodin_user',
         'departemen',
-        'nama_pengadaan',
-        'tanggal_nodin',
+        'perihal',
         'tanggal_spk',
-        'hari_pengerjaan',
         'metode',
-        'progres',
-        'hari_proses',
-        'progres_pengadaan',
+        'is_verification_complete',
+        'is_done',
+        'proses_pengadaan',
+        'nilai_spk',
+        'anggaran',
+        'hps',
+        'tkdn_percentage',
+        'catatan',
     ];
 }

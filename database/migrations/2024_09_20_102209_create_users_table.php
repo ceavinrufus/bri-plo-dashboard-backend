@@ -21,7 +21,7 @@ return new class extends Migration
             $table->foreign('departemen')->references('code')->on('departments')->onDelete('restrict');
             $table->string('password');
             $table->rememberToken();
-            $table->boolean('isMaker');
+            $table->boolean('is_maker');
             $table->timestamps();
         });
 

@@ -28,8 +28,9 @@ class UserFactory extends Factory
             'email' => fake()->unique()->safeEmail(),
             'email_verified_at' => now(),
             'pn' => fake()->unique()->numerify('########'),
-            'role' => $this->faker->randomElement(['BCP', 'IGP', 'PSR']),
+            'departemen' => $this->faker->randomElement(['bcp', 'igp', 'psr']),
             'password' => static::$password ??= Hash::make('password'),
+            'is_maker' => true,
             'remember_token' => Str::random(10),
         ];
     }
@@ -41,6 +42,16 @@ class UserFactory extends Factory
     {
         return $this->state(fn(array $attributes) => [
             'email_verified_at' => null,
+        ]);
+    }
+
+    /**
+     * Indicate that the model's email address should be unverified.
+     */
+    public function notMaker(): static
+    {
+        return $this->state(fn(array $attributes) => [
+            'is_maker' => false,
         ]);
     }
 }

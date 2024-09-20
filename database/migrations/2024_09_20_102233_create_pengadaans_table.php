@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('pengadaans', function (Blueprint $table) {
             $table->id();
             $table->string('kode_user');
-            $table->date('nodin_user')->nullable();
+            $table->string('nodin_user')->nullable();
             $table->date('tanggal_nodin_user')->nullable();
             $table->string('departemen');
             $table->foreign('departemen')->references('code')->on('departments')->onDelete('restrict');

@@ -20,15 +20,21 @@ class PengadaanFactory extends Factory
     public function definition(): array
     {
         return [
+            'kode_user' => strtoupper($this->faker->lexify('???')),
+            'nodin_user' => $this->faker->words(3, true),
+            'tanggal_nodin_user' => $this->faker->optional()->date(),
             'departemen' => $this->faker->randomElement(['bcp', 'igp', 'psr']),
-            'nama_pengadaan' => $this->faker->words(3, true),
-            'tanggal_nodin' => $this->faker->optional()->date(),
+            'perihal' => $this->faker->sentence,
             'tanggal_spk' => $this->faker->optional()->date(),
-            'hari_pengerjaan' => $this->faker->optional()->numberBetween(1, 100),
-            'metode' => $this->faker->randomElement(['Pemilihan Langsung', 'Penunjukkan Langsung', 'Lelang']),
-            'progres' => "Done",
-            'hari_proses' => $this->faker->optional()->numberBetween(1, 100),
-            'progres_pengadaan' => $this->faker->optional()->word(),
+            'metode' => $this->faker->randomElement(['Lelang', 'Pemilihan Langsung', 'Seleksi Langsung', 'Penunjukkan Langsung']),
+            'is_verification_complete' => $this->faker->boolean,
+            'is_done' => $this->faker->boolean,
+            'proses_pengadaan' => $this->faker->optional()->word(),
+            'nilai_spk' => $this->faker->optional()->randomFloat(2, 1000, 1000000),
+            'anggaran' => $this->faker->optional()->randomFloat(2, 1000, 1000000),
+            'hps' => $this->faker->optional()->randomFloat(2, 1000, 1000000),
+            'tkdn_percentage' => $this->faker->optional()->randomFloat(2, 0, 100),
+            'catatan' => $this->faker->optional()->sentence,
             'created_at' => now(),
             'updated_at' => now(),
         ];
