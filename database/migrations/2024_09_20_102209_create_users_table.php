@@ -17,9 +17,11 @@ return new class extends Migration
             $table->string('email')->unique();
             $table->timestamp('email_verified_at')->nullable();
             $table->string('pn')->unique();
-            $table->string('role');
+            $table->string('departemen');
+            $table->foreign('departemen')->references('code')->on('departments')->onDelete('restrict');
             $table->string('password');
             $table->rememberToken();
+            $table->boolean('isMaker');
             $table->timestamps();
         });
 
