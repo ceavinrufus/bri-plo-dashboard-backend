@@ -26,6 +26,7 @@ class PengadaanController extends Controller
 
             // Place 'nomor' at the start
             $itemArray = array_merge(['nomor' => $index + 1], $itemArray);
+            $itemArray['nodin_plo'] = $item->nodinPlos;
 
             return $itemArray;
         });
@@ -43,15 +44,21 @@ class PengadaanController extends Controller
     {
         // Validate the incoming request
         $validated = $request->validate([
-            'departemen' => 'required|in:bcp,igp,psr',
-            'nama_pengadaan' => 'required|string|max:255',
-            'tanggal_nodin' => 'nullable|date',
+            'kode_user' => 'required|string|max:255',
+            'nodin_user' => 'nullable|string|max:255',
+            'tanggal_nodin_user' => 'nullable|date',
+            'departemen' => 'required|exists:departments,code',
+            'perihal' => 'required|string|max:255',
             'tanggal_spk' => 'nullable|date',
-            'hari_pengerjaan' => 'nullable|integer',
-            'metode' => 'nullable|in:Pemilihan Langsung,Penunjukkan Langsung,Lelang',
-            'progres' => 'nullable|string|max:255',
-            'hari_proses' => 'nullable|integer',
-            'progres_pengadaan' => 'nullable|string|max:255',
+            'metode' => 'nullable|in:Lelang,Pemilihan Langsung,Seleksi Langsung,Penunjukkan Langsung',
+            'is_verification_complete' => 'nullable|boolean',
+            'is_done' => 'nullable|boolean',
+            'proses_pengadaan' => 'nullable|string|max:255',
+            'nilai_spk' => 'nullable|integer',
+            'anggaran' => 'nullable|integer',
+            'hps' => 'nullable|integer',
+            'tkdn_percentage' => 'nullable|integer',
+            'catatan' => 'nullable|string|max:255',
         ]);
 
         // Create a new Pengadaan record
