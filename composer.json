@@ -10,6 +10,8 @@
         "laravel/sanctum": "^4.0",
         "laravel/tinker": "^2.9",
         "maatwebsite/excel": "^3.1",
+        "mll-lab/laravel-graphiql": "^3.2",
+        "nuwave/lighthouse": "^6.45",
         "rebing/graphql-laravel": "^9.6"
     },
     "require-dev": {
