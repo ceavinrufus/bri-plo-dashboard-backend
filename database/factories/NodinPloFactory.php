@@ -21,10 +21,12 @@ class NodinPloFactory extends Factory
      */
     public function definition(): array
     {
+        $pengadaanIDs = Pengadaan::all()->pluck('id')->toArray();
+
         return [
             'nodin' => $this->faker->word,
             'tanggal_nodin' => $this->faker->date,
-            'pengadaan_id' => Pengadaan::inRandomOrder()->first()->id, // Use existing Pengadaan ID
+            'pengadaan_id' =>  $this->faker->randomElement($pengadaanIDs), // Use existing Pengadaan ID
         ];
     }
 }
