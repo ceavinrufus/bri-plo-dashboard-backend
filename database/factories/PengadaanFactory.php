@@ -19,13 +19,15 @@ class PengadaanFactory extends Factory
      */
     public function definition(): array
     {
+        $tanggalNodinUser = $this->faker->dateTimeThisYear();
+
         return [
             'kode_user' => strtoupper($this->faker->lexify('???')),
             'nodin_user' => $this->faker->words(3, true),
-            'tanggal_nodin_user' => $this->faker->optional()->date(),
+            'tanggal_nodin_user' => $tanggalNodinUser->format('Y-m-d'),
             'departemen' => $this->faker->randomElement(['bcp', 'igp', 'psr']),
             'perihal' => $this->faker->sentence,
-            'tanggal_spk' => $this->faker->optional()->date(),
+            'tanggal_spk' => $this->faker->dateTimeBetween($tanggalNodinUser, 'now')->format('Y-m-d'),
             'metode' => $this->faker->randomElement(['Lelang', 'Pemilihan Langsung', 'Seleksi Langsung', 'Penunjukkan Langsung']),
             'is_verification_complete' => $this->faker->boolean,
             'is_done' => $this->faker->boolean,
