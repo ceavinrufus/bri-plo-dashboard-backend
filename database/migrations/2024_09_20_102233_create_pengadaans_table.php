@@ -16,6 +16,7 @@ return new class extends Migration
             $table->string('kode_user');
             $table->string('nodin_user')->nullable();
             $table->date('tanggal_nodin_user')->nullable();
+            $table->string('tim');
             $table->string('departemen');
             $table->foreign('departemen')->references('code')->on('departments')->onDelete('restrict');
             $table->string('perihal');

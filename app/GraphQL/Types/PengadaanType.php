@@ -37,6 +37,11 @@ class PengadaanType extends GraphQLType
                 'type' => Type::string(),
                 'description' => 'The nodin user date'
             ],
+            'tim' => [
+                'type' => Type::string(),
+                'description' => 'The team',
+                'rules' => ['required']
+            ],
             'departemen' => [
                 'type' => Type::string(),
                 'description' => 'The department',

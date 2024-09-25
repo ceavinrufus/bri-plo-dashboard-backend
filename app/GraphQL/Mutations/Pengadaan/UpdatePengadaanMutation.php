@@ -40,6 +40,10 @@ class UpdatePengadaanMutation extends Mutation
                 'type' => Type::string(),
                 'description' => 'The nodin user date'
             ],
+            'tim' => [
+                'type' => Type::string(),
+                'description' => 'The team'
+            ],
             'departemen' => [
                 'type' => Type::string(),
                 'description' => 'The department'

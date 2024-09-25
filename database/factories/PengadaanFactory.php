@@ -20,18 +20,33 @@ class PengadaanFactory extends Factory
     public function definition(): array
     {
         $tanggalNodinUser = $this->faker->dateTimeThisYear();
+        $tim = $this->faker->randomElement(['bcr', 'pts', 'ptt']);
+        $departemen = $this->faker->randomElement(['bcp', 'igp', 'psr']);
+        $sentences = [
+            'Pengadaan Jasa Kontraktor Pelaksana Pekerjaan Renovasi Lt.10 Gd RO Bandung',
+            'Jasa Konsultan Pengawas Renovasi Ruang Kerja PPM Div Gedung BRI 2 Lt 31',
+            'Pengadaan Jasa Sewa LED Jl. Malabar – Depan Lippo Plaza Bogor',
+            'Pengadaan CCTV untuk Ruang Audit Standard & Quality Development Division Gedung BRI 2 Lantai 25',
+            'Pengadaan Aplikasi e-Procurement di Direktorat Fixed Assets Management & Procurement (FAMP) BRI'
+        ];
 
         return [
-            'kode_user' => strtoupper($this->faker->lexify('???')),
-            'nodin_user' => $this->faker->words(3, true),
+            'kode_user' => "PLO",
+            'nodin_user' => 'B.' . $this->faker->randomNumber() . '.P-PLO/' . strtoupper($departemen) . '/' . strtoupper($tim) . '/' . now()->format('m') . '/' . now()->format('Y'),
             'tanggal_nodin_user' => $tanggalNodinUser->format('Y-m-d'),
-            'departemen' => $this->faker->randomElement(['bcp', 'igp', 'psr']),
-            'perihal' => $this->faker->sentence,
+            'tim' => $tim,
+            'departemen' => $departemen,
+            'perihal' => $this->faker->randomElement($sentences),
             'tanggal_spk' => $this->faker->dateTimeBetween($tanggalNodinUser, 'now')->format('Y-m-d'),
             'metode' => $this->faker->randomElement(['Lelang', 'Pemilihan Langsung', 'Seleksi Langsung', 'Penunjukkan Langsung']),
             'is_verification_complete' => $this->faker->boolean,
             'is_done' => $this->faker->boolean,
-            'proses_pengadaan' => $this->faker->optional()->word(),
+            'proses_pengadaan' => $this->faker->randomElement([
+                'Penyusunan & Penetapan HPS',
+                'Membuat Izin Pengadaan',
+                'Pengumuman Pengadaan',
+                'Selesai'
+            ]),
             'nilai_spk' => $this->faker->optional()->randomFloat(2, 1000, 1000000),
             'anggaran' => $this->faker->optional()->randomFloat(2, 1000, 1000000),
             'hps' => $this->faker->optional()->randomFloat(2, 1000, 1000000),

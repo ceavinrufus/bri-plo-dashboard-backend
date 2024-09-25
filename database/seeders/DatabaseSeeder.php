@@ -33,6 +33,7 @@ class DatabaseSeeder extends Seeder
         // Seed a user
         User::factory()->create([
             'name' => 'Ceavin Rufus',
+            'pn' => '37163211',
             'email' => 'ceavin.dev@gmail.com',
         ]);
 

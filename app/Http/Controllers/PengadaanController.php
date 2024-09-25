@@ -47,6 +47,7 @@ class PengadaanController extends Controller
             'kode_user' => 'required|string|max:255',
             'nodin_user' => 'nullable|string|max:255',
             'tanggal_nodin_user' => 'nullable|date',
+            'tim' => 'required|string|max:3',
             'departemen' => 'required|exists:departments,code',
             'perihal' => 'required|string|max:255',
             'tanggal_spk' => 'nullable|date',

@@ -36,6 +36,11 @@ class CreatePengadaanMutation extends Mutation
                 'type' => Type::string(),
                 'description' => 'The nodin user date'
             ],
+            'tim' => [
+                'type' => Type::nonNull(Type::string()),
+                'description' => 'The team',
+                'rules' => ['required']
+            ],
             'departemen' => [
                 'type' => Type::nonNull(Type::string()),
                 'description' => 'The department',

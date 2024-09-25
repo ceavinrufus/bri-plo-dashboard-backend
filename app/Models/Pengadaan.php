@@ -15,6 +15,7 @@ class Pengadaan extends Model
         'kode_user',
         'nodin_user',
         'tanggal_nodin_user',
+        'tim',
         'departemen',
         'perihal',
         'tanggal_spk',
