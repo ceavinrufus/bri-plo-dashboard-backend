@@ -64,6 +64,16 @@ class UpdatePengadaanMutation extends Mutation
                 'type' => Type::boolean(),
                 'description' => 'Is verification complete'
             ],
+            'verification_alert_at' => [
+                'type' => Type::string(),
+                'description' => 'Verification alert date',
+                'rules' => ['nullable', 'date']
+            ],
+            'nodin_alert_at' => [
+                'type' => Type::string(),
+                'description' => 'Nodin alert date',
+                'rules' => ['nullable', 'date']
+            ],
             'is_done' => [
                 'type' => Type::boolean(),
                 'description' => 'Is done'

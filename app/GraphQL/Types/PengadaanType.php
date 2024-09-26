@@ -64,6 +64,14 @@ class PengadaanType extends GraphQLType
                 'type' => Type::boolean(),
                 'description' => 'Is verification complete'
             ],
+            'verification_alert_at' => [
+                'type' => Type::string(),
+                'description' => 'Verification alert date',
+            ],
+            'nodin_alert_at' => [
+                'type' => Type::string(),
+                'description' => 'Nodin alert date',
+            ],
             'is_done' => [
                 'type' => Type::boolean(),
                 'description' => 'Is done'

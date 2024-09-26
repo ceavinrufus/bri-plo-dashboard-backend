@@ -21,6 +21,8 @@ class Pengadaan extends Model
         'tanggal_spk',
         'metode',
         'is_verification_complete',
+        'verification_alert_at',
+        'nodin_alert_at',
         'is_done',
         'proses_pengadaan',
         'nilai_spk',
