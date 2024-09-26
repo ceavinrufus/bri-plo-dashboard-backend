@@ -72,4 +72,37 @@ class PengadaanController extends Controller
             'data' => $pengadaan,
         ], 201);
     }
+
+    public function update(Request $request, Pengadaan $pengadaan)
+    {
+        // Validate the incoming request
+        $validated = $request->validate([
+            'kode_user' => 'required|string|max:255',
+            'nodin_user' => 'nullable|string|max:255',
+            'tanggal_nodin_user' => 'nullable|date',
+            'tim' => 'required|string|max:3',
+            'departemen' => 'required|exists:departments,code',
+            'perihal' => 'required|string|max:255',
+            'tanggal_spk' => 'nullable|date',
+            'metode' => 'nullable|in:Lelang,Pemilihan Langsung,Seleksi Langsung,Penunjukkan Langsung',
+            'is_verification_complete' => 'nullable|boolean',
+            'is_done' => 'nullable|boolean',
+            'proses_pengadaan' => 'nullable|string|max:255',
+            'nilai_spk' => 'nullable|integer',
+            'anggaran' => 'nullable|integer',
+            'hps' => 'nullable|integer',
+            'tkdn_percentage' => 'nullable|integer',
+            'catatan' => 'nullable|string|max:255',
+        ]);
+
+        // Update the Pengadaan record with validated data
+        $pengadaan->update($validated);
+
+        // Return a JSON response indicating success
+        return response()->json([
+            'status' => 'success',
+            'message' => 'Pengadaan data successfully updated!',
+            'data' => $pengadaan,
+        ], 200);
+    }
 }
