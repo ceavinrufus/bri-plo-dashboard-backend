@@ -4,6 +4,7 @@ namespace App\GraphQL\Queries\Pengadaan;
 
 use App\Models\Pengadaan;
 use GraphQL\Type\Definition\Type;
+use Illuminate\Support\Facades\Log;
 use Rebing\GraphQL\Support\Facades\GraphQL;
 use Rebing\GraphQL\Support\Query;
 
@@ -32,6 +33,8 @@ class PengadaanQuery extends Query
 
     public function resolve($root, $args)
     {
-        return Pengadaan::findOrFail($args['id']);
+        $pengadaan = Pengadaan::with('nodinPlos')->findOrFail($args['id']);
+        $pengadaan->nodin_plos = $pengadaan->nodinPlos;
+        return $pengadaan;
     }
 }

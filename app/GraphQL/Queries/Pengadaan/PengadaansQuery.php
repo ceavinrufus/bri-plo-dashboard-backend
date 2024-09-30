@@ -50,8 +50,12 @@ class PengadaansQuery extends Query
             $query->where('departemen', $args['departemen']);
         }
 
-        return $query->offset($args['offset'])
+        return $query->with('nodinPlos')
+            ->offset($args['offset'])
             ->limit($args['limit'])
-            ->get();
+            ->get()
+            ->each(function ($pengadaan) {
+                $pengadaan->nodin_plos = $pengadaan->nodinPlos;
+            });
     }
 }
