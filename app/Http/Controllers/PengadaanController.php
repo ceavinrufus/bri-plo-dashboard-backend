@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Pengadaan;
+use App\Models\NodinPlo;
 use Illuminate\Http\Request;
 
 class PengadaanController extends Controller
@@ -39,7 +40,7 @@ class PengadaanController extends Controller
         ], 200);
     }
 
-    // Function to store data and return a JSON response
+    // Function to store data and related nodin_plos and return a JSON response
     public function store(Request $request)
     {
         // Validate the incoming request
@@ -62,19 +63,30 @@ class PengadaanController extends Controller
             'hps' => 'nullable|integer',
             'tkdn_percentage' => 'nullable|integer',
             'catatan' => 'nullable|string|max:255',
+            'nodin_plos' => 'nullable|array', // Nodin Plo must be an array
+            'nodin_plos.*.nodin' => 'required|string|max:255',
+            'nodin_plos.*.tanggal_nodin' => 'nullable|date',
         ]);
 
         // Create a new Pengadaan record
         $pengadaan = Pengadaan::create($validated);
 
+        // Create associated NodinPlos if present
+        if (isset($validated['nodin_plos'])) {
+            foreach ($validated['nodin_plos'] as $nodinPloData) {
+                $pengadaan->nodinPlos()->create($nodinPloData);
+            }
+        }
+
         // Return a JSON response indicating success
         return response()->json([
             'status' => 'success',
             'message' => 'Pengadaan data successfully added!',
-            'data' => $pengadaan,
+            'data' => $pengadaan->load('nodinPlos'), // Load related nodinPlos
         ], 201);
     }
 
+    // Function to update Pengadaan and related nodin_plos
     public function update(Request $request, Pengadaan $pengadaan)
     {
         // Validate the incoming request
@@ -97,16 +109,33 @@ class PengadaanController extends Controller
             'hps' => 'nullable|integer',
             'tkdn_percentage' => 'nullable|integer',
             'catatan' => 'nullable|string|max:255',
+            'nodin_plos' => 'nullable|array', // Nodin Plo must be an array
+            'nodin_plos.*.id' => 'nullable|exists:nodin_plos,id', // Allow existing NodinPlo for update
+            'nodin_plos.*.nodin' => 'required|string|max:255',
+            'nodin_plos.*.tanggal_nodin' => 'nullable|date',
         ]);
 
         // Update the Pengadaan record with validated data
         $pengadaan->update($validated);
 
+        // Sync NodinPlos if present
+        if (isset($validated['nodin_plos'])) {
+            foreach ($validated['nodin_plos'] as $nodinPloData) {
+                if (isset($nodinPloData['id'])) {
+                    // Update existing NodinPlo
+                    NodinPlo::where('id', $nodinPloData['id'])->update($nodinPloData);
+                } else {
+                    // Create a new NodinPlo
+                    $pengadaan->nodinPlos()->create($nodinPloData);
+                }
+            }
+        }
+
         // Return a JSON response indicating success
         return response()->json([
             'status' => 'success',
             'message' => 'Pengadaan data successfully updated!',
-            'data' => $pengadaan,
+            'data' => $pengadaan->load('nodinPlos'), // Load related nodinPlos
         ], 200);
     }
 }
