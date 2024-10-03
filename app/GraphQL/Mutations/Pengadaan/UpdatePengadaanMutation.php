@@ -52,10 +52,6 @@ class UpdatePengadaanMutation extends Mutation
                 'type' => Type::string(),
                 'description' => 'The subject'
             ],
-            'tanggal_spk' => [
-                'type' => Type::string(),
-                'description' => 'The SPK date'
-            ],
             'metode' => [
                 'type' => Type::string(),
                 'description' => 'The method'
@@ -81,6 +77,18 @@ class UpdatePengadaanMutation extends Mutation
             'proses_pengadaan' => [
                 'type' => Type::string(),
                 'description' => 'The procurement process'
+            ],
+            'nomor_spk' => [
+                'type' => Type::string(),
+                'description' => 'The SPK number'
+            ],
+            'tanggal_spk' => [
+                'type' => Type::string(),
+                'description' => 'The SPK date'
+            ],
+            'pelaku_pekerjaan' => [
+                'type' => Type::string(),
+                'description' => 'The job performer'
             ],
             'nilai_spk' => [
                 'type' => Type::int(),
@@ -114,11 +122,13 @@ class UpdatePengadaanMutation extends Mutation
             'tanggal_nodin_user',
             'departemen',
             'perihal',
-            'tanggal_spk',
             'metode',
             'is_verification_complete',
             'is_done',
             'proses_pengadaan',
+            'nomor_spk',
+            'tanggal_spk',
+            'pelaku_pekerjaan',
             'nilai_spk',
             'anggaran',
             'hps',

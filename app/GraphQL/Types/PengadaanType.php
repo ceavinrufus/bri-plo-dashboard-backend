@@ -52,10 +52,6 @@ class PengadaanType extends GraphQLType
                 'description' => 'The subject',
                 'rules' => ['required']
             ],
-            'tanggal_spk' => [
-                'type' => Type::string(),
-                'description' => 'The SPK date'
-            ],
             'metode' => [
                 'type' => Type::string(),
                 'description' => 'The method'
@@ -79,6 +75,18 @@ class PengadaanType extends GraphQLType
             'proses_pengadaan' => [
                 'type' => Type::string(),
                 'description' => 'The procurement process'
+            ],
+            'nomor_spk' => [
+                'type' => Type::string(),
+                'description' => 'The SPK number'
+            ],
+            'tanggal_spk' => [
+                'type' => Type::string(),
+                'description' => 'The SPK date'
+            ],
+            'pelaku_pekerjaan' => [
+                'type' => Type::string(),
+                'description' => 'The job performer'
             ],
             'nilai_spk' => [
                 'type' => Type::int(),
