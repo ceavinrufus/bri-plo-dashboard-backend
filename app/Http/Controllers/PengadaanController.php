@@ -66,8 +66,8 @@ class PengadaanController extends Controller
             'tkdn_percentage' => 'nullable|integer',
             'catatan' => 'nullable|string|max:255',
             'nodin_plos' => 'nullable|array', // Nodin Plo must be an array
-            'nodin_plos.*.nodin' => 'required|string|max:255',
-            'nodin_plos.*.tanggal_nodin' => 'nullable|date',
+            'nodin_plos.*.nodin' => 'required_with:nodin_plos|string|max:255',
+            'nodin_plos.*.tanggal_nodin' => 'required_with:nodin_plos|date',
         ]);
 
         // Create a new Pengadaan record
@@ -115,8 +115,8 @@ class PengadaanController extends Controller
             'catatan' => 'nullable|string|max:255',
             'nodin_plos' => 'nullable|array', // Nodin Plo must be an array
             'nodin_plos.*.id' => 'nullable|exists:nodin_plos,id', // Allow existing NodinPlo for update
-            'nodin_plos.*.nodin' => 'required|string|max:255',
-            'nodin_plos.*.tanggal_nodin' => 'nullable|date',
+            'nodin_plos.*.nodin' => 'required_with:nodin_plos|string|max:255',
+            'nodin_plos.*.tanggal_nodin' => 'required_with:nodin_plos|date',
         ]);
 
         // Update the Pengadaan record with validated data
