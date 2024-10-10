@@ -70,9 +70,10 @@ class UpdatePengadaanMutation extends Mutation
                 'description' => 'Nodin alert date',
                 'rules' => ['nullable', 'date']
             ],
-            'is_done' => [
-                'type' => Type::boolean(),
-                'description' => 'Is done'
+            'pic_id' => [
+                'type' => Type::nonNull(Type::id()),
+                'description' => 'The ID of the PIC',
+                'rules' => ['required', 'exists:users,id']
             ],
             'proses_pengadaan' => [
                 'type' => Type::string(),
@@ -124,7 +125,7 @@ class UpdatePengadaanMutation extends Mutation
             'perihal',
             'metode',
             'is_verification_complete',
-            'is_done',
+            'pic_id',
             'proses_pengadaan',
             'nomor_spk',
             'tanggal_spk',

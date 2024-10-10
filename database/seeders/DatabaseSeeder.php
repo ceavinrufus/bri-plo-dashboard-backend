@@ -3,6 +3,7 @@
 namespace Database\Seeders;
 
 use App\Models\Department;
+use App\Models\NodinPlo;
 use App\Models\Pengadaan;
 use App\Models\User;
 use Illuminate\Database\Seeder;
@@ -27,7 +28,7 @@ class DatabaseSeeder extends Seeder
 
         Department::create([
             'code' => 'psr',
-            'name' => '...',
+            'name' => 'Payment Service and Rental',
         ]);
 
         // Seed a user
@@ -37,6 +38,8 @@ class DatabaseSeeder extends Seeder
             'email' => 'ceavin.dev@gmail.com',
         ]);
 
-        Pengadaan::factory(10)->create();
+        Pengadaan::factory(15)->create();
+
+        NodinPlo::factory(20)->create();
     }
 }

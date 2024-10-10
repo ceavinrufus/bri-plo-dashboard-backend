@@ -68,9 +68,10 @@ class PengadaanType extends GraphQLType
                 'type' => Type::string(),
                 'description' => 'Nodin alert date',
             ],
-            'is_done' => [
-                'type' => Type::boolean(),
-                'description' => 'Is done'
+            'pic' => [
+                'type' => GraphQL::type('User'),
+                'description' => 'The ID of the PIC',
+                'rules' => ['required', 'exists:users,id']
             ],
             'proses_pengadaan' => [
                 'type' => Type::string(),

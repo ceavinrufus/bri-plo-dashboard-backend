@@ -24,7 +24,8 @@ return new class extends Migration
             $table->boolean('is_verification_complete')->nullable();
             $table->date('verification_alert_at')->nullable();
             $table->date('nodin_alert_at')->nullable();
-            $table->boolean('is_done')->nullable();
+            $table->unsignedBigInteger('pic_id');
+            $table->foreign('pic_id')->references('id')->on('users')->onDelete('restrict');
             $table->string('proses_pengadaan')->nullable();
             $table->string('nomor_spk')->nullable();
             $table->date('tanggal_spk')->nullable();

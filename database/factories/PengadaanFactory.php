@@ -3,6 +3,7 @@
 namespace Database\Factories;
 
 use App\Models\Pengadaan;
+use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
@@ -29,6 +30,7 @@ class PengadaanFactory extends Factory
             'Pengadaan CCTV untuk Ruang Audit Standard & Quality Development Division Gedung BRI 2 Lantai 25',
             'Pengadaan Aplikasi e-Procurement di Direktorat Fixed Assets Management & Procurement (FAMP) BRI'
         ];
+        $userIDs = User::all()->pluck('id')->toArray();
 
         return [
             'kode_user' => "PLO",
@@ -39,7 +41,7 @@ class PengadaanFactory extends Factory
             'perihal' => $this->faker->randomElement($sentences),
             'metode' => $this->faker->randomElement(['Lelang', 'Pemilihan Langsung', 'Seleksi Langsung', 'Penunjukkan Langsung']),
             'is_verification_complete' => $this->faker->boolean,
-            'is_done' => $this->faker->boolean,
+            'pic_id' => $this->faker->randomElement($userIDs),
             'proses_pengadaan' => $this->faker->randomElement([
                 'Penyusunan & Penetapan HPS',
                 'Membuat Izin Pengadaan',

@@ -22,7 +22,7 @@ class Pengadaan extends Model
         'is_verification_complete',
         'verification_alert_at',
         'nodin_alert_at',
-        'is_done',
+        'pic_id',
         'proses_pengadaan',
         'nomor_spk',
         'tanggal_spk',
@@ -39,8 +39,13 @@ class Pengadaan extends Model
         return $this->hasMany(NodinPlo::class);
     }
 
-    public function department(): BelongsTo
+    public function departemen(): BelongsTo
     {
-        return $this->belongsTo(Department::class, 'department_code', 'code');
+        return $this->belongsTo(Department::class, 'departemen', 'code');
+    }
+
+    public function pic(): BelongsTo
+    {
+        return $this->belongsTo(User::class, 'pic_id', 'id');
     }
 }

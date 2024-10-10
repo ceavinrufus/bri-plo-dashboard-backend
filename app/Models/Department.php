@@ -27,7 +27,7 @@ class Department extends Model
     // Define the relationship: a Department has many Pengadaan
     public function pengadaan()
     {
-        return $this->hasMany(Pengadaan::class, 'department_code', 'code');
+        return $this->hasMany(Pengadaan::class, 'departemen', 'code');
     }
 
     // Define the relationship: a Department has many Users
