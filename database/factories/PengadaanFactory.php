@@ -48,7 +48,7 @@ class PengadaanFactory extends Factory
             ]),
             'nomor_spk' => 'SPK.' . $this->faker->randomNumber() . '.P-PLO/' . strtoupper($departemen) . '/' . strtoupper($tim) . '/' . now()->format('m') . '/' . now()->format('Y'),
             'tanggal_spk' => $this->faker->dateTimeBetween($tanggalNodinUser, 'now')->format('Y-m-d'),
-            'pelaku_pekerjaan' => $this->faker->name,
+            'pelaksana_pekerjaan' => $this->faker->name,
             'nilai_spk' => $this->faker->optional()->randomFloat(2, 1000, 1000000),
             'anggaran' => $this->faker->optional()->randomFloat(2, 1000, 1000000),
             'hps' => $this->faker->optional()->randomFloat(2, 1000, 1000000),

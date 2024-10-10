@@ -85,7 +85,7 @@ class CreatePengadaanMutation extends Mutation
                 'type' => Type::string(),
                 'description' => 'The SPK date'
             ],
-            'pelaku_pekerjaan' => [
+            'pelaksana_pekerjaan' => [
                 'type' => Type::string(),
                 'description' => 'The job performer'
             ],
@@ -128,7 +128,7 @@ class CreatePengadaanMutation extends Mutation
             'proses_pengadaan',
             'nomor_spk',
             'tanggal_spk',
-            'pelaku_pekerjaan',
+            'pelaksana_pekerjaan',
             'nilai_spk',
             'anggaran',
             'hps',

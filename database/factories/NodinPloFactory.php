@@ -22,9 +22,11 @@ class NodinPloFactory extends Factory
     public function definition(): array
     {
         $pengadaanIDs = Pengadaan::all()->pluck('id')->toArray();
+        $tim = $this->faker->randomElement(['bcr', 'pts', 'ptt']);
+        $departemen = $this->faker->randomElement(['bcp', 'igp', 'psr']);
 
         return [
-            'nodin' => $this->faker->word,
+            'nodin' => 'B.' . $this->faker->randomNumber() . '.P-PLO/' . strtoupper($departemen) . '/' . strtoupper($tim) . '/' . now()->format('m') . '/' . now()->format('Y'),
             'tanggal_nodin' => $this->faker->date,
             'pengadaan_id' =>  $this->faker->randomElement($pengadaanIDs), // Use existing Pengadaan ID
         ];

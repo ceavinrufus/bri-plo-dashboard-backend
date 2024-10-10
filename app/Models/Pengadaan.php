@@ -26,7 +26,7 @@ class Pengadaan extends Model
         'proses_pengadaan',
         'nomor_spk',
         'tanggal_spk',
-        'pelaku_pekerjaan',
+        'pelaksana_pekerjaan',
         'nilai_spk',
         'anggaran',
         'hps',

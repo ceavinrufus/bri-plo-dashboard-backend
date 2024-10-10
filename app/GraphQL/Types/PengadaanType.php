@@ -84,7 +84,7 @@ class PengadaanType extends GraphQLType
                 'type' => Type::string(),
                 'description' => 'The SPK date'
             ],
-            'pelaku_pekerjaan' => [
+            'pelaksana_pekerjaan' => [
                 'type' => Type::string(),
                 'description' => 'The job performer'
             ],
