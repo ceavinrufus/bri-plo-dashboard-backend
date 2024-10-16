@@ -15,3 +15,6 @@ Route::get('/data-pengadaan/{pengadaan:departemen}', [PengadaanController::class
 Route::post('/pengadaan/store', [PengadaanController::class, 'store'])->name('pengadaan.store');
 
 Route::put('/pengadaan/update/{pengadaan}', [PengadaanController::class, 'update'])->name('pengadaan.update');
+
+// Route for deleting Pengadaan
+Route::delete('/pengadaan/delete/{pengadaan}', [PengadaanController::class, 'destroy'])->name('pengadaan.destroy');

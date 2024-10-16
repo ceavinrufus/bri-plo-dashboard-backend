@@ -142,4 +142,20 @@ class PengadaanController extends Controller
             'data' => $pengadaan->load('nodinPlos'), // Load related nodinPlos
         ], 200);
     }
+
+    // Function to delete Pengadaan and related NodinPlos
+    public function destroy(Pengadaan $pengadaan)
+    {
+        // Delete associated NodinPlos
+        $pengadaan->nodinPlos()->delete();
+
+        // Delete the Pengadaan record
+        $pengadaan->delete();
+
+        // Return a JSON response indicating success
+        return response()->json([
+            'status' => 'success',
+            'message' => 'Pengadaan data successfully deleted!',
+        ], 200);
+    }
 }
