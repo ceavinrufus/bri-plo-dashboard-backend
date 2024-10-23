@@ -98,11 +98,11 @@ class PengadaanType extends GraphQLType
                 'description' => 'List of nodin plos of the Pengadaan'
             ],
             'anggaran' => [
-                'type' => Type::int(),
+                'type' => GraphQL::type('Price'),
                 'description' => 'The budget'
             ],
             'hps' => [
-                'type' => Type::int(),
+                'type' => GraphQL::type('Price'),
                 'description' => 'The HPS'
             ],
             'tkdn_percentage' => [

@@ -122,6 +122,7 @@ return [
         'Pengadaan' => App\GraphQL\Types\PengadaanType::class,
         'NodinPlo' => App\GraphQL\Types\NodinPloType::class,
         'User' => App\GraphQL\Types\UserType::class,
+        'Price' => App\GraphQL\Types\PriceType::class,
     ],
 
     // This callable will be passed the Error object for each errors GraphQL catch.

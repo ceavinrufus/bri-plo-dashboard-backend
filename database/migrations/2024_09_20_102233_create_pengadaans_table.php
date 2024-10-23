@@ -31,8 +31,8 @@ return new class extends Migration
             $table->date('tanggal_spk')->nullable();
             $table->string('pelaksana_pekerjaan')->nullable();
             $table->integer('nilai_spk')->nullable();
-            $table->integer('anggaran')->nullable();
-            $table->integer('hps')->nullable();
+            $table->json('anggaran')->nullable();
+            $table->json('hps')->nullable();
             $table->integer('tkdn_percentage')->nullable();
             $table->string('catatan')->nullable();
             $table->timestamps();

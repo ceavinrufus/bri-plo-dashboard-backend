@@ -56,6 +56,9 @@ class PengadaansQuery extends Query
             ->get()
             ->each(function ($pengadaan) {
                 $pengadaan->nodin_plos = $pengadaan->nodinPlos;
+
+                $pengadaan->anggaran = json_decode($pengadaan->anggaran);
+                $pengadaan->hps = json_decode($pengadaan->hps);
             });
     }
 }

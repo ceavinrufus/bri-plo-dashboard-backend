@@ -96,11 +96,11 @@ class UpdatePengadaanMutation extends Mutation
                 'description' => 'The SPK value'
             ],
             'anggaran' => [
-                'type' => Type::int(),
+                'type' => GraphQL::type('Price'),
                 'description' => 'The budget'
             ],
             'hps' => [
-                'type' => Type::int(),
+                'type' => GraphQL::type('Price'),
                 'description' => 'The HPS'
             ],
             'tkdn_percentage' => [
