@@ -90,7 +90,7 @@ class PengadaanType extends GraphQLType
                 'description' => 'The job performer'
             ],
             'nilai_spk' => [
-                'type' => Type::int(),
+                'type' => Type::float(),
                 'description' => 'The SPK value'
             ],
             'nodin_plos' => [
@@ -106,7 +106,7 @@ class PengadaanType extends GraphQLType
                 'description' => 'The HPS'
             ],
             'tkdn_percentage' => [
-                'type' => Type::int(),
+                'type' => Type::float(),
                 'description' => 'The TKDN percentage'
             ],
             'catatan' => [

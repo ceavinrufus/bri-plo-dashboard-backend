@@ -35,6 +35,8 @@ class PengadaanQuery extends Query
     {
         $pengadaan = Pengadaan::with('nodinPlos')->findOrFail($args['id']);
         $pengadaan->nodin_plos = $pengadaan->nodinPlos;
+        $pengadaan->anggaran = json_decode($pengadaan->anggaran);
+        $pengadaan->hps = json_decode($pengadaan->hps);
         return $pengadaan;
     }
 }

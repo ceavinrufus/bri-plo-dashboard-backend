@@ -61,8 +61,8 @@ class PengadaanController extends Controller
             'tanggal_spk' => 'nullable|date',
             'pelaksana_pekerjaan' => 'nullable|string|max:255',
             'nilai_spk' => 'nullable|integer',
-            'anggaran' => 'nullable|integer',
-            'hps' => 'nullable|integer',
+            'anggaran' => 'nullable|json',
+            'hps' => 'nullable|json',
             'tkdn_percentage' => 'nullable|integer',
             'catatan' => 'nullable|string|max:255',
             'nodin_plos' => 'nullable|array', // Nodin Plo must be an array
@@ -109,8 +109,8 @@ class PengadaanController extends Controller
             'tanggal_spk' => 'nullable|date',
             'pelaksana_pekerjaan' => 'nullable|string|max:255',
             'nilai_spk' => 'nullable|integer',
-            'anggaran' => 'nullable|integer',
-            'hps' => 'nullable|integer',
+            'anggaran' => 'nullable|json',
+            'hps' => 'nullable|json',
             'tkdn_percentage' => 'nullable|integer',
             'catatan' => 'nullable|string|max:255',
             'nodin_plos' => 'nullable|array', // Nodin Plo must be an array

@@ -92,7 +92,7 @@ class UpdatePengadaanMutation extends Mutation
                 'description' => 'The job performer'
             ],
             'nilai_spk' => [
-                'type' => Type::int(),
+                'type' => Type::float(),
                 'description' => 'The SPK value'
             ],
             'anggaran' => [
@@ -104,7 +104,7 @@ class UpdatePengadaanMutation extends Mutation
                 'description' => 'The HPS'
             ],
             'tkdn_percentage' => [
-                'type' => Type::int(),
+                'type' => Type::float(),
                 'description' => 'The TKDN percentage'
             ],
             'catatan' => [
