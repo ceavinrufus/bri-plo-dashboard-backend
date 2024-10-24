@@ -60,10 +60,10 @@ class PengadaanController extends Controller
             'nomor_spk' => 'nullable|string|max:255',
             'tanggal_spk' => 'nullable|date',
             'pelaksana_pekerjaan' => 'nullable|string|max:255',
-            'nilai_spk' => 'nullable|integer',
+            'nilai_spk' => 'nullable|numeric',
             'anggaran' => 'nullable|json',
             'hps' => 'nullable|json',
-            'tkdn_percentage' => 'nullable|integer',
+            'tkdn_percentage' => 'nullable|numeric',
             'catatan' => 'nullable|string|max:255',
             'nodin_plos' => 'nullable|array', // Nodin Plo must be an array
             'nodin_plos.*.nodin' => 'required_with:nodin_plos|string|max:255',
@@ -108,10 +108,10 @@ class PengadaanController extends Controller
             'nomor_spk' => 'nullable|string|max:255',
             'tanggal_spk' => 'nullable|date',
             'pelaksana_pekerjaan' => 'nullable|string|max:255',
-            'nilai_spk' => 'nullable|integer',
+            'nilai_spk' => 'nullable|numeric',
             'anggaran' => 'nullable|json',
             'hps' => 'nullable|json',
-            'tkdn_percentage' => 'nullable|integer',
+            'tkdn_percentage' => 'nullable|numeric',
             'catatan' => 'nullable|string|max:255',
             'nodin_plos' => 'nullable|array', // Nodin Plo must be an array
             'nodin_plos.*.id' => 'nullable|exists:nodin_plos,id', // Allow existing NodinPlo for update
