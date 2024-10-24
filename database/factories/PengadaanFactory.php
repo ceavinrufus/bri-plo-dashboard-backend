@@ -38,6 +38,7 @@ class PengadaanFactory extends Factory
             'tanggal_nodin_user' => $tanggalNodinUser->format('Y-m-d'),
             'tim' => $tim,
             'departemen' => $departemen,
+            'proyek' => $departemen === 'bcp' ? 'P001' : null,
             'perihal' => $this->faker->randomElement($sentences),
             'metode' => $this->faker->randomElement(['Lelang', 'Pemilihan Langsung', 'Seleksi Langsung', 'Penunjukkan Langsung']),
             'is_verification_complete' => $this->faker->boolean,

@@ -5,6 +5,7 @@ namespace Database\Seeders;
 use App\Models\Department;
 use App\Models\NodinPlo;
 use App\Models\Pengadaan;
+use App\Models\Project;
 use App\Models\User;
 use Illuminate\Database\Seeder;
 
@@ -29,6 +30,11 @@ class DatabaseSeeder extends Seeder
         Department::create([
             'code' => 'psr',
             'name' => 'Payment Service and Rental',
+        ]);
+
+        Project::create([
+            'kode' => 'P001',
+            'nama' => 'Proyek Pembangunan Gedung A',
         ]);
 
         // Seed a user

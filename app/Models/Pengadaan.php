@@ -17,6 +17,7 @@ class Pengadaan extends Model
         'tanggal_nodin_user',
         'tim',
         'departemen',
+        'proyek',
         'perihal',
         'metode',
         'is_verification_complete',
@@ -42,6 +43,11 @@ class Pengadaan extends Model
     public function departemen(): BelongsTo
     {
         return $this->belongsTo(Department::class, 'departemen', 'code');
+    }
+
+    public function proyek(): BelongsTo
+    {
+        return $this->belongsTo(Project::class, 'proyek', 'kode');
     }
 
     public function pic(): BelongsTo
