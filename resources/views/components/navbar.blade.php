@@ -3,22 +3,22 @@
         ['name' => 'Dashboard', 'url' => '/', 'active' => request()->is('/')],
         [
             'name' => 'Data Pengadaan',
-            'url' => '/data-pengadaan',
+            'url' => '/pengadaan',
             'children' => [
                 [
                     'name' => 'BCP',
                     'description' => 'Building Construction Procurement',
-                    'url' => '/data-pengadaan/bcp',
+                    'url' => '/pengadaan/bcp',
                 ],
                 [
                     'name' => 'IGP',
                     'description' => '...',
-                    'url' => '/data-pengadaan/igp',
+                    'url' => '/pengadaan/igp',
                 ],
                 [
                     'name' => 'PSR',
                     'description' => '...',
-                    'url' => '/data-pengadaan/psr',
+                    'url' => '/pengadaan/psr',
                 ],
             ],
         ],
