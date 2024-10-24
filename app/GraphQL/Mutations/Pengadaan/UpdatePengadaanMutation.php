@@ -48,6 +48,10 @@ class UpdatePengadaanMutation extends Mutation
                 'type' => Type::string(),
                 'description' => 'The department'
             ],
+            'proyek' => [
+                'type' => Type::string(),
+                'description' => 'The project code',
+            ],
             'perihal' => [
                 'type' => Type::string(),
                 'description' => 'The subject'

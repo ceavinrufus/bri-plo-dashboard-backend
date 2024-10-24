@@ -46,6 +46,10 @@ class CreatePengadaanMutation extends Mutation
                 'description' => 'The department',
                 'rules' => ['required']
             ],
+            'proyek' => [
+                'type' => Type::string(),
+                'description' => 'The project code',
+            ],
             'perihal' => [
                 'type' => Type::nonNull(Type::string()),
                 'description' => 'The subject',
