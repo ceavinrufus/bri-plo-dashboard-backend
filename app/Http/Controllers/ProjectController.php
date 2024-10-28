@@ -66,12 +66,6 @@ class ProjectController extends Controller
     // Function to delete Project and related Pengadaan
     public function destroy(Project $project)
     {
-        // Delete associated Pengadaan and their NodinPlos
-        foreach ($project->pengadaan as $pengadaan) {
-            $pengadaan->nodinPlos()->delete();
-            $pengadaan->delete();
-        }
-
         // Delete the Project record
         $project->delete();
 
