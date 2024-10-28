@@ -31,6 +31,7 @@ class PengadaanFactory extends Factory
             'Pengadaan Aplikasi e-Procurement di Direktorat Fixed Assets Management & Procurement (FAMP) BRI'
         ];
         $userIDs = User::all()->pluck('id')->toArray();
+        $isVerificationComplete = $this->faker->boolean;
 
         return [
             'kode_user' => "PLO",
@@ -41,7 +42,8 @@ class PengadaanFactory extends Factory
             'proyek' => $departemen === 'bcp' ? 'P001' : null,
             'perihal' => $this->faker->randomElement($sentences),
             'metode' => $this->faker->randomElement(['Lelang', 'Pemilihan Langsung', 'Seleksi Langsung', 'Penunjukkan Langsung']),
-            'is_verification_complete' => $this->faker->boolean,
+            'is_verification_complete' => $isVerificationComplete,
+            'catatan' => $isVerificationComplete ? $this->faker->optional()->sentence : '',
             'pic_id' => $this->faker->randomElement($userIDs),
             'proses_pengadaan' => $this->faker->randomElement([
                 'Penyusunan & Penetapan HPS',
@@ -66,7 +68,6 @@ class PengadaanFactory extends Factory
                 'tanggal_terima' => $this->faker->dateTimeThisYear()->format('Y-m-d')
             ]),
             'tkdn_percentage' => $this->faker->optional()->randomFloat(2, 0, 100),
-            'catatan' => $this->faker->optional()->sentence,
             'created_at' => now(),
             'updated_at' => now(),
         ];
