@@ -54,15 +54,15 @@ class PengadaanFactory extends Factory
             'nomor_spk' => 'SPK.' . $this->faker->randomNumber() . '.P-PLO/' . strtoupper($departemen) . '/' . strtoupper($tim) . '/' . now()->format('m') . '/' . now()->format('Y'),
             'tanggal_spk' => $this->faker->dateTimeBetween($tanggalNodinUser, 'now')->format('Y-m-d'),
             'pelaksana_pekerjaan' => $this->faker->name,
-            'nilai_spk' => $this->faker->optional()->randomFloat(2, 1000, 1000000),
+            'nilai_spk' => $this->faker->optional()->randomFloat(2, 10000, 11000),
             'anggaran' => json_encode([
-                'amount' => $this->faker->randomFloat(2, 1000, 1000000),
+                'amount' => $this->faker->randomFloat(2, 10000, 11000),
                 'currency' => $this->faker->randomElement(['IDR', 'USD', 'EUR']),
                 'tanggal_permohonan' => $this->faker->dateTimeThisYear()->format('Y-m-d'),
                 'tanggal_terima' => $this->faker->dateTimeThisYear()->format('Y-m-d')
             ]),
             'hps' => json_encode([
-                'amount' => $this->faker->randomFloat(2, 1000, 1000000),
+                'amount' => $this->faker->randomFloat(2, 10000, 11000),
                 'currency' => $this->faker->randomElement(['IDR', 'USD', 'EUR']),
                 'tanggal_permohonan' => $this->faker->dateTimeThisYear()->format('Y-m-d'),
                 'tanggal_terima' => $this->faker->dateTimeThisYear()->format('Y-m-d')

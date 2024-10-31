@@ -38,9 +38,9 @@ class UserType extends GraphQLType
                 'type' => Type::string(),
                 'description' => 'The department of the user',
             ],
-            'is_maker' => [
-                'type' => Type::boolean(),
-                'description' => 'Whether the user is a maker',
+            'role' => [
+                'type' => Type::string(),
+                'description' => 'The role of the user',
             ],
             'pengadaans' => [
                 'type' => Type::listOf(GraphQL::type('Pengadaan')),

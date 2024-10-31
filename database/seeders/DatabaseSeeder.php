@@ -20,16 +20,19 @@ class DatabaseSeeder extends Seeder
         Department::create([
             'code' => 'bcp',
             'name' => 'Building Construction Procurement',
+            'target' => 3.5,
         ]);
 
         Department::create([
             'code' => 'igp',
             'name' => 'IT Goods and Services Procurement',
+            'target' => 7,
         ]);
 
         Department::create([
             'code' => 'psr',
             'name' => 'Payment Service and Rental',
+            'target' => 5.5,
         ]);
 
         Project::create([
@@ -41,6 +44,12 @@ class DatabaseSeeder extends Seeder
         User::factory()->create([
             'name' => 'Ceavin Rufus',
             'pn' => '90175686',
+            'email' => 'ceavinr@gmail.com',
+        ]);
+
+        User::factory()->admin()->create([
+            'name' => 'Admin',
+            'pn' => '99999999',
             'email' => 'ceavin.dev@gmail.com',
         ]);
 

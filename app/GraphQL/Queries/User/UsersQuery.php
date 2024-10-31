@@ -26,9 +26,9 @@ class UsersQuery extends Query
                 'type' => Type::string(),
                 'description' => 'Filter users by department',
             ],
-            'is_maker' => [
+            'role' => [
                 'type' => Type::boolean(),
-                'description' => 'Filter users by maker status',
+                'description' => 'Filter users by role',
             ],
             'limit' => [
                 'type' => Type::int(),
@@ -45,8 +45,8 @@ class UsersQuery extends Query
             $query->where('departemen', $args['departemen']);
         }
 
-        if (isset($args['is_maker'])) {
-            $query->where('is_maker', $args['is_maker']);
+        if (isset($args['role'])) {
+            $query->where('role', $args['role']);
         }
 
         if (isset($args['limit'])) {

@@ -24,7 +24,7 @@ class User extends Authenticatable
         'pn',
         'departemen',
         'password',
-        'is_maker',
+        'role',
     ];
 
     /**

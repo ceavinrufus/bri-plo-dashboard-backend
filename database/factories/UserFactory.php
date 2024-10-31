@@ -31,7 +31,7 @@ class UserFactory extends Factory
             'departemen' => 'bcp',
             // 'departemen' => $this->faker->randomElement(['bcp', 'igp', 'psr']),
             'password' => static::$password ??= Hash::make('password'),
-            'is_maker' => true,
+            'role' => 'maker',
             'remember_token' => Str::random(10),
         ];
     }
@@ -49,10 +49,10 @@ class UserFactory extends Factory
     /**
      * Indicate that the model's email address should be unverified.
      */
-    public function notMaker(): static
+    public function admin(): static
     {
         return $this->state(fn(array $attributes) => [
-            'is_maker' => false,
+            'role' => 'admin',
         ]);
     }
 }

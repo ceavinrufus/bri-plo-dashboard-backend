@@ -22,6 +22,7 @@ class Department extends Model
     protected $fillable = [
         'code',
         'name',
+        'target',
     ];
 
     // Define the relationship: a Department has many Pengadaan
