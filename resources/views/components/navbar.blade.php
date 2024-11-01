@@ -70,7 +70,6 @@
                 ],
             ],
         ],
-        // ['name' => 'Upload Excel', 'url' => '/upload-excel', 'active' => request()->is('upload-excel')],
     ];
 @endphp
 
