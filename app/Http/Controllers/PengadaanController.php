@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Pengadaan;
 use App\Models\NodinPlo;
+use App\Models\NodinUser;
 use Illuminate\Http\Request;
 
 class PengadaanController extends Controller
@@ -28,6 +29,7 @@ class PengadaanController extends Controller
             // Place 'nomor' at the start
             $itemArray = array_merge(['nomor' => $index + 1], $itemArray);
             $itemArray['nodin_plo'] = $item->nodinPlos;
+            $itemArray['nodin_user'] = $item->nodinUsers;
 
             return $itemArray;
         });
@@ -40,14 +42,12 @@ class PengadaanController extends Controller
         ], 200);
     }
 
-    // Function to store data and related nodin_plos and return a JSON response
+    // Function to store data and related nodin_users & nodin_plos and return a JSON response
     public function store(Request $request)
     {
         // Validate the incoming request
         $validated = $request->validate([
             'kode_user' => 'required|string|max:255',
-            'nodin_user' => 'nullable|string|max:255',
-            'tanggal_nodin_user' => 'nullable|date',
             'tim' => 'required|string|max:3',
             'departemen' => 'required|exists:departments,code',
             'perihal' => 'required|string|max:255',
@@ -65,6 +65,9 @@ class PengadaanController extends Controller
             'hps' => 'nullable|json',
             'tkdn_percentage' => 'nullable|numeric',
             'catatan' => 'nullable|string|max:255',
+            'nodin_users' => 'nullable|array', // Nodin User must be an array
+            'nodin_users.*.nodin' => 'required_with:nodin_users|string|max:255',
+            'nodin_users.*.tanggal_nodin' => 'required_with:nodin_users|date',
             'nodin_plos' => 'nullable|array', // Nodin Plo must be an array
             'nodin_plos.*.nodin' => 'required_with:nodin_plos|string|max:255',
             'nodin_plos.*.tanggal_nodin' => 'required_with:nodin_plos|date',
@@ -72,6 +75,13 @@ class PengadaanController extends Controller
 
         // Create a new Pengadaan record
         $pengadaan = Pengadaan::create($validated);
+
+        // Create associated NodinUsers if present
+        if (isset($validated['nodin_users'])) {
+            foreach ($validated['nodin_users'] as $nodinUserData) {
+                $pengadaan->nodinUsers()->create($nodinUserData);
+            }
+        }
 
         // Create associated NodinPlos if present
         if (isset($validated['nodin_plos'])) {
@@ -84,7 +94,7 @@ class PengadaanController extends Controller
         return response()->json([
             'status' => 'success',
             'message' => 'Pengadaan data successfully added!',
-            'data' => $pengadaan->load('nodinPlos'), // Load related nodinPlos
+            'data' => $pengadaan->load(['nodinPlos', 'nodinUsers']), // Load related nodinPlos and nodinUsers
         ], 201);
     }
 
@@ -94,8 +104,6 @@ class PengadaanController extends Controller
         // Validate the incoming request
         $validated = $request->validate([
             'kode_user' => 'required|string|max:255',
-            'nodin_user' => 'nullable|string|max:255',
-            'tanggal_nodin_user' => 'nullable|date',
             'tim' => 'required|string|max:3',
             'departemen' => 'required|exists:departments,code',
             'perihal' => 'required|string|max:255',
@@ -113,6 +121,10 @@ class PengadaanController extends Controller
             'hps' => 'nullable|json',
             'tkdn_percentage' => 'nullable|numeric',
             'catatan' => 'nullable|string|max:255',
+            'nodin_users' => 'nullable|array', // Nodin User must be an array
+            'nodin_users.*.id' => 'nullable|exists:nodin_users,id', // Allow existing NodinUser for update
+            'nodin_users.*.nodin' => 'required_with:nodin_users|string|max:255',
+            'nodin_users.*.tanggal_nodin' => 'required_with:nodin_users|date',
             'nodin_plos' => 'nullable|array', // Nodin Plo must be an array
             'nodin_plos.*.id' => 'nullable|exists:nodin_plos,id', // Allow existing NodinPlo for update
             'nodin_plos.*.nodin' => 'required_with:nodin_plos|string|max:255',
@@ -121,6 +133,19 @@ class PengadaanController extends Controller
 
         // Update the Pengadaan record with validated data
         $pengadaan->update($validated);
+
+        // Sync NodinUsers if present
+        if (isset($validated['nodin_users'])) {
+            foreach ($validated['nodin_users'] as $nodinUserData) {
+                if (isset($nodinUserData['id'])) {
+                    // Update existing NodinUser
+                    NodinUser::where('id', $nodinUserData['id'])->update($nodinUserData);
+                } else {
+                    // Create a new NodinUser
+                    $pengadaan->nodinUsers()->create($nodinUserData);
+                }
+            }
+        }
 
         // Sync NodinPlos if present
         if (isset($validated['nodin_plos'])) {
@@ -139,14 +164,15 @@ class PengadaanController extends Controller
         return response()->json([
             'status' => 'success',
             'message' => 'Pengadaan data successfully updated!',
-            'data' => $pengadaan->load('nodinPlos'), // Load related nodinPlos
+            'data' => $pengadaan->load(['nodinPlos', 'nodinUsers']), // Load related nodinPlos
         ], 200);
     }
 
     // Function to delete Pengadaan and related NodinPlos
     public function destroy(Pengadaan $pengadaan)
     {
-        // Delete associated NodinPlos
+        // Delete associated NodinUsers & NodinPlos
+        $pengadaan->nodinUsers()->delete();
         $pengadaan->nodinPlos()->delete();
 
         // Delete the Pengadaan record

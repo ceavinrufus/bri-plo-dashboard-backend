@@ -77,6 +77,8 @@ return [
             'query' => [
                 'pengadaan' => App\GraphQL\Queries\Pengadaan\PengadaanQuery::class,
                 'pengadaans' => App\GraphQL\Queries\Pengadaan\PengadaansQuery::class,
+                'nodin_user' => App\GraphQL\Queries\NodinUser\NodinUserQuery::class,
+                'nodin_users' => App\GraphQL\Queries\NodinUser\NodinUsersQuery::class,
                 'nodin_plo' => App\GraphQL\Queries\NodinPlo\NodinPloQuery::class,
                 'nodin_plos' => App\GraphQL\Queries\NodinPlo\NodinPlosQuery::class,
                 'user' => App\GraphQL\Queries\User\UserQuery::class,
@@ -121,6 +123,7 @@ return [
         // \Rebing\GraphQL\Support\UploadType::class,
         'Pengadaan' => App\GraphQL\Types\PengadaanType::class,
         'NodinPlo' => App\GraphQL\Types\NodinPloType::class,
+        'NodinUser' => App\GraphQL\Types\NodinUserType::class,
         'User' => App\GraphQL\Types\UserType::class,
         'Price' => App\GraphQL\Types\PriceType::class,
     ],

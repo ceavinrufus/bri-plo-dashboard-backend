@@ -29,13 +29,9 @@ class PengadaanType extends GraphQLType
                 'description' => 'The user code',
                 'rules' => ['required']
             ],
-            'nodin_user' => [
-                'type' => Type::string(),
-                'description' => 'The nodin user'
-            ],
-            'tanggal_nodin_user' => [
-                'type' => Type::string(),
-                'description' => 'The nodin user date'
+            'nodin_users' => [
+                'type' => Type::listOf(GraphQL::type('NodinUser')),
+                'description' => 'List of nodin users of the Pengadaan'
             ],
             'tim' => [
                 'type' => Type::string(),

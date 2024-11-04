@@ -13,8 +13,6 @@ class Pengadaan extends Model
 
     protected $fillable = [
         'kode_user',
-        'nodin_user',
-        'tanggal_nodin_user',
         'tim',
         'departemen',
         'proyek',
@@ -38,6 +36,11 @@ class Pengadaan extends Model
     public function nodinPlos(): HasMany
     {
         return $this->hasMany(NodinPlo::class);
+    }
+
+    public function nodinUsers(): HasMany
+    {
+        return $this->hasMany(NodinUser::class);
     }
 
     public function departemen(): BelongsTo

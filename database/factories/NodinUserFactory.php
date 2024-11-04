@@ -2,16 +2,16 @@
 
 namespace Database\Factories;
 
-use App\Models\NodinPlo;
+use App\Models\NodinUser;
 use App\Models\Pengadaan;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
- * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\NodinPlo>
+ * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\NodinUser>
  */
-class NodinPloFactory extends Factory
+class NodinUserFactory extends Factory
 {
-    protected $model = NodinPlo::class;
+    protected $model = NodinUser::class;
 
     /**
      * Define the model's default state.

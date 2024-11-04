@@ -35,8 +35,6 @@ class PengadaanFactory extends Factory
 
         return [
             'kode_user' => "PLO",
-            'nodin_user' => 'B.' . $this->faker->randomNumber() . '.P-PLO/' . strtoupper($departemen) . '/' . strtoupper($tim) . '/' . now()->format('m') . '/' . now()->format('Y'),
-            'tanggal_nodin_user' => $tanggalNodinUser->format('Y-m-d'),
             'tim' => $tim,
             'departemen' => $departemen,
             'proyek' => $departemen === 'bcp' ? 'P001' : null,
