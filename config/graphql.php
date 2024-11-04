@@ -85,12 +85,12 @@ return [
                 'users' => App\GraphQL\Queries\User\UsersQuery::class,
             ],
             'mutation' => [
-                'createPengadaan' => App\GraphQL\Mutations\Pengadaan\CreatePengadaanMutation::class,
-                'updatePengadaan' => App\GraphQL\Mutations\Pengadaan\UpdatePengadaanMutation::class,
-                'deletePengadaan' => App\GraphQL\Mutations\Pengadaan\DeletePengadaanMutation::class,
-                'createNodinPlo' => App\GraphQL\Mutations\NodinPlo\CreateNodinPloMutation::class,
-                'updateNodinPlo' => App\GraphQL\Mutations\NodinPlo\UpdateNodinPloMutation::class,
-                'deleteNodinPlo' => App\GraphQL\Mutations\NodinPlo\DeleteNodinPloMutation::class,
+                // 'createPengadaan' => App\GraphQL\Mutations\Pengadaan\CreatePengadaanMutation::class,
+                // 'updatePengadaan' => App\GraphQL\Mutations\Pengadaan\UpdatePengadaanMutation::class,
+                // 'deletePengadaan' => App\GraphQL\Mutations\Pengadaan\DeletePengadaanMutation::class,
+                // 'createNodinPlo' => App\GraphQL\Mutations\NodinPlo\CreateNodinPloMutation::class,
+                // 'updateNodinPlo' => App\GraphQL\Mutations\NodinPlo\UpdateNodinPloMutation::class,
+                // 'deleteNodinPlo' => App\GraphQL\Mutations\NodinPlo\DeleteNodinPloMutation::class,
             ],
             // The types only available in this schema
             'types' => [

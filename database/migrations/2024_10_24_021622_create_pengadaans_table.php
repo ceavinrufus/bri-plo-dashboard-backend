@@ -29,6 +29,7 @@ return new class extends Migration
             $table->string('proses_pengadaan')->nullable();
             $table->string('nomor_spk')->nullable();
             $table->date('tanggal_spk')->nullable();
+            $table->date('tanggal_acuan')->nullable();
             $table->string('pelaksana_pekerjaan')->nullable();
             $table->float('nilai_spk')->nullable();
             $table->json('anggaran')->nullable();
