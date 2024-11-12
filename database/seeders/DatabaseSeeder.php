@@ -44,13 +44,13 @@ class DatabaseSeeder extends Seeder
         // Seed a user
         User::factory()->create([
             'name' => 'Ceavin Rufus',
-            'pn' => '90175686',
+            'pn' => '99999999',
             'email' => 'ceavinr@gmail.com',
         ]);
 
         User::factory()->admin()->create([
             'name' => 'Admin',
-            'pn' => '99999999',
+            'pn' => '90175686',
             'email' => 'ceavin.dev@gmail.com',
         ]);
 
