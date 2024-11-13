@@ -66,6 +66,7 @@ class PengadaanController extends Controller
             'hps' => 'nullable|json',
             'tkdn_percentage' => 'nullable|numeric',
             'catatan' => 'nullable|string|max:255',
+            'proyek' => 'nullable|string|max:255', // Kode proyek
             'nodin_users' => 'nullable|array', // Nodin User must be an array
             'nodin_users.*.nodin' => 'required_with:nodin_users|string|max:255',
             'nodin_users.*.tanggal_nodin' => 'required_with:nodin_users|date',
@@ -123,6 +124,7 @@ class PengadaanController extends Controller
             'hps' => 'nullable|json',
             'tkdn_percentage' => 'nullable|numeric',
             'catatan' => 'nullable|string|max:255',
+            'proyek' => 'nullable|string|max:255', // Kode proyek
             'nodin_users' => 'nullable|array', // Nodin User must be an array
             'nodin_users.*.id' => 'nullable|exists:nodin_users,id', // Allow existing NodinUser for update
             'nodin_users.*.nodin' => 'required_with:nodin_users|string|max:255',
