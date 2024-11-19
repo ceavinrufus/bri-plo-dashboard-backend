@@ -83,6 +83,8 @@ return [
                 'nodin_plos' => App\GraphQL\Queries\NodinPlo\NodinPlosQuery::class,
                 'user' => App\GraphQL\Queries\User\UserQuery::class,
                 'users' => App\GraphQL\Queries\User\UsersQuery::class,
+                'dokumen' => App\GraphQL\Queries\Dokumen\DokumenQuery::class,
+                'dokumens' => App\GraphQL\Queries\Dokumen\DokumensQuery::class,
             ],
             'mutation' => [
                 // 'createPengadaan' => App\GraphQL\Mutations\Pengadaan\CreatePengadaanMutation::class,
@@ -126,6 +128,7 @@ return [
         'NodinUser' => App\GraphQL\Types\NodinUserType::class,
         'User' => App\GraphQL\Types\UserType::class,
         'Price' => App\GraphQL\Types\PriceType::class,
+        'Dokumen' => App\GraphQL\Types\DokumenType::class,
     ],
 
     // This callable will be passed the Error object for each errors GraphQL catch.
