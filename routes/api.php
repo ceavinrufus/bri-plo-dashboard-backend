@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\DepartmentController;
+use App\Http\Controllers\DokumenController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\PengadaanController;
@@ -17,6 +18,12 @@ Route::get('/pengadaan/{pengadaan:departemen}', [PengadaanController::class, 'in
 Route::post('/pengadaan/store', [PengadaanController::class, 'store'])->name('pengadaan.store');
 Route::put('/pengadaan/update/{pengadaan}', [PengadaanController::class, 'update'])->name('pengadaan.update');
 Route::delete('/pengadaan/delete/{pengadaan}', [PengadaanController::class, 'destroy'])->name('pengadaan.destroy');
+
+// Dokumen
+Route::get('/dokumen', [DokumenController::class, 'index'])->name('dokumen.index');
+Route::post('/dokumen/store', [DokumenController::class, 'store'])->name('dokumen.store');
+Route::put('/dokumen/update/{dokumen}', [DokumenController::class, 'update'])->name('dokumen.update');
+Route::delete('/dokumen/delete/{dokumen}', [DokumenController::class, 'destroy'])->name('dokumen.destroy');
 
 // Project
 Route::get('/project', [ProjectController::class, 'index'])->name('projects.index');

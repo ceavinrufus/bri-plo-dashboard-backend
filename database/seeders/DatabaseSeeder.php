@@ -3,6 +3,7 @@
 namespace Database\Seeders;
 
 use App\Models\Department;
+use App\Models\Dokumen;
 use App\Models\NodinPlo;
 use App\Models\NodinUser;
 use App\Models\Pengadaan;
@@ -55,6 +56,7 @@ class DatabaseSeeder extends Seeder
         ]);
 
         Pengadaan::factory(15)->create();
+        Dokumen::factory(15)->create();
 
         NodinPlo::factory(20)->create();
         NodinUser::factory(20)->create();
