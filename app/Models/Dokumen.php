@@ -21,7 +21,7 @@ class Dokumen extends Model
         'tanggal',
         'jangka_waktu',
         'tim',
-        'nilai_spk',
+        'spk',
         'identitas_vendor',
         'info_vendor',
         'tanggal_pengambilan',

@@ -27,7 +27,7 @@ class Pengadaan extends Model
         'tanggal_spk',
         'tanggal_acuan',
         'pelaksana_pekerjaan',
-        'nilai_spk',
+        'spk',
         'anggaran',
         'hps',
         'tkdn_percentage',

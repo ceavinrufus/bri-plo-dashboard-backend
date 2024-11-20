@@ -73,9 +73,9 @@ class DokumenType extends GraphQLType
                 'description' => 'The team',
                 'rules' => ['required']
             ],
-            'nilai_spk' => [
-                'type' => Type::float(),
-                'description' => 'The SPK value',
+            'spk' => [
+                'type' => GraphQL::type('Price'),
+                'description' => 'The SPK',
                 'rules' => ['required']
             ],
             'identitas_vendor' => [

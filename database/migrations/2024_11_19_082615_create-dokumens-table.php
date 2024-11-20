@@ -23,7 +23,7 @@ return new class extends Migration
             $table->date('tanggal');
             $table->integer('jangka_waktu');
             $table->string('tim');
-            $table->decimal('nilai_spk', 15, 2);
+            $table->json('spk')->nullable();
             $table->string('identitas_vendor');
             $table->text('info_vendor');
             $table->date('tanggal_pengambilan');

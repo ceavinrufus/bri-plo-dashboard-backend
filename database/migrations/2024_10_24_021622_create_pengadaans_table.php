@@ -31,7 +31,7 @@ return new class extends Migration
             $table->date('tanggal_spk')->nullable();
             $table->date('tanggal_acuan')->nullable();
             $table->string('pelaksana_pekerjaan')->nullable();
-            $table->float('nilai_spk')->nullable();
+            $table->json('spk')->nullable();
             $table->json('anggaran')->nullable();
             $table->json('hps')->nullable();
             $table->float('tkdn_percentage')->nullable();

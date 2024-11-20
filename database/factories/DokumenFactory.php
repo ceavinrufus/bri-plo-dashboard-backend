@@ -35,7 +35,11 @@ class DokumenFactory extends Factory
             'tanggal' => $this->faker->date(),
             'jangka_waktu' => $this->faker->numberBetween(1, 365),
             'tim' => $this->faker->word,
-            'nilai_spk' => $this->faker->randomFloat(2, 1000, 1000000),
+            'spk' => json_encode([
+                'amount' => $this->faker->randomFloat(2, 10000, 11000),
+                'currency' => $this->faker->randomElement(['IDR', 'USD', 'EUR']),
+                'rate' => $this->faker->randomFloat(2, 0.1, 1)
+            ]),
             'identitas_vendor' => $this->faker->name,
             'info_vendor' => $this->faker->text,
             'tanggal_pengambilan' => $this->faker->date(),

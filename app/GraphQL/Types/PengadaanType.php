@@ -93,9 +93,9 @@ class PengadaanType extends GraphQLType
                 'type' => Type::string(),
                 'description' => 'The job performer'
             ],
-            'nilai_spk' => [
-                'type' => Type::float(),
-                'description' => 'The SPK value'
+            'spk' => [
+                'type' => GraphQL::type('Price'),
+                'description' => 'The SPK'
             ],
             'nodin_plos' => [
                 'type' => Type::listOf(GraphQL::type('NodinPlo')),
