@@ -52,6 +52,9 @@ class DokumensQuery extends Query
 
         return $query->offset($args['offset'])
             ->limit($args['limit'])
-            ->get();
+            ->get()
+            ->each(function ($dokumen) {
+                $dokumen->spk = json_decode($dokumen->spk);
+            });
     }
 }

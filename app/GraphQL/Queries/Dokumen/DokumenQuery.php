@@ -33,6 +33,8 @@ class DokumenQuery extends Query
     public function resolve($root, $args)
     {
         $dokumen = Dokumen::findOrFail($args['id']);
+        $dokumen->spk = json_decode($dokumen->spk);
+
         return $dokumen;
     }
 }

@@ -60,6 +60,7 @@ class PengadaansQuery extends Query
 
                 $pengadaan->anggaran = json_decode($pengadaan->anggaran);
                 $pengadaan->hps = json_decode($pengadaan->hps);
+                $pengadaan->spk = json_decode($pengadaan->spk);
             });
     }
 }
