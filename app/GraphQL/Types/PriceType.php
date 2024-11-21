@@ -28,14 +28,14 @@ class PriceType extends GraphQLType
                 'type' => Type::float(),
                 'description' => 'The rate of the currency'
             ],
-            'tanggal_permohonan' => [
-                'type' => Type::string(),
-                'description' => 'The request date of the price'
-            ],
-            'tanggal_terima' => [
-                'type' => Type::string(),
-                'description' => 'The received date of the price'
-            ],
+            // 'tanggal_permohonan' => [
+            //     'type' => Type::string(),
+            //     'description' => 'The request date of the price'
+            // ],
+            // 'tanggal_terima' => [
+            //     'type' => Type::string(),
+            //     'description' => 'The received date of the price'
+            // ],
         ];
     }
 }

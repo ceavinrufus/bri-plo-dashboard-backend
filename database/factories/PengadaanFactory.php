@@ -67,22 +67,22 @@ class PengadaanFactory extends Factory
                 'amount' => $this->faker->randomFloat(2, 10000, 11000),
                 'currency' => $this->faker->randomElement(['IDR', 'USD', 'EUR']),
                 'rate' => $this->faker->randomFloat(2, 0.1, 1),
-                'tanggal_permohonan' => $this->faker->dateTimeThisYear()->format('Y-m-d'),
-                'tanggal_terima' => $this->faker->dateTimeThisYear()->format('Y-m-d')
+                // 'tanggal_permohonan' => $this->faker->dateTimeThisYear()->format('Y-m-d'),
+                // 'tanggal_terima' => $this->faker->dateTimeThisYear()->format('Y-m-d')
             ]),
             'anggaran_eksploitasi' => json_encode([
                 'amount' => $this->faker->randomFloat(2, 10000, 11000),
                 'currency' => $this->faker->randomElement(['IDR', 'USD', 'EUR']),
                 'rate' => $this->faker->randomFloat(2, 0.1, 1),
-                'tanggal_permohonan' => $this->faker->dateTimeThisYear()->format('Y-m-d'),
-                'tanggal_terima' => $this->faker->dateTimeThisYear()->format('Y-m-d')
+                // 'tanggal_permohonan' => $this->faker->dateTimeThisYear()->format('Y-m-d'),
+                // 'tanggal_terima' => $this->faker->dateTimeThisYear()->format('Y-m-d')
             ]),
             'hps' => json_encode([
                 'amount' => $this->faker->randomFloat(2, 10000, 11000),
                 'currency' => $this->faker->randomElement(['IDR', 'USD', 'EUR']),
                 'rate' => $this->faker->randomFloat(2, 0.1, 1),
-                'tanggal_permohonan' => $this->faker->dateTimeThisYear()->format('Y-m-d'),
-                'tanggal_terima' => $this->faker->dateTimeThisYear()->format('Y-m-d')
+                // 'tanggal_permohonan' => $this->faker->dateTimeThisYear()->format('Y-m-d'),
+                // 'tanggal_terima' => $this->faker->dateTimeThisYear()->format('Y-m-d')
             ]),
             'tkdn_percentage' => $this->faker->optional()->randomFloat(2, 0, 100),
             'created_at' => now(),
