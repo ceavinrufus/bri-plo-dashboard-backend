@@ -53,12 +53,24 @@ class PengadaanFactory extends Factory
             'tanggal_spk' => $this->faker->dateTimeBetween($tanggalNodinUser, 'now')->format('Y-m-d'),
             'tanggal_acuan' => $this->faker->dateTimeBetween($tanggalNodinUser, 'now')->format('Y-m-d'),
             'pelaksana_pekerjaan' => $this->faker->name,
-            'spk' => json_encode([
+            'spk_investasi' => json_encode([
                 'amount' => $this->faker->randomFloat(2, 10000, 11000),
                 'currency' => $this->faker->randomElement(['IDR', 'USD', 'EUR']),
                 'rate' => $this->faker->randomFloat(2, 0.1, 1),
             ]),
-            'anggaran' => json_encode([
+            'spk_eksploitasi' => json_encode([
+                'amount' => $this->faker->randomFloat(2, 10000, 11000),
+                'currency' => $this->faker->randomElement(['IDR', 'USD', 'EUR']),
+                'rate' => $this->faker->randomFloat(2, 0.1, 1),
+            ]),
+            'anggaran_investasi' => json_encode([
+                'amount' => $this->faker->randomFloat(2, 10000, 11000),
+                'currency' => $this->faker->randomElement(['IDR', 'USD', 'EUR']),
+                'rate' => $this->faker->randomFloat(2, 0.1, 1),
+                'tanggal_permohonan' => $this->faker->dateTimeThisYear()->format('Y-m-d'),
+                'tanggal_terima' => $this->faker->dateTimeThisYear()->format('Y-m-d')
+            ]),
+            'anggaran_eksploitasi' => json_encode([
                 'amount' => $this->faker->randomFloat(2, 10000, 11000),
                 'currency' => $this->faker->randomElement(['IDR', 'USD', 'EUR']),
                 'rate' => $this->faker->randomFloat(2, 0.1, 1),

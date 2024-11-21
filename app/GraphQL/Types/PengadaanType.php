@@ -93,7 +93,11 @@ class PengadaanType extends GraphQLType
                 'type' => Type::string(),
                 'description' => 'The job performer'
             ],
-            'spk' => [
+            'spk_investasi' => [
+                'type' => GraphQL::type('Price'),
+                'description' => 'The SPK'
+            ],
+            'spk_eksploitasi' => [
                 'type' => GraphQL::type('Price'),
                 'description' => 'The SPK'
             ],
@@ -101,7 +105,11 @@ class PengadaanType extends GraphQLType
                 'type' => Type::listOf(GraphQL::type('NodinPlo')),
                 'description' => 'List of nodin plos of the Pengadaan'
             ],
-            'anggaran' => [
+            'anggaran_investasi' => [
+                'type' => GraphQL::type('Price'),
+                'description' => 'The budget'
+            ],
+            'anggaran_eksploitasi' => [
                 'type' => GraphQL::type('Price'),
                 'description' => 'The budget'
             ],

@@ -58,9 +58,11 @@ class PengadaansQuery extends Query
                 $pengadaan->nodin_plos = $pengadaan->nodinPlos;
                 $pengadaan->nodin_users = $pengadaan->nodinUsers;
 
-                $pengadaan->anggaran = json_decode($pengadaan->anggaran);
+                $pengadaan->anggaran_investasi = json_decode($pengadaan->anggaran_investasi);
+                $pengadaan->anggaran_eksploitasi = json_decode($pengadaan->anggaran_eksploitasi);
                 $pengadaan->hps = json_decode($pengadaan->hps);
-                $pengadaan->spk = json_decode($pengadaan->spk);
+                $pengadaan->spk_investasi = json_decode($pengadaan->spk_investasi);
+                $pengadaan->spk_eksploitasi = json_decode($pengadaan->spk_eksploitasi);
             });
     }
 }
