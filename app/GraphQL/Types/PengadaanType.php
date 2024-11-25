@@ -77,6 +77,10 @@ class PengadaanType extends GraphQLType
                 'type' => Type::string(),
                 'description' => 'The procurement process'
             ],
+            'pengadaan_log' => [
+                'type' => Type::listOf(GraphQL::type('ProsesPengadaan')),
+                'description' => 'The procurement process log'
+            ],
             'nomor_spk' => [
                 'type' => Type::string(),
                 'description' => 'The SPK number'

@@ -129,6 +129,7 @@ return [
         'User' => App\GraphQL\Types\UserType::class,
         'Price' => App\GraphQL\Types\PriceType::class,
         'Dokumen' => App\GraphQL\Types\DokumenType::class,
+        'ProsesPengadaan' => App\GraphQL\Types\ProsesPengadaanType::class,
     ],
 
     // This callable will be passed the Error object for each errors GraphQL catch.

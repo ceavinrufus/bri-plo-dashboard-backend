@@ -23,6 +23,7 @@ class Pengadaan extends Model
         'nodin_alert_at',
         'pic_id',
         'proses_pengadaan',
+        'pengadaan_log',
         'nomor_spk',
         'tanggal_spk',
         'tanggal_acuan',
@@ -34,6 +35,10 @@ class Pengadaan extends Model
         'hps',
         'tkdn_percentage',
         'catatan',
+    ];
+
+    protected $casts = [
+        'pengadaan_log' => 'array',
     ];
 
     public function nodinPlos(): HasMany
