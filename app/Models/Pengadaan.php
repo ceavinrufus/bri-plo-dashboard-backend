@@ -18,7 +18,7 @@ class Pengadaan extends Model
         'proyek',
         'perihal',
         'metode',
-        'is_verification_complete',
+        'verification_completed_at',
         'verification_alert_at',
         'nodin_alert_at',
         'pic_id',

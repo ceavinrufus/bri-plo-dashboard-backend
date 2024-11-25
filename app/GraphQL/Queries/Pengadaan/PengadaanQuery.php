@@ -34,6 +34,7 @@ class PengadaanQuery extends Query
     public function resolve($root, $args)
     {
         $pengadaan = Pengadaan::with(['nodinPlos', 'nodinUsers'])->findOrFail($args['id']);
+        $pengadaan->pengadaan_log = json_decode($pengadaan->pengadaan_log);
         $pengadaan->nodin_users = $pengadaan->nodinUsers;
         $pengadaan->nodin_plos = $pengadaan->nodinPlos;
         $pengadaan->anggaran_investasi = json_decode($pengadaan->anggaran_investasi);
