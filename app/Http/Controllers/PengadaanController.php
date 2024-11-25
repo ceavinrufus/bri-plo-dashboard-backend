@@ -108,15 +108,15 @@ class PengadaanController extends Controller
     {
         // Validate the incoming request
         $validated = $request->validate([
-            'kode_user' => 'required|string|max:255',
-            'tim' => 'required|string|max:3',
-            'departemen' => 'required|exists:departments,code',
-            'perihal' => 'required|string|max:255',
+            'kode_user' => 'nullable|string|max:255',
+            'tim' => 'nullable|string|max:3',
+            'departemen' => 'nullable|exists:departments,code',
+            'perihal' => 'nullable|string|max:255',
             'metode' => 'nullable|in:Lelang,Pemilihan Langsung,Seleksi Langsung,Penunjukkan Langsung',
             'is_verification_complete' => 'nullable|boolean',
             'verification_alert_at' => 'nullable|date',
             'nodin_alert_at' => 'nullable|date',
-            'pic_id' => 'required|exists:users,id',
+            'pic_id' => 'nullable|exists:users,id',
             'proses_pengadaan' => 'nullable|string|max:255',
             'pengadaan_log' => 'nullable|array',
             'nomor_spk' => 'nullable|string|max:255',
