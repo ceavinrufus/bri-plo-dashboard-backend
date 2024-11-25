@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\DepartmentController;
 use App\Http\Controllers\DokumenController;
+use App\Http\Controllers\HariLiburController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\PengadaanController;
@@ -36,3 +37,9 @@ Route::get('/department', [DepartmentController::class, 'index'])->name('departm
 Route::post('/department/store', [DepartmentController::class, 'store'])->name('departments.store');
 Route::put('/department/update/{department}', [DepartmentController::class, 'update'])->name('departments.update');
 Route::delete('/department/delete/{department}', [DepartmentController::class, 'destroy'])->name('departments.destroy');
+
+// Hari Libur
+Route::get('/hari-libur', [HariLiburController::class, 'index'])->name('hari-libur.index');
+Route::post('/hari-libur/store', [HariLiburController::class, 'store'])->name('hari-libur.store');
+Route::put('/hari-libur/update/{hariLibur}', [HariLiburController::class, 'update'])->name('hari-libur.update');
+Route::delete('/hari-libur/delete/{hariLibur}', [HariLiburController::class, 'destroy'])->name('hari-libur.destroy');
