@@ -49,7 +49,7 @@ class PengadaanFactory extends Factory
                 'Pengumuman Pengadaan',
                 'Selesai'
             ]),
-            'pengadaan_log' => json_encode([
+            'pengadaan_log' => [
                 [
                     'stage' => 'Penyusunan & Penetapan HPS',
                     'tanggal' => $this->faker->dateTimeThisYear()->format('Y-m-d'),
@@ -60,7 +60,7 @@ class PengadaanFactory extends Factory
                     'tanggal' => $this->faker->dateTimeThisYear()->format('Y-m-d'),
                     'document' => $this->faker->word
                 ],
-            ]),
+            ],
             'nomor_spk' => 'SPK.' . $this->faker->randomNumber() . '.P-PLO/' . strtoupper($departemen) . '/' . strtoupper($tim) . '/' . now()->format('m') . '/' . now()->format('Y'),
             'tanggal_spk' => $this->faker->dateTimeBetween($tanggalNodinUser, 'now')->format('Y-m-d'),
             'tanggal_acuan' => $this->faker->dateTimeBetween($tanggalNodinUser, 'now')->format('Y-m-d'),
