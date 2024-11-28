@@ -203,7 +203,7 @@ class PengadaanController extends Controller
         return response()->json([
             'status' => 'success',
             'message' => 'Pengadaan data successfully updated!',
-            'data' => $pengadaan->load(['nodinPlos', 'nodinUsers']), // Load related nodinPlos
+            'data' => $pengadaan->load(['nodinPlos', 'nodinUsers', 'nodinIpPengadaans']), // Load related nodinPlos
         ], 200);
     }
 
