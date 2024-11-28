@@ -21,7 +21,6 @@ class ProjectController extends Controller
         ], 200);
     }
 
-    // Function to store data and related nodin_plos and return a JSON response
     public function store(Request $request)
     {
         // Validate the incoming request

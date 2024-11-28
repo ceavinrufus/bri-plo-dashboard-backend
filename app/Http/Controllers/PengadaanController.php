@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\NodinIpPengadaan;
 use App\Models\Pengadaan;
 use App\Models\NodinPlo;
 use App\Models\NodinUser;
@@ -29,6 +30,7 @@ class PengadaanController extends Controller
             // Place 'nomor' at the start
             $itemArray = array_merge(['nomor' => $index + 1], $itemArray);
             $itemArray['nodin_plo'] = $item->nodinPlos;
+            $itemArray['nodin_ip_pengadaan'] = $item->nodinIpPengadaans;
             $itemArray['nodin_user'] = $item->nodinUsers;
 
             return $itemArray;
@@ -76,6 +78,9 @@ class PengadaanController extends Controller
             'nodin_plos' => 'nullable|array', // Nodin Plo must be an array
             'nodin_plos.*.nodin' => 'required_with:nodin_plos|string|max:255',
             'nodin_plos.*.tanggal_nodin' => 'required_with:nodin_plos|date',
+            'nodin_ip_pengadaans' => 'nullable|array', // Nodin IP Pengadaan must be an array
+            'nodin_ip_pengadaans.*.nodin' => 'required_with:nodin_ip_pengadaans|string|max:255',
+            'nodin_ip_pengadaans.*.tanggal_nodin' => 'required_with:nodin_ip_pengadaans|date',
         ]);
 
         // Create a new Pengadaan record
@@ -95,15 +100,22 @@ class PengadaanController extends Controller
             }
         }
 
+        // Create associated NodinIpPengadaans if present
+        if (isset($validated['nodin_ip_pengadaans'])) {
+            foreach ($validated['nodin_ip_pengadaans'] as $nodinIpPengadaanData) {
+                $pengadaan->nodinIpPengadaans()->create($nodinIpPengadaanData);
+            }
+        }
+
         // Return a JSON response indicating success
         return response()->json([
             'status' => 'success',
             'message' => 'Pengadaan data successfully added!',
-            'data' => $pengadaan->load(['nodinPlos', 'nodinUsers']), // Load related nodinPlos and nodinUsers
+            'data' => $pengadaan->load(['nodinPlos', 'nodinUsers', 'nodinIpPengadaans']), // Load related nodinPlos and nodinUsers
         ], 201);
     }
 
-    // Function to update Pengadaan and related nodin_plos
+    // Function to update Pengadaan and related nodins
     public function update(Request $request, Pengadaan $pengadaan)
     {
         // Validate the incoming request
@@ -139,6 +151,10 @@ class PengadaanController extends Controller
             'nodin_plos.*.id' => 'nullable|exists:nodin_plos,id', // Allow existing NodinPlo for update
             'nodin_plos.*.nodin' => 'required_with:nodin_plos|string|max:255',
             'nodin_plos.*.tanggal_nodin' => 'required_with:nodin_plos|date',
+            'nodin_ip_pengadaans' => 'nullable|array', // Nodin IP pengadaan must be an array
+            'nodin_ip_pengadaans.*.id' => 'nullable|exists:nodin_ip_pengadaans,id', // Allow existing NodinIpPengadaan for update
+            'nodin_ip_pengadaans.*.nodin' => 'required_with:nodin_ip_pengadaans|string|max:255',
+            'nodin_ip_pengadaans.*.tanggal_nodin' => 'required_with:nodin_ip_pengadaans|date',
         ]);
 
         // Update the Pengadaan record with validated data
@@ -166,6 +182,19 @@ class PengadaanController extends Controller
                 } else {
                     // Create a new NodinPlo
                     $pengadaan->nodinPlos()->create($nodinPloData);
+                }
+            }
+        }
+
+        // Sync NodinPlos if present
+        if (isset($validated['nodin_ip_pengadaans'])) {
+            foreach ($validated['nodin_ip_pengadaans'] as $nodinIpPengadaanData) {
+                if (isset($nodinIpPengadaanData['id'])) {
+                    // Update existing NodinIpPengadaan
+                    NodinIpPengadaan::where('id', $nodinIpPengadaanData['id'])->update($nodinIpPengadaanData);
+                } else {
+                    // Create a new NodinIpPengadaan
+                    $pengadaan->nodinIpPengadaans()->create($nodinIpPengadaanData);
                 }
             }
         }

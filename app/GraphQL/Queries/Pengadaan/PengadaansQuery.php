@@ -50,12 +50,13 @@ class PengadaansQuery extends Query
             $query->where('departemen', $args['departemen']);
         }
 
-        return $query->with(['nodinPlos', 'nodinUsers'])
+        return $query->with(['nodinPlos', 'nodinUsers', 'nodinIpPengadaans'])
             ->offset($args['offset'])
             ->limit($args['limit'])
             ->get()
             ->each(function ($pengadaan) {
                 $pengadaan->nodin_plos = $pengadaan->nodinPlos;
+                $pengadaan->nodin_ip_pengadaans = $pengadaan->nodinIpPengadaans;
                 $pengadaan->nodin_users = $pengadaan->nodinUsers;
                 $pengadaan->pengadaan_log = json_decode($pengadaan->pengadaan_log);
                 $pengadaan->anggaran_investasi = json_decode($pengadaan->anggaran_investasi);

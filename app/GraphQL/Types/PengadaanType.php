@@ -30,7 +30,7 @@ class PengadaanType extends GraphQLType
                 'rules' => ['required']
             ],
             'nodin_users' => [
-                'type' => Type::listOf(GraphQL::type('NodinUser')),
+                'type' => Type::listOf(GraphQL::type('Nodin')),
                 'description' => 'List of nodin users of the Pengadaan'
             ],
             'tim' => [
@@ -106,8 +106,12 @@ class PengadaanType extends GraphQLType
                 'description' => 'The SPK'
             ],
             'nodin_plos' => [
-                'type' => Type::listOf(GraphQL::type('NodinPlo')),
+                'type' => Type::listOf(GraphQL::type('Nodin')),
                 'description' => 'List of nodin plos of the Pengadaan'
+            ],
+            'nodin_ip_pengadaans' => [
+                'type' => Type::listOf(GraphQL::type('Nodin')),
+                'description' => 'List of nodin izin pelaksanaan of the Pengadaan'
             ],
             'anggaran_investasi' => [
                 'type' => GraphQL::type('Price'),

@@ -51,6 +51,11 @@ class Pengadaan extends Model
         return $this->hasMany(NodinUser::class);
     }
 
+    public function nodinIpPengadaans(): HasMany
+    {
+        return $this->hasMany(NodinIpPengadaan::class);
+    }
+
     public function departemen(): BelongsTo
     {
         return $this->belongsTo(Department::class, 'departemen', 'code');

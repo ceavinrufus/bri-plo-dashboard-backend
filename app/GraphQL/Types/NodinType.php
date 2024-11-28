@@ -2,17 +2,15 @@
 
 namespace App\GraphQL\Types;
 
-use App\Models\NodinUser;
 use GraphQL\Type\Definition\Type;
 use Rebing\GraphQL\Support\Facades\GraphQL;
 use Rebing\GraphQL\Support\Type as GraphQLType;
 
-class NodinUserType extends GraphQLType
+class NodinType extends GraphQLType
 {
     protected $attributes = [
-        'name' => 'NodinUser',
-        'description' => 'A type that represents a NodinUser',
-        'model' => NodinUser::class
+        'name' => 'Nodin',
+        'description' => 'A type that represents a Nodin'
     ];
 
     public function fields(): array
@@ -20,7 +18,7 @@ class NodinUserType extends GraphQLType
         return [
             'id' => [
                 'type' => Type::nonNull(Type::id()),
-                'description' => 'The ID of the NodinUser',
+                'description' => 'The ID of the Nodin',
                 'rules' => ['required']
             ],
             'nodin' => [
@@ -35,17 +33,17 @@ class NodinUserType extends GraphQLType
             ],
             'pengadaan' => [
                 'type' => GraphQL::type('Pengadaan'),
-                'description' => 'The pengadaan of the NodinUser',
+                'description' => 'The pengadaan of the Nodin',
                 'rules' => ['required']
             ],
             'created_at' => [
                 'type' => Type::string(),
-                'description' => 'The creation date of the NodinUser',
+                'description' => 'The creation date of the Nodin',
                 'rules' => ['required']
             ],
             'updated_at' => [
                 'type' => Type::string(),
-                'description' => 'The last update date of the NodinUser',
+                'description' => 'The last update date of the Nodin',
                 'rules' => ['required']
             ],
         ];

@@ -4,6 +4,7 @@ namespace Database\Seeders;
 
 use App\Models\Department;
 use App\Models\Dokumen;
+use App\Models\NodinIpPengadaan;
 use App\Models\NodinPlo;
 use App\Models\NodinUser;
 use App\Models\Pengadaan;
@@ -60,5 +61,6 @@ class DatabaseSeeder extends Seeder
 
         NodinPlo::factory(20)->create();
         NodinUser::factory(20)->create();
+        NodinIpPengadaan::factory(20)->create();
     }
 }

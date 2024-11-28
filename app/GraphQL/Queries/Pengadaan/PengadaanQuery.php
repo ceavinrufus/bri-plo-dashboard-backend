@@ -37,6 +37,7 @@ class PengadaanQuery extends Query
         $pengadaan->pengadaan_log = json_decode($pengadaan->pengadaan_log);
         $pengadaan->nodin_users = $pengadaan->nodinUsers;
         $pengadaan->nodin_plos = $pengadaan->nodinPlos;
+        $pengadaan->nodin_ip_pengadaans = $pengadaan->nodinIpPengadaans;
         $pengadaan->anggaran_investasi = json_decode($pengadaan->anggaran_investasi);
         $pengadaan->anggaran_eksploitasi = json_decode($pengadaan->anggaran_eksploitasi);
         $pengadaan->hps = json_decode($pengadaan->hps);

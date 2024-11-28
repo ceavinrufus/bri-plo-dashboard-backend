@@ -16,7 +16,7 @@ class NodinUserQuery extends Query
 
     public function type(): Type
     {
-        return GraphQL::type('NodinUser');
+        return GraphQL::type('Nodin');
     }
 
     public function args(): array
