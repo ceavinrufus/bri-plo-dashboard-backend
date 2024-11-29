@@ -21,7 +21,8 @@ class HariLiburController extends Controller
     public function store()
     {
         $validated = request()->validate([
-            'tanggal' => 'required|date',
+            'tanggal_mulai' => 'required|date',
+            'tanggal_selesai' => 'required|date',
             'keterangan' => 'required|string|max:255',
         ]);
 
@@ -36,7 +37,8 @@ class HariLiburController extends Controller
     public function update(Request $request, HariLibur $hariLibur)
     {
         $validated = $request->validate([
-            'tanggal' => 'required|date',
+            'tanggal_mulai' => 'required|date',
+            'tanggal_selesai' => 'required|date',
             'keterangan' => 'required|string|max:255',
         ]);
 

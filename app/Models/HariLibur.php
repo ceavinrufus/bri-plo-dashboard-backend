@@ -10,11 +10,13 @@ class HariLibur extends Model
     use HasFactory;
 
     protected $fillable = [
-        'tanggal',
+        'tanggal_mulai',
+        'tanggal_selesai',
         'keterangan',
     ];
 
     protected $casts = [
-        'tanggal' => 'date',
+        'tanggal_mulai' => 'date',
+        'tanggal_selesai' => 'date',
     ];
 }
