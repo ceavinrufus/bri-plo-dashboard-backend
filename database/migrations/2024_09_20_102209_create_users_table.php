@@ -19,6 +19,7 @@ return new class extends Migration
             $table->string('pn')->unique();
             $table->string('departemen');
             $table->foreign('departemen')->references('code')->on('departments')->onDelete('restrict');
+            $table->string('tim');
             $table->string('password');
             $table->rememberToken();
             $table->string('role');

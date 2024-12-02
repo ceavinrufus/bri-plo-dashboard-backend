@@ -29,6 +29,7 @@ class UserFactory extends Factory
             'email_verified_at' => now(),
             'pn' => fake()->unique()->numerify('########'),
             'departemen' => 'bcp',
+            'tim' => 'bcd',
             // 'departemen' => $this->faker->randomElement(['bcp', 'igp', 'psr']),
             'password' => static::$password ??= Hash::make('password'),
             'role' => 'maker',

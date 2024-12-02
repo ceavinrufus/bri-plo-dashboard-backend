@@ -27,6 +27,7 @@ class RegisteredUserController extends Controller
             'email' => ['required', 'string', 'lowercase', 'email', 'max:255', 'unique:' . User::class],
             'password' => ['required', 'confirmed', Rules\Password::defaults()],
             'departemen' => ['required', 'string', 'lowercase', 'max:3'],
+            'tim' => ['required', 'string', 'lowercase', 'max:3'],
         ]);
 
         $user = User::create([
@@ -34,6 +35,7 @@ class RegisteredUserController extends Controller
             'pn' => $request->pn,
             'role' => 'guest',
             'departemen' => $request->departemen,
+            'tim' => $request->departemen,
             'email' => $request->email,
             'password' => Hash::make($request->string('password')),
         ]);
