@@ -16,7 +16,7 @@ class NodinPlosQuery extends Query
 
     public function type(): Type
     {
-        return Type::listOf(GraphQL::type('Nodin'));
+        return Type::listOf(GraphQL::type('NodinPlo'));
     }
 
     public function args(): array
