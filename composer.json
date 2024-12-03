@@ -14,6 +14,7 @@
         "laravel/tinker": "^2.9",
         "mll-lab/laravel-graphiql": "^3.2",
         "nuwave/lighthouse": "^6.45",
+        "phpoffice/phpspreadsheet": "^3.5",
         "rebing/graphql-laravel": "^9.6"
     },
     "require-dev": {

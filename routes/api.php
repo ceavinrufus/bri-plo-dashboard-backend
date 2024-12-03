@@ -19,6 +19,7 @@ Route::get('/pengadaan/{pengadaan:departemen}', [PengadaanController::class, 'in
 Route::post('/pengadaan/store', [PengadaanController::class, 'store'])->name('pengadaan.store');
 Route::put('/pengadaan/update/{pengadaan}', [PengadaanController::class, 'update'])->name('pengadaan.update');
 Route::delete('/pengadaan/delete/{pengadaan}', [PengadaanController::class, 'destroy'])->name('pengadaan.destroy');
+Route::post('pengadaan/import', [PengadaanController::class, 'import']);
 
 // Dokumen
 Route::get('/dokumen', [DokumenController::class, 'index'])->name('dokumen.index');

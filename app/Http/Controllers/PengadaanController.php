@@ -7,6 +7,10 @@ use App\Models\Pengadaan;
 use App\Models\NodinPlo;
 use App\Models\NodinUser;
 use Illuminate\Http\Request;
+use PhpOffice\PhpSpreadsheet\IOFactory;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\Validator;
 
 class PengadaanController extends Controller
 {
@@ -42,6 +46,196 @@ class PengadaanController extends Controller
             'message' => 'Data fetched successfully',
             'data' => $data,
         ], 200);
+    }
+
+    public function import(Request $request)
+    {
+
+        $request->validate([
+            'excel_file' => 'required|file|mimes:xlsx,xls',
+        ]);
+
+        try {
+            $file = $request->file('excel_file');
+            $spreadsheet = IOFactory::load($file->getPathname());
+            $worksheet = $spreadsheet->getActiveSheet();
+            $rows = $worksheet->toArray();
+
+            // Get headers from first row and convert to lowercase
+            $headers = array_map('strtolower', $rows[0]);
+
+            // Remove first row (headers)
+            array_shift($rows);
+
+            $successCount = 0;
+            $errorRows = [];
+
+            DB::beginTransaction();
+
+            foreach ($rows as $index => $row) {
+                try {
+                    // Convert row to associative array
+                    $data = array_combine($headers, $row);
+
+                    // Prepare Pengadaan data
+                    $pengadaanData = [
+                        'kode_user' => $data['kode_user'] ?? null,
+                        'tim' => $data['tim'] ?? null,
+                        'departemen' => $data['departemen'],
+                        'perihal' => $data['perihal'] ?? null,
+                        'metode' => $data['metode'] ?? null,
+                        'pic_id' => $data['pic_id'] ?? 1,
+                        'proses_pengadaan' => $data['proses_pengadaan'] ?? null,
+                        'nodin_ip_pengadaans' => collect(explode(';', $data['nodin_ip_pengadaan'] ?? ''))
+                            ->map(function ($nodin, $index) use ($data) {
+                                $tanggalNodin = explode(';', $data['tanggal_nodin_ip_pengadaan'] ?? '')[$index] ?? null;
+                                return [
+                                    'nodin' => $nodin,
+                                    'tanggal_nodin' => $this->parseExcelDate($tanggalNodin)
+                                ];
+                            })->toArray(),
+                        'nodin_users' => collect(explode(';', $data['nodin_user'] ?? ''))
+                            ->map(function ($nodin, $index) use ($data) {
+                                $tanggalNodin = explode(';', $data['tanggal_nodin_user'] ?? '')[$index] ?? null;
+                                return [
+                                    'nodin' => $nodin,
+                                    'tanggal_nodin' => $this->parseExcelDate($tanggalNodin)
+                                ];
+                            })->toArray(),
+                        'nodin_plos' => collect(explode(';', $data['nodin_plo'] ?? ''))
+                            ->map(function ($nodin, $index) use ($data) {
+                                $tanggalNodin = explode(';', $data['tanggal_nodin_plo'] ?? '')[$index] ?? null;
+                                return [
+                                    'nodin' => $nodin,
+                                    'tanggal_nodin' => $this->parseExcelDate($tanggalNodin)
+                                ];
+                            })->toArray(),
+                        'nomor_spk' => $data['nomor_spk'] ?? null,
+                        'tanggal_spk' => $this->parseExcelDate($data['tanggal_spk'] ?? null),
+                        'verification_completed_at' => $this->parseExcelDate($data['tanggal_dokumen_lengkap'] ?? null),
+                        'tanggal_acuan' => $this->parseExcelDate($data['tanggal_spph'] ?? null),
+                        'spk_investasi' => 'nullable|json',
+                        'spk_eksploitasi' => 'nullable|json',
+                        'anggaran_investasi' => 'nullable|json',
+                        'anggaran_eksploitasi' => 'nullable|json',
+                        'hps' => 'nullable|json',
+                        'spk_investasi' => json_encode([
+                            'currency' => $data['currency_spk_investasi'] ?? null,
+                            'amount' => isset($data['nilai_spk_investasi']) ? (float)$data['nilai_spk_investasi'] : null ?? null,
+                            'rate' => isset($data['rate_spk_investasi']) ? (float)$data['rate_spk_investasi'] : null ?? null,
+                        ]),
+                        'spk_eksploitasi' => json_encode([
+                            'currency' => $data['currency_spk_eksploitasi'] ?? null,
+                            'amount' => isset($data['nilai_spk_eksploitasi']) ? (float)$data['nilai_spk_eksploitasi'] : null,
+                            'rate' => isset($data['rate_spk_eksploitasi']) ? (float)$data['rate_spk_eksploitasi'] : null,
+                        ]),
+                        'anggaran_investasi' => json_encode([
+                            'currency' => $data['currency_anggaran_investasi'] ?? null,
+                            'amount' => isset($data['nilai_anggaran_investasi']) ? (float)$data['nilai_anggaran_investasi'] : null,
+                            'rate' => isset($data['rate_anggaran_investasi']) ? (float)$data['rate_anggaran_investasi'] : null,
+                        ]),
+                        'anggaran_eksploitasi' => json_encode([
+                            'currency' => $data['currency_anggaran_eksploitasi'] ?? null,
+                            'amount' => isset($data['nilai_anggaran_eksploitasi']) ? (float)$data['nilai_anggaran_eksploitasi'] : null,
+                            'rate' => isset($data['rate_anggaran_eksploitasi']) ? (float)$data['rate_anggaran_eksploitasi'] : null,
+                        ]),
+                        'hps' => json_encode([
+                            'currency' => $data['currency_hps'] ?? null,
+                            'amount' => isset($data['nilai_hps']) ? (float)$data['nilai_hps'] : null,
+                            'rate' => isset($data['rate_hps']) ? (float)$data['rate_hps'] : null,
+                        ]),
+                        'pelaksana_pekerjaan' => $data['pelaksana_pekerjaan'] ?? null,
+                        'tkdn_percentage' => $data['tkdn_percentage'] ?? null,
+                        'catatan' => $data['catatan'] ?? null,
+                        'proyek' => $data['proyek'] ?? null,
+                    ];
+
+                    // Create a new Pengadaan record
+                    $pengadaan = Pengadaan::create($pengadaanData);
+
+                    // Create associated NodinUsers if present
+                    if (isset($pengadaanData['nodin_users'])) {
+                        foreach ($pengadaanData['nodin_users'] as $nodinUserData) {
+                            try {
+                                $pengadaan->nodinUsers()->create($nodinUserData);
+                            } catch (\Exception $e) {
+                                Log::error('Failed to create NodinUser: ' . $e->getMessage());
+                            }
+                        }
+                    }
+
+                    // Create associated NodinPlos if present
+                    if (isset($pengadaanData['nodin_plos'])) {
+                        foreach ($pengadaanData['nodin_plos'] as $nodinPloData) {
+                            try {
+                                $pengadaan->nodinPlos()->create($nodinPloData);
+                            } catch (\Exception $e) {
+                                Log::error('Failed to create NodinPlo: ' . $e->getMessage());
+                            }
+                        }
+                    }
+
+                    // Create associated NodinIpPengadaans if present
+                    if (isset($pengadaanData['nodin_ip_pengadaans'])) {
+                        foreach ($pengadaanData['nodin_ip_pengadaans'] as $nodinIpPengadaanData) {
+                            try {
+                                $pengadaan->nodinIpPengadaans()->create($nodinIpPengadaanData);
+                            } catch (\Exception $e) {
+                                Log::error('Failed to create NodinIpPengadaan: ' . $e->getMessage());
+                            }
+                        }
+                    }
+
+                    $successCount++;
+                } catch (\Exception $e) {
+                    $errorRows[] = [
+                        'row' => $index + 2, // Add 2 because: 1 for header, 1 for zero-based index
+                        'error' => $e->getMessage()
+                    ];
+                }
+            }
+
+            Log::info('Success count: ' . $successCount);
+            if ($successCount > 0) {
+                DB::commit();
+                return response()->json([
+                    'status' => 'success',
+                    'message' => "$successCount records imported successfully",
+                    'errors' => count($errorRows) > 0 ? $errorRows : null,
+                ], 200);
+            } else {
+                DB::rollBack();
+                return response()->json([
+                    'status' => 'error',
+                    'message' => 'No records were imported',
+                    'errors' => $errorRows
+                ], 422);
+            }
+        } catch (\Exception $e) {
+            DB::rollBack();
+            return response()->json([
+                'status' => 'error',
+                'message' => 'Failed to process Excel file: ' . $e->getMessage()
+            ], 500);
+        }
+    }
+
+    private function parseExcelDate($value)
+    {
+        if (empty($value)) return null;
+
+        try {
+            // If it's a numeric value (Excel date)
+            if (is_numeric($value)) {
+                return \PhpOffice\PhpSpreadsheet\Shared\Date::excelToDateTimeObject($value)
+                    ->format('Y-m-d');
+            }
+
+            // If it's already a date string, try to parse it
+            return date('Y-m-d', strtotime($value));
+        } catch (\Exception $e) {
+            return null;
+        }
     }
 
     // Function to store data and related nodin_users & nodin_plos and return a JSON response
@@ -111,7 +305,7 @@ class PengadaanController extends Controller
         return response()->json([
             'status' => 'success',
             'message' => 'Pengadaan data successfully added!',
-            'data' => $pengadaan->load(['nodinPlos', 'nodinUsers', 'nodinIpPengadaans']), // Load related nodinPlos and nodinUsers
+            'data' => $pengadaan->load(['nodinPlos', 'nodinUsers', 'nodinIpPengadaans']), // Load related nodinPlos, nodinUsers, and nodinIpPengadaans
         ], 201);
     }
 
@@ -186,7 +380,7 @@ class PengadaanController extends Controller
             }
         }
 
-        // Sync NodinPlos if present
+        // Sync NodinIpPengadaans if present
         if (isset($validated['nodin_ip_pengadaans'])) {
             foreach ($validated['nodin_ip_pengadaans'] as $nodinIpPengadaanData) {
                 if (isset($nodinIpPengadaanData['id'])) {
@@ -203,16 +397,17 @@ class PengadaanController extends Controller
         return response()->json([
             'status' => 'success',
             'message' => 'Pengadaan data successfully updated!',
-            'data' => $pengadaan->load(['nodinPlos', 'nodinUsers', 'nodinIpPengadaans']), // Load related nodinPlos
+            'data' => $pengadaan->load(['nodinPlos', 'nodinUsers', 'nodinIpPengadaans']), // Load related nodinPlos, nodinUsers, and nodinIpPengadaans
         ], 200);
     }
 
-    // Function to delete Pengadaan and related NodinPlos
+    // Function to delete Pengadaan and related NodinPlos, NodinUsers, and NodinIpPengadaans
     public function destroy(Pengadaan $pengadaan)
     {
-        // Delete associated NodinUsers & NodinPlos
+        // Delete associated NodinUsers, NodinPlos, and NodinIpPengadaans
         $pengadaan->nodinUsers()->delete();
         $pengadaan->nodinPlos()->delete();
+        $pengadaan->nodinIpPengadaans()->delete();
 
         // Delete the Pengadaan record
         $pengadaan->delete();
