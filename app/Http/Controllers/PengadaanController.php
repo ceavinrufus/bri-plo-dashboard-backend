@@ -156,33 +156,33 @@ class PengadaanController extends Controller
                     // Create associated NodinUsers if present
                     if (isset($pengadaanData['nodin_users'])) {
                         foreach ($pengadaanData['nodin_users'] as $nodinUserData) {
-                            try {
-                                $pengadaan->nodinUsers()->create($nodinUserData);
-                            } catch (\Exception $e) {
-                                Log::error('Failed to create NodinUser: ' . $e->getMessage());
-                            }
+                            // try {
+                            $pengadaan->nodinUsers()->create($nodinUserData);
+                            // } catch (\Exception $e) {
+                            //     Log::error('Failed to create NodinUser: ' . $e->getMessage());
+                            // }
                         }
                     }
 
                     // Create associated NodinPlos if present
                     if (isset($pengadaanData['nodin_plos'])) {
                         foreach ($pengadaanData['nodin_plos'] as $nodinPloData) {
-                            try {
-                                $pengadaan->nodinPlos()->create($nodinPloData);
-                            } catch (\Exception $e) {
-                                Log::error('Failed to create NodinPlo: ' . $e->getMessage());
-                            }
+                            // try {
+                            $pengadaan->nodinPlos()->create($nodinPloData);
+                            // } catch (\Exception $e) {
+                            //     Log::error('Failed to create NodinPlo: ' . $e->getMessage());
+                            // }
                         }
                     }
 
                     // Create associated NodinIpPengadaans if present
                     if (isset($pengadaanData['nodin_ip_pengadaans'])) {
                         foreach ($pengadaanData['nodin_ip_pengadaans'] as $nodinIpPengadaanData) {
-                            try {
-                                $pengadaan->nodinIpPengadaans()->create($nodinIpPengadaanData);
-                            } catch (\Exception $e) {
-                                Log::error('Failed to create NodinIpPengadaan: ' . $e->getMessage());
-                            }
+                            // try {
+                            $pengadaan->nodinIpPengadaans()->create($nodinIpPengadaanData);
+                            // } catch (\Exception $e) {
+                            //     Log::error('Failed to create NodinIpPengadaan: ' . $e->getMessage());
+                            // }
                         }
                     }
 
@@ -195,7 +195,6 @@ class PengadaanController extends Controller
                 }
             }
 
-            Log::info('Success count: ' . $successCount);
             if ($successCount > 0) {
                 DB::commit();
                 return response()->json([
@@ -277,36 +276,54 @@ class PengadaanController extends Controller
             'nodin_ip_pengadaans.*.tanggal_nodin' => 'required_with:nodin_ip_pengadaans|date',
         ]);
 
-        // Create a new Pengadaan record
-        $pengadaan = Pengadaan::create($validated);
+        // Start a database transaction
+        DB::beginTransaction();
 
-        // Create associated NodinUsers if present
-        if (isset($validated['nodin_users'])) {
-            foreach ($validated['nodin_users'] as $nodinUserData) {
-                $pengadaan->nodinUsers()->create($nodinUserData);
+        try {
+            // Create a new Pengadaan record
+            $pengadaan = Pengadaan::create($validated);
+
+            // Create associated NodinUsers if present
+            if (isset($validated['nodin_users'])) {
+                foreach ($validated['nodin_users'] as $nodinUserData) {
+                    $pengadaan->nodinUsers()->create($nodinUserData);
+                }
             }
-        }
 
-        // Create associated NodinPlos if present
-        if (isset($validated['nodin_plos'])) {
-            foreach ($validated['nodin_plos'] as $nodinPloData) {
-                $pengadaan->nodinPlos()->create($nodinPloData);
+            // Create associated NodinPlos if present
+            if (isset($validated['nodin_plos'])) {
+                foreach ($validated['nodin_plos'] as $nodinPloData) {
+                    $pengadaan->nodinPlos()->create($nodinPloData);
+                }
             }
-        }
 
-        // Create associated NodinIpPengadaans if present
-        if (isset($validated['nodin_ip_pengadaans'])) {
-            foreach ($validated['nodin_ip_pengadaans'] as $nodinIpPengadaanData) {
-                $pengadaan->nodinIpPengadaans()->create($nodinIpPengadaanData);
+            // Create associated NodinIpPengadaans if present
+            if (isset($validated['nodin_ip_pengadaans'])) {
+                foreach ($validated['nodin_ip_pengadaans'] as $nodinIpPengadaanData) {
+                    $pengadaan->nodinIpPengadaans()->create($nodinIpPengadaanData);
+                }
             }
-        }
 
-        // Return a JSON response indicating success
-        return response()->json([
-            'status' => 'success',
-            'message' => 'Pengadaan data successfully added!',
-            'data' => $pengadaan->load(['nodinPlos', 'nodinUsers', 'nodinIpPengadaans']), // Load related nodinPlos, nodinUsers, and nodinIpPengadaans
-        ], 201);
+            // Commit the transaction
+            DB::commit();
+
+            // Return a JSON response indicating success
+            return response()->json([
+                'status' => 'success',
+                'message' => 'Pengadaan data successfully added!',
+                'data' => $pengadaan->load(['nodinPlos', 'nodinUsers', 'nodinIpPengadaans']), // Load related nodinPlos, nodinUsers, and nodinIpPengadaans
+            ], 201);
+        } catch (\Exception $e) {
+            // Rollback the transaction in case of any errors
+            DB::rollBack();
+
+            // Return a JSON response indicating failure
+            return response()->json([
+                'status' => 'error',
+                'message' => 'Failed to add Pengadaan data.',
+                'error' => $e->getMessage(),
+            ], 500);
+        }
     }
 
     // Function to update Pengadaan and related nodins
@@ -351,54 +368,72 @@ class PengadaanController extends Controller
             'nodin_ip_pengadaans.*.tanggal_nodin' => 'required_with:nodin_ip_pengadaans|date',
         ]);
 
-        // Update the Pengadaan record with validated data
-        $pengadaan->update($validated);
+        // Start a database transaction
+        DB::beginTransaction();
 
-        // Sync NodinUsers if present
-        if (isset($validated['nodin_users'])) {
-            foreach ($validated['nodin_users'] as $nodinUserData) {
-                if (isset($nodinUserData['id'])) {
-                    // Update existing NodinUser
-                    NodinUser::where('id', $nodinUserData['id'])->update($nodinUserData);
-                } else {
-                    // Create a new NodinUser
-                    $pengadaan->nodinUsers()->create($nodinUserData);
+        try {
+            // Update the Pengadaan record with validated data
+            $pengadaan->update($validated);
+
+            // Sync NodinUsers if present
+            if (isset($validated['nodin_users'])) {
+                foreach ($validated['nodin_users'] as $nodinUserData) {
+                    if (isset($nodinUserData['id'])) {
+                        // Update existing NodinUser
+                        NodinUser::where('id', $nodinUserData['id'])->update($nodinUserData);
+                    } else {
+                        // Create a new NodinUser
+                        $pengadaan->nodinUsers()->create($nodinUserData);
+                    }
                 }
             }
-        }
 
-        // Sync NodinPlos if present
-        if (isset($validated['nodin_plos'])) {
-            foreach ($validated['nodin_plos'] as $nodinPloData) {
-                if (isset($nodinPloData['id'])) {
-                    // Update existing NodinPlo
-                    NodinPlo::where('id', $nodinPloData['id'])->update($nodinPloData);
-                } else {
-                    // Create a new NodinPlo
-                    $pengadaan->nodinPlos()->create($nodinPloData);
+            // Sync NodinPlos if present
+            if (isset($validated['nodin_plos'])) {
+                foreach ($validated['nodin_plos'] as $nodinPloData) {
+                    if (isset($nodinPloData['id'])) {
+                        // Update existing NodinPlo
+                        NodinPlo::where('id', $nodinPloData['id'])->update($nodinPloData);
+                    } else {
+                        // Create a new NodinPlo
+                        $pengadaan->nodinPlos()->create($nodinPloData);
+                    }
                 }
             }
-        }
 
-        // Sync NodinIpPengadaans if present
-        if (isset($validated['nodin_ip_pengadaans'])) {
-            foreach ($validated['nodin_ip_pengadaans'] as $nodinIpPengadaanData) {
-                if (isset($nodinIpPengadaanData['id'])) {
-                    // Update existing NodinIpPengadaan
-                    NodinIpPengadaan::where('id', $nodinIpPengadaanData['id'])->update($nodinIpPengadaanData);
-                } else {
-                    // Create a new NodinIpPengadaan
-                    $pengadaan->nodinIpPengadaans()->create($nodinIpPengadaanData);
+            // Sync NodinIpPengadaans if present
+            if (isset($validated['nodin_ip_pengadaans'])) {
+                foreach ($validated['nodin_ip_pengadaans'] as $nodinIpPengadaanData) {
+                    if (isset($nodinIpPengadaanData['id'])) {
+                        // Update existing NodinIpPengadaan
+                        NodinIpPengadaan::where('id', $nodinIpPengadaanData['id'])->update($nodinIpPengadaanData);
+                    } else {
+                        // Create a new NodinIpPengadaan
+                        $pengadaan->nodinIpPengadaans()->create($nodinIpPengadaanData);
+                    }
                 }
             }
-        }
 
-        // Return a JSON response indicating success
-        return response()->json([
-            'status' => 'success',
-            'message' => 'Pengadaan data successfully updated!',
-            'data' => $pengadaan->load(['nodinPlos', 'nodinUsers', 'nodinIpPengadaans']), // Load related nodinPlos, nodinUsers, and nodinIpPengadaans
-        ], 200);
+            // Commit the transaction
+            DB::commit();
+
+            // Return a JSON response indicating success
+            return response()->json([
+                'status' => 'success',
+                'message' => 'Pengadaan data successfully updated!',
+                'data' => $pengadaan->load(['nodinPlos', 'nodinUsers', 'nodinIpPengadaans']), // Load related nodinPlos, nodinUsers, and nodinIpPengadaans
+            ], 200);
+        } catch (\Exception $e) {
+            // Rollback the transaction in case of any errors
+            DB::rollBack();
+
+            // Return a JSON response indicating failure
+            return response()->json([
+                'status' => 'error',
+                'message' => 'Failed to update Pengadaan data.',
+                'error' => $e->getMessage(),
+            ], 500);
+        }
     }
 
     // Function to delete Pengadaan and related NodinPlos, NodinUsers, and NodinIpPengadaans
