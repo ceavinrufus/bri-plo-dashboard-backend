@@ -24,7 +24,7 @@ return new class extends Migration
             $table->date('verification_completed_at')->nullable();
             $table->date('verification_alert_at')->nullable();
             $table->date('nodin_alert_at')->nullable();
-            $table->unsignedBigInteger('pic_id');
+            $table->unsignedBigInteger('pic_id')->nullable();
             $table->foreign('pic_id')->references('id')->on('users')->onDelete('cascade')->onUpdate('cascade');
             $table->string('proses_pengadaan')->nullable();
             $table->json('pengadaan_log')->nullable();
