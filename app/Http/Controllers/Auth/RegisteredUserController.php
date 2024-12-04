@@ -35,7 +35,7 @@ class RegisteredUserController extends Controller
             'pn' => $request->pn,
             'role' => 'guest',
             'departemen' => $request->departemen,
-            'tim' => $request->departemen,
+            'tim' => $request->tim,
             'email' => $request->email,
             'password' => Hash::make($request->string('password')),
         ]);
