@@ -38,10 +38,10 @@ class DatabaseSeeder extends Seeder
             'target' => 5.5,
         ]);
 
-        Project::create([
-            'kode' => 'P001',
-            'nama' => 'Proyek Pembangunan Gedung A',
-        ]);
+        // Project::create([
+        //     'kode' => 'P001',
+        //     'nama' => 'Proyek Pembangunan Gedung A',
+        // ]);
 
         // Seed a user
         User::factory()->create([
@@ -56,11 +56,11 @@ class DatabaseSeeder extends Seeder
             'email' => 'ceavin.dev@gmail.com',
         ]);
 
-        Pengadaan::factory(15)->create();
-        Dokumen::factory(15)->create();
+        // Pengadaan::factory(15)->create();
+        // Dokumen::factory(15)->create();
 
-        NodinPlo::factory(20)->create();
-        NodinUser::factory(20)->create();
-        NodinIpPengadaan::factory(20)->create();
+        // NodinPlo::factory(20)->create();
+        // NodinUser::factory(20)->create();
+        // NodinIpPengadaan::factory(20)->create();
     }
 }

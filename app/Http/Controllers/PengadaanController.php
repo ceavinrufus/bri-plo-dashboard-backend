@@ -84,27 +84,26 @@ class PengadaanController extends Controller
                         'departemen' => $data['departemen'],
                         'perihal' => $data['perihal'] ?? null,
                         'metode' => $data['metode'] ?? null,
-                        'pic_id' => $data['pic_id'] ?? 1,
                         'proses_pengadaan' => $data['proses_pengadaan'] ?? null,
-                        'nodin_ip_pengadaans' => collect(explode(';', $data['nodin_ip_pengadaan'] ?? ''))
+                        'nodin_ip_pengadaans' => empty($data['nodin_ip_pengadaan']) || empty($data['tanggal_nodin_ip_pengadaan']) ? [] : collect(explode(';', $data['nodin_ip_pengadaan']))
                             ->map(function ($nodin, $index) use ($data) {
-                                $tanggalNodin = explode(';', $data['tanggal_nodin_ip_pengadaan'] ?? '')[$index] ?? null;
+                                $tanggalNodin = explode(';', $data['tanggal_nodin_ip_pengadaan'])[$index] ?? '';
                                 return [
                                     'nodin' => $nodin,
                                     'tanggal_nodin' => $this->parseExcelDate($tanggalNodin)
                                 ];
                             })->toArray(),
-                        'nodin_users' => collect(explode(';', $data['nodin_user'] ?? ''))
+                        'nodin_users' => empty($data['nodin_user']) || empty($data['tanggal_nodin_user']) ? [] : collect(explode(';', $data['nodin_user']))
                             ->map(function ($nodin, $index) use ($data) {
-                                $tanggalNodin = explode(';', $data['tanggal_nodin_user'] ?? '')[$index] ?? null;
+                                $tanggalNodin = explode(';', $data['tanggal_nodin_user'])[$index] ?? '';
                                 return [
                                     'nodin' => $nodin,
                                     'tanggal_nodin' => $this->parseExcelDate($tanggalNodin)
                                 ];
                             })->toArray(),
-                        'nodin_plos' => collect(explode(';', $data['nodin_plo'] ?? ''))
+                        'nodin_plos' => empty($data['nodin_plo']) || empty($data['tanggal_nodin_plo']) ? [] : collect(explode(';', $data['nodin_plo']))
                             ->map(function ($nodin, $index) use ($data) {
-                                $tanggalNodin = explode(';', $data['tanggal_nodin_plo'] ?? '')[$index] ?? null;
+                                $tanggalNodin = explode(';', $data['tanggal_nodin_plo'])[$index] ?? '';
                                 return [
                                     'nodin' => $nodin,
                                     'tanggal_nodin' => $this->parseExcelDate($tanggalNodin)
@@ -151,38 +150,46 @@ class PengadaanController extends Controller
                     ];
 
                     // Create a new Pengadaan record
-                    $pengadaan = Pengadaan::create($pengadaanData);
+                    try {
+                        $pengadaan = Pengadaan::create($pengadaanData);
+                    } catch (\Exception $e) {
+                        Log::error('Failed to create Pengadaan: ' . $e->getMessage());
+                        throw new \Exception('Failed to create Pengadaan: ' . $e->getMessage());
+                    }
 
                     // Create associated NodinUsers if present
                     if (isset($pengadaanData['nodin_users'])) {
                         foreach ($pengadaanData['nodin_users'] as $nodinUserData) {
-                            // try {
-                            $pengadaan->nodinUsers()->create($nodinUserData);
-                            // } catch (\Exception $e) {
-                            //     Log::error('Failed to create NodinUser: ' . $e->getMessage());
-                            // }
+                            try {
+                                $pengadaan->nodinUsers()->create($nodinUserData);
+                            } catch (\Exception $e) {
+                                Log::error('Failed to create NodinUser: ' . $e->getMessage());
+                                throw new \Exception('Failed to create NodinUser: ' . $e->getMessage());
+                            }
                         }
                     }
 
                     // Create associated NodinPlos if present
                     if (isset($pengadaanData['nodin_plos'])) {
                         foreach ($pengadaanData['nodin_plos'] as $nodinPloData) {
-                            // try {
-                            $pengadaan->nodinPlos()->create($nodinPloData);
-                            // } catch (\Exception $e) {
-                            //     Log::error('Failed to create NodinPlo: ' . $e->getMessage());
-                            // }
+                            try {
+                                $pengadaan->nodinPlos()->create($nodinPloData);
+                            } catch (\Exception $e) {
+                                Log::error('Failed to create NodinPlo: ' . $e->getMessage());
+                                throw new \Exception('Failed to create NodinPlo: ' . $e->getMessage());
+                            }
                         }
                     }
 
                     // Create associated NodinIpPengadaans if present
                     if (isset($pengadaanData['nodin_ip_pengadaans'])) {
                         foreach ($pengadaanData['nodin_ip_pengadaans'] as $nodinIpPengadaanData) {
-                            // try {
-                            $pengadaan->nodinIpPengadaans()->create($nodinIpPengadaanData);
-                            // } catch (\Exception $e) {
-                            //     Log::error('Failed to create NodinIpPengadaan: ' . $e->getMessage());
-                            // }
+                            try {
+                                $pengadaan->nodinIpPengadaans()->create($nodinIpPengadaanData);
+                            } catch (\Exception $e) {
+                                Log::error('Failed to create NodinIpPengadaan: ' . $e->getMessage());
+                                throw new \Exception('Failed to create NodinIpPengadaan: ' . $e->getMessage());
+                            }
                         }
                     }
 
