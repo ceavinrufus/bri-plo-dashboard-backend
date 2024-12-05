@@ -13,27 +13,27 @@ return new class extends Migration
     {
         Schema::create('dokumens', function (Blueprint $table) {
             $table->id();
-            $table->string('perihal');
+            $table->string('perihal')->nullable();
             $table->string('nomor_spk');
-            $table->date('tanggal_spk');
-            $table->string('nama_vendor');
-            $table->foreignId('pic_id')->constrained('users');
-            $table->integer('sla_spk_sejak_terbit');
-            $table->integer('sla_spk_sejak_diambil');
-            $table->date('tanggal');
-            $table->integer('jangka_waktu');
-            $table->string('tim');
+            $table->date('tanggal_spk')->nullable();
+            $table->string('nama_vendor')->nullable();
+            $table->foreignId('pic_id')->constrained('users')->nullable();
+            $table->integer('sla_spk_sejak_terbit')->nullable();
+            $table->integer('sla_spk_sejak_diambil')->nullable();
+            $table->date('tanggal')->nullable();
+            $table->integer('jangka_waktu')->nullable();
+            $table->string('tim')->nullable();
             $table->json('spk')->nullable();
-            $table->string('identitas_vendor');
-            $table->text('info_vendor');
-            $table->date('tanggal_pengambilan');
-            $table->string('identitas_pengambil');
-            $table->date('tanggal_pengembalian');
-            $table->date('tanggal_jatuh_tempo');
-            $table->text('catatan');
-            $table->boolean('form_tkdn');
-            $table->date('tanggal_penyerahan_dokumen');
-            $table->string('penerima_dokumen');
+            $table->string('identitas_vendor')->nullable();
+            $table->text('info_vendor')->nullable();
+            $table->date('tanggal_pengambilan')->nullable();
+            $table->string('identitas_pengambil')->nullable();
+            $table->date('tanggal_pengembalian')->nullable();
+            $table->date('tanggal_jatuh_tempo')->nullable();
+            $table->text('catatan')->nullable();
+            $table->boolean('form_tkdn')->nullable();
+            $table->date('tanggal_penyerahan_dokumen')->nullable();
+            $table->string('penerima_dokumen')->nullable();
             $table->timestamps();
         });
     }
