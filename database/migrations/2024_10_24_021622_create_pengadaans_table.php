@@ -28,7 +28,7 @@ return new class extends Migration
             $table->foreign('pic_id')->references('id')->on('users')->onDelete('cascade')->onUpdate('cascade');
             $table->string('proses_pengadaan')->nullable();
             $table->json('pengadaan_log')->nullable();
-            $table->string('nomor_spk')->nullable();
+            $table->string('nomor_spk')->unique()->nullable();
             $table->date('tanggal_spk')->nullable();
             $table->date('tanggal_acuan')->nullable();
             $table->string('pelaksana_pekerjaan')->nullable();

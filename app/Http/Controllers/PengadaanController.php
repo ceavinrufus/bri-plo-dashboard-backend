@@ -48,6 +48,38 @@ class PengadaanController extends Controller
         ], 200);
     }
 
+    public function getByNomorSpk(Request $request)
+    {
+        // Get nomor_spk from query parameters
+        $nomor_spk = $request->query('nomor_spk');
+
+        // If no nomor_spk is provided, return an error
+        if (!$nomor_spk) {
+            return response()->json([
+                'status' => 'error',
+                'message' => 'Nomor SPK is required.',
+            ], 400);
+        }
+
+        // Retrieve the Pengadaan record based on the unique nomor_spk
+        $pengadaan = Pengadaan::where('nomor_spk', $nomor_spk)->first();
+
+        // If the Pengadaan record is not found, return an error response
+        if (!$pengadaan) {
+            return response()->json([
+                'status' => 'error',
+                'message' => 'Pengadaan data not found for the provided nomor_spk.',
+            ], 404);
+        }
+
+        // Return the Pengadaan data along with the related nodins (NodinPlos, NodinUsers, NodinIpPengadaans)
+        return response()->json([
+            'status' => 'success',
+            'message' => 'Pengadaan data fetched successfully.',
+            'data' => $pengadaan->load(['nodinPlos', 'nodinUsers', 'nodinIpPengadaans']),
+        ], 200);
+    }
+
     public function import(Request $request)
     {
 

@@ -15,7 +15,8 @@ Route::middleware(['auth:sanctum'])->get('/user', function (Request $request) {
 // Route::get('/user', [UserController::class, 'index']);
 
 // Pengadaan
-Route::get('/pengadaan/{pengadaan:departemen}', [PengadaanController::class, 'index']);
+Route::get('/pengadaan/departemen/{pengadaan:departemen}', [PengadaanController::class, 'index']);
+Route::get('/pengadaan/nomor_spk', [PengadaanController::class, 'getByNomorSpk']);
 Route::post('/pengadaan/store', [PengadaanController::class, 'store'])->name('pengadaan.store');
 Route::put('/pengadaan/update/{pengadaan}', [PengadaanController::class, 'update'])->name('pengadaan.update');
 Route::delete('/pengadaan/delete/{pengadaan}', [PengadaanController::class, 'destroy'])->name('pengadaan.destroy');

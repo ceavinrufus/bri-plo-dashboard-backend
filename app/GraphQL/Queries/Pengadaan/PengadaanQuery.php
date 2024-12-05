@@ -25,16 +25,29 @@ class PengadaanQuery extends Query
         return [
             'id' => [
                 'name' => 'id',
-                'type' => Type::nonNull(Type::id()),
-                'rules' => ['required', 'exists:pengadaans,id']
+                'type' => Type::id(),
+                'rules' => ['exists:pengadaans,id']
+            ],
+            'nomor_spk' => [
+                'name' => 'nomor_spk',
+                'type' => Type::string(),
+                'rules' => ['required_without:id', 'exists:pengadaans,nomor_spk']
             ],
         ];
     }
 
     public function resolve($root, $args)
     {
-        $pengadaan = Pengadaan::with(['nodinPlos', 'nodinUsers', 'nodinIpPengadaans'])->findOrFail($args['id']);
-        $pengadaan->pengadaan_log = json_decode($pengadaan->pengadaan_log);
+        if (isset($args['id'])) {
+            $pengadaan = Pengadaan::with(['nodinPlos', 'nodinUsers', 'nodinIpPengadaans'])->findOrFail($args['id']);
+        } elseif (isset($args['nomor_spk'])) {
+            $pengadaan = Pengadaan::with(['nodinPlos', 'nodinUsers', 'nodinIpPengadaans'])->where('nomor_spk', $args['nomor_spk'])->firstOrFail();
+        } else {
+            throw new \InvalidArgumentException('Either id or nomor_spk must be provided.');
+        }
+
+        // Log::info('PengadaanQuery: ' . json_encode($pengadaan));
+        $pengadaan->pengadaan_log = $pengadaan->pengadaan_log;
         $pengadaan->nodin_users = $pengadaan->nodinUsers;
         $pengadaan->nodin_plos = $pengadaan->nodinPlos;
         $pengadaan->nodin_ip_pengadaans = $pengadaan->nodinIpPengadaans;
