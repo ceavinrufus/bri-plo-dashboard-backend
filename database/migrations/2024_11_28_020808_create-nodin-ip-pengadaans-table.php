@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('nodin_ip_pengadaans', function (Blueprint $table) {
             $table->id();
-            $table->string('nodin')->unique();
+            $table->string('nodin');
             $table->date('tanggal_nodin');
             $table->unsignedBigInteger('pengadaan_id');
             $table->foreign('pengadaan_id')->references('id')->on('pengadaans')->onDelete('cascade');
