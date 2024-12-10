@@ -39,7 +39,7 @@ class PengadaanFactory extends Factory
             'departemen' => $departemen,
             'proyek' => $departemen === 'bcp' ? 'P001' : null,
             'perihal' => $this->faker->randomElement($sentences),
-            'metode' => $this->faker->randomElement(['Lelang', 'Pemilihan Langsung', 'Seleksi Langsung', 'Penunjukkan Langsung']),
+            'metode' => $this->faker->randomElement(['Lelang', 'Pemilihan Langsung', 'Seleksi Langsung', 'Penunjukan Langsung']),
             'verification_completed_at' => $verificationCompletedAt,
             'catatan' => $verificationCompletedAt ? $this->faker->optional()->sentence : '',
             'pic_id' => $this->faker->randomElement($userIDs),

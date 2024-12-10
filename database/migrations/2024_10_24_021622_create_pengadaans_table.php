@@ -20,7 +20,7 @@ return new class extends Migration
             $table->string('proyek')->nullable();
             $table->foreign('proyek')->references('kode')->on('projects')->onDelete('restrict')->onUpdate('cascade');
             $table->string('perihal');
-            $table->enum('metode', ['Lelang', 'Pemilihan Langsung', 'Seleksi Langsung', 'Penunjukkan Langsung'])->nullable();
+            $table->enum('metode', ['Lelang', 'Pemilihan Langsung', 'Seleksi Langsung', 'Penunjukan Langsung'])->nullable();
             $table->date('verification_completed_at')->nullable();
             $table->date('verification_alert_at')->nullable();
             $table->date('nodin_alert_at')->nullable();

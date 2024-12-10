@@ -58,7 +58,7 @@
                 <!-- Select Metode -->
                 <x-select id="metode" name="metode" label="Metode" :options="[
                     'Pemilihan Langsung' => 'Pemilihan Langsung',
-                    'Penunjukkan Langsung' => 'Penunjukkan Langsung',
+                    'Penunjukan Langsung' => 'Penunjukan Langsung',
                     'Lelang' => 'Lelang',
                 ]" />
 
