@@ -33,7 +33,7 @@ class DokumenSpkType extends GraphQLType
                 'description' => 'The initiating team',
                 'rules' => ['required']
             ],
-            'pic_pengadaan_id' => [
+            'pic_pengadaan' => [
                 'type' => GraphQL::type('User'),
                 'description' => 'The ID of the procurement PIC',
                 'rules' => ['required', 'exists:users,id']
@@ -118,7 +118,7 @@ class DokumenSpkType extends GraphQLType
                 'description' => 'The document recipient',
                 'rules' => ['required']
             ],
-            'pic_legal_id' => [
+            'pic_legal' => [
                 'type' => GraphQL::type('User'),
                 'description' => 'The ID of the legal PIC',
                 'rules' => ['required', 'exists:users,id']

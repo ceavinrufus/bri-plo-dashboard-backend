@@ -4,6 +4,7 @@ namespace App\GraphQL\Queries\DokumenSpk;
 
 use App\Models\DokumenSpk;
 use GraphQL\Type\Definition\Type;
+use Illuminate\Support\Facades\Log;
 use Rebing\GraphQL\Support\Facades\GraphQL;
 use Rebing\GraphQL\Support\Query;
 
@@ -55,6 +56,10 @@ class DokumenSpksQuery extends Query
             ->get()
             ->each(function ($dokumen) {
                 $dokumen->spk = json_decode($dokumen->spk);
+                $dokumen->pic_legal = json_decode($dokumen->pic_legal);
+                $dokumen->pic_pengadaan = json_decode($dokumen->pic_pengadaan);
+                $dokumen->dokumen_pelengkap = json_decode($dokumen->dokumen_pelengkap);
+                $dokumen->dokumen_yang_dikembalikan = json_decode($dokumen->dokumen_yang_dikembalikan);
             });
     }
 }

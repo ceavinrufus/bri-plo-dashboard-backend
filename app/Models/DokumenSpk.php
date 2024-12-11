@@ -42,8 +42,13 @@ class DokumenSpk extends Model
         'tanggal_penyerahan_dokumen' => 'date',
     ];
 
-    public function pic(): BelongsTo
+    public function pic_legal(): BelongsTo
     {
-        return $this->belongsTo(User::class, 'pic_id', 'id');
+        return $this->belongsTo(User::class, 'pic_legal_id', 'id');
+    }
+
+    public function pic_pengadaan(): BelongsTo
+    {
+        return $this->belongsTo(User::class, 'pic_pengadaan_id', 'id');
     }
 }
