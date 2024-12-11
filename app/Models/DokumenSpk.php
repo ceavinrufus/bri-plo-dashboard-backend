@@ -6,40 +6,39 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
-class Dokumen extends Model
+class DokumenSpk extends Model
 {
     use HasFactory;
 
     protected $fillable = [
-        'perihal',
+        'tanggal_spk_diterima',
+        'tim_pemrakarsa',
+        'pic_pengadaan_id',
         'nomor_spk',
         'tanggal_spk',
-        'nama_vendor',
-        'pic_id',
-        'sla_spk_sejak_terbit',
-        'sla_spk_sejak_diambil',
-        'tanggal',
+        'jenis_pekerjaan',
+        'spk', // JSON: PriceType in GraphQL
         'jangka_waktu',
-        'tim',
-        'spk',
-        'identitas_vendor',
-        'info_vendor',
+        'pelaksana_pekerjaan', // JSON: Nama, Alamat, No Telp
+        'pic_pelaksana_pekerjaan', // JSON: Nama, No HP
+        'dokumen_pelengkap', // Array
+        'info_ke_vendor', // JSON: Via, Tanggal
         'tanggal_pengambilan',
         'identitas_pengambil',
         'tanggal_pengembalian',
-        'tanggal_jatuh_tempo',
-        'catatan',
-        'form_tkdn',
+        'dokumen_yang_dikembalikan', // Array
+        'tkdn_percentage',
         'tanggal_penyerahan_dokumen',
-        'penerima_dokumen'
+        'penerima_dokumen',
+        'pic_legal_id',
+        'catatan'
     ];
 
     protected $casts = [
         'tanggal_spk' => 'date',
-        'tanggal' => 'date',
+        'tanggal_spk_diterima' => 'date',
         'tanggal_pengambilan' => 'date',
         'tanggal_pengembalian' => 'date',
-        'tanggal_jatuh_tempo' => 'date',
         'tanggal_penyerahan_dokumen' => 'date',
     ];
 

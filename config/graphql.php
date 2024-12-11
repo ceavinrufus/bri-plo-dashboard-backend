@@ -83,8 +83,8 @@ return [
                 'nodin_plos' => App\GraphQL\Queries\NodinPlo\NodinPlosQuery::class,
                 'user' => App\GraphQL\Queries\User\UserQuery::class,
                 'users' => App\GraphQL\Queries\User\UsersQuery::class,
-                'dokumen' => App\GraphQL\Queries\Dokumen\DokumenQuery::class,
-                'dokumens' => App\GraphQL\Queries\Dokumen\DokumensQuery::class,
+                'dokumen_spk' => App\GraphQL\Queries\DokumenSpk\DokumenSpkQuery::class,
+                'dokumen_spks' => App\GraphQL\Queries\DokumenSpk\DokumenSpksQuery::class,
             ],
             'mutation' => [
                 // 'createPengadaan' => App\GraphQL\Mutations\Pengadaan\CreatePengadaanMutation::class,
@@ -130,7 +130,7 @@ return [
         'NodinIpPengadaan' => App\GraphQL\Types\NodinIpPengadaanType::class,
         'User' => App\GraphQL\Types\UserType::class,
         'Price' => App\GraphQL\Types\PriceType::class,
-        'Dokumen' => App\GraphQL\Types\DokumenType::class,
+        'DokumenSpk' => App\GraphQL\Types\DokumenSpkType::class,
         'ProsesPengadaan' => App\GraphQL\Types\ProsesPengadaanType::class,
     ],
 

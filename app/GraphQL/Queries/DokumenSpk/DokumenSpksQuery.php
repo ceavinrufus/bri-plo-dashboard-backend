@@ -1,31 +1,31 @@
 <?php
 
-namespace App\GraphQL\Queries\Dokumen;
+namespace App\GraphQL\Queries\DokumenSpk;
 
-use App\Models\Dokumen;
+use App\Models\DokumenSpk;
 use GraphQL\Type\Definition\Type;
 use Rebing\GraphQL\Support\Facades\GraphQL;
 use Rebing\GraphQL\Support\Query;
 
-class DokumensQuery extends Query
+class DokumenSpksQuery extends Query
 {
     protected $attributes = [
         'name' => 'dokumens',
-        'description' => 'A query to get a list of Dokumens, optionally filtered by vendor name'
+        'description' => 'A query to get a list of Dokumen SPKs, optionally filtered by vendor name'
     ];
 
     public function type(): Type
     {
-        return Type::listOf(GraphQL::type('Dokumen'));
+        return Type::listOf(GraphQL::type('DokumenSpk'));
     }
 
     public function args(): array
     {
         return [
-            'nama_vendor' => [
-                'name' => 'nama_vendor',
+            'tim_pemrakarsa' => [
+                'name' => 'tim_pemrakarsa',
                 'type' => Type::string(),
-                'description' => 'Filter by vendor name',
+                'description' => 'Filter by tim pemrakarsa',
             ],
             'limit' => [
                 'name' => 'limit',
@@ -44,10 +44,10 @@ class DokumensQuery extends Query
 
     public function resolve($root, $args)
     {
-        $query = Dokumen::query();
+        $query = DokumenSpk::query();
 
-        if (isset($args['nama_vendor'])) {
-            $query->where('nama_vendor', $args['nama_vendor']);
+        if (isset($args['tim_pemrakarsa'])) {
+            $query->where('tim_pemrakarsa', $args['tim_pemrakarsa']);
         }
 
         return $query->offset($args['offset'])

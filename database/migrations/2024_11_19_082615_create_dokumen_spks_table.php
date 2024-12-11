@@ -1,0 +1,48 @@
+<?php
+
+use Illuminate\Database\Migrations\Migration;
+use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\Schema;
+
+return new class extends Migration
+{
+    /**
+     * Run the migrations.
+     */
+    public function up(): void
+    {
+        Schema::create('dokumen_spks', function (Blueprint $table) {
+            $table->id();
+            $table->date('tanggal_spk_diterima')->nullable();
+            $table->string('tim_pemrakarsa')->nullable();
+            $table->foreignId('pic_pengadaan_id')->constrained('users')->nullable();
+            $table->string('nomor_spk');
+            $table->date('tanggal_spk')->nullable();
+            $table->string('jenis_pekerjaan')->nullable();
+            $table->json('spk')->nullable();
+            $table->integer('jangka_waktu')->nullable();
+            $table->string('pelaksana_pekerjaan')->nullable();
+            $table->string('pic_pelaksana_pekerjaan')->nullable();
+            $table->string('dokumen_pelengkap')->nullable();
+            $table->string('info_ke_vendor')->nullable();
+            $table->date('tanggal_pengambilan')->nullable();
+            $table->string('identitas_pengambil')->nullable();
+            $table->date('tanggal_pengembalian')->nullable();
+            $table->json('dokumen_yang_dikembalikan')->nullable();
+            $table->decimal('tkdn_percentage', 5, 2)->nullable();
+            $table->date('tanggal_penyerahan_dokumen')->nullable();
+            $table->string('penerima_dokumen')->nullable();
+            $table->foreignId('pic_legal_id')->constrained('users')->nullable();
+            $table->text('catatan')->nullable();
+            $table->timestamps();
+        });
+    }
+
+    /**
+     * Reverse the migrations.
+     */
+    public function down(): void
+    {
+        Schema::dropIfExists('dokumen_spks');
+    }
+};

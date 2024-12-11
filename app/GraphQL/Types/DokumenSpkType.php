@@ -2,17 +2,17 @@
 
 namespace App\GraphQL\Types;
 
-use App\Models\Dokumen;
+use App\Models\DokumenSpk;
 use GraphQL\Type\Definition\Type;
 use Rebing\GraphQL\Support\Facades\GraphQL;
 use Rebing\GraphQL\Support\Type as GraphQLType;
 
-class DokumenType extends GraphQLType
+class DokumenSpkType extends GraphQLType
 {
     protected $attributes = [
-        'name' => 'Dokumen',
-        'description' => 'A type that represents a Dokumen',
-        'model' => Dokumen::class
+        'name' => 'DokumenSpk',
+        'description' => 'A type that represents a Dokumen SPK',
+        'model' => DokumenSpk::class
     ];
 
     public function fields(): array
@@ -20,13 +20,23 @@ class DokumenType extends GraphQLType
         return [
             'id' => [
                 'type' => Type::nonNull(Type::id()),
-                'description' => 'The ID of the Dokumen',
+                'description' => 'The ID of the Dokumen SPK',
                 'rules' => ['required']
             ],
-            'perihal' => [
+            'tanggal_spk_diterima' => [
                 'type' => Type::string(),
-                'description' => 'The subject',
+                'description' => 'The date the SPK was received',
                 'rules' => ['required']
+            ],
+            'tim_pemrakarsa' => [
+                'type' => Type::string(),
+                'description' => 'The initiating team',
+                'rules' => ['required']
+            ],
+            'pic_pengadaan_id' => [
+                'type' => GraphQL::type('User'),
+                'description' => 'The ID of the procurement PIC',
+                'rules' => ['required', 'exists:users,id']
             ],
             'nomor_spk' => [
                 'type' => Type::string(),
@@ -38,29 +48,14 @@ class DokumenType extends GraphQLType
                 'description' => 'The SPK date',
                 'rules' => ['required']
             ],
-            'nama_vendor' => [
+            'jenis_pekerjaan' => [
                 'type' => Type::string(),
-                'description' => 'The vendor name',
+                'description' => 'The type of work',
                 'rules' => ['required']
             ],
-            'pic' => [
-                'type' => GraphQL::type('User'),
-                'description' => 'The ID of the PIC',
-                'rules' => ['required', 'exists:users,id']
-            ],
-            'sla_spk_sejak_terbit' => [
-                'type' => Type::int(),
-                'description' => 'SLA SPK since issuance',
-                'rules' => ['required']
-            ],
-            'sla_spk_sejak_diambil' => [
-                'type' => Type::int(),
-                'description' => 'SLA SPK since taken',
-                'rules' => ['required']
-            ],
-            'tanggal' => [
-                'type' => Type::string(),
-                'description' => 'The date',
+            'spk' => [
+                'type' => GraphQL::type('Price'),
+                'description' => 'The SPK details',
                 'rules' => ['required']
             ],
             'jangka_waktu' => [
@@ -68,24 +63,24 @@ class DokumenType extends GraphQLType
                 'description' => 'The duration',
                 'rules' => ['required']
             ],
-            'tim' => [
+            'pelaksana_pekerjaan' => [
                 'type' => Type::string(),
-                'description' => 'The team',
+                'description' => 'The executor of the work',
                 'rules' => ['required']
             ],
-            'spk' => [
-                'type' => GraphQL::type('Price'),
-                'description' => 'The SPK',
+            'pic_pelaksana_pekerjaan' => [
+                'type' => Type::string(),
+                'description' => 'The PIC of the executor of the work',
                 'rules' => ['required']
             ],
-            'identitas_vendor' => [
-                'type' => Type::string(),
-                'description' => 'The vendor identity',
+            'dokumen_pelengkap' => [
+                'type' => Type::listOf(Type::string()),
+                'description' => 'The supporting documents',
                 'rules' => ['required']
             ],
-            'info_vendor' => [
+            'info_ke_vendor' => [
                 'type' => Type::string(),
-                'description' => 'The vendor information',
+                'description' => 'Information to the vendor',
                 'rules' => ['required']
             ],
             'tanggal_pengambilan' => [
@@ -103,19 +98,14 @@ class DokumenType extends GraphQLType
                 'description' => 'The return date',
                 'rules' => ['required']
             ],
-            'tanggal_jatuh_tempo' => [
-                'type' => Type::string(),
-                'description' => 'The due date',
+            'dokumen_yang_dikembalikan' => [
+                'type' => Type::listOf(Type::string()),
+                'description' => 'The returned documents',
                 'rules' => ['required']
             ],
-            'catatan' => [
-                'type' => Type::string(),
-                'description' => 'The notes',
-                'rules' => ['required']
-            ],
-            'form_tkdn' => [
-                'type' => Type::boolean(),
-                'description' => 'The TKDN form',
+            'tkdn_percentage' => [
+                'type' => Type::float(),
+                'description' => 'The TKDN percentage',
                 'rules' => ['required']
             ],
             'tanggal_penyerahan_dokumen' => [
@@ -128,14 +118,24 @@ class DokumenType extends GraphQLType
                 'description' => 'The document recipient',
                 'rules' => ['required']
             ],
+            'pic_legal_id' => [
+                'type' => GraphQL::type('User'),
+                'description' => 'The ID of the legal PIC',
+                'rules' => ['required', 'exists:users,id']
+            ],
+            'catatan' => [
+                'type' => Type::string(),
+                'description' => 'The notes',
+                'rules' => ['required']
+            ],
             'created_at' => [
                 'type' => Type::string(),
-                'description' => 'The creation date of the Dokumen',
+                'description' => 'The creation date of the Dokumen SPK',
                 'rules' => ['required']
             ],
             'updated_at' => [
                 'type' => Type::string(),
-                'description' => 'The last update date of the Dokumen',
+                'description' => 'The last update date of the Dokumen SPK',
                 'rules' => ['required']
             ],
         ];

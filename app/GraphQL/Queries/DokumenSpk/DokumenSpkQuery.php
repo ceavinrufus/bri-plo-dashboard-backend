@@ -1,22 +1,22 @@
 <?php
 
-namespace App\GraphQL\Queries\Dokumen;
+namespace App\GraphQL\Queries\DokumenSpk;
 
-use App\Models\Dokumen;
+use App\Models\DokumenSpk;
 use GraphQL\Type\Definition\Type;
 use Rebing\GraphQL\Support\Facades\GraphQL;
 use Rebing\GraphQL\Support\Query;
 
-class DokumenQuery extends Query
+class DokumenSpkQuery extends Query
 {
     protected $attributes = [
         'name' => 'dokumen',
-        'description' => 'A query to get a specific Dokumen by ID'
+        'description' => 'A query to get a specific Dokumen SPK by ID'
     ];
 
     public function type(): Type
     {
-        return GraphQL::type('Dokumen');
+        return GraphQL::type('DokumenSpk');
     }
 
     public function args(): array
@@ -32,7 +32,7 @@ class DokumenQuery extends Query
 
     public function resolve($root, $args)
     {
-        $dokumen = Dokumen::findOrFail($args['id']);
+        $dokumen = DokumenSpk::findOrFail($args['id']);
         $dokumen->spk = json_decode($dokumen->spk);
 
         return $dokumen;
