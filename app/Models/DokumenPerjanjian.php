@@ -27,9 +27,9 @@ class DokumenPerjanjian extends Model
     ];
 
     protected $casts = [
-        'tanggal_spk' => 'date',
-        'tanggal_spk_diterima' => 'date',
-        'tanggal_kontrak' => 'date',
+        // 'tanggal_spk' => 'date',
+        // 'tanggal_spk_diterima' => 'date',
+        // 'tanggal_kontrak' => 'date',
     ];
 
     public function pic_legal(): BelongsTo

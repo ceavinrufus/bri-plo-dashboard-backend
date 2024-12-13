@@ -35,12 +35,12 @@ class DokumenSpk extends Model
     ];
 
     protected $casts = [
-        'tanggal_spk' => 'date',
-        'tanggal_info_ke_vendor' => 'date',
-        'tanggal_spk_diterima' => 'date',
-        'tanggal_pengambilan' => 'date',
-        'tanggal_pengembalian' => 'date',
-        'tanggal_penyerahan_dokumen' => 'date',
+        // 'tanggal_spk' => 'date',
+        // 'tanggal_info_ke_vendor' => 'date',
+        // 'tanggal_spk_diterima' => 'date',
+        // 'tanggal_pengambilan' => 'date',
+        // 'tanggal_pengembalian' => 'date',
+        // 'tanggal_penyerahan_dokumen' => 'date',
     ];
 
     public function pic_legal(): BelongsTo
