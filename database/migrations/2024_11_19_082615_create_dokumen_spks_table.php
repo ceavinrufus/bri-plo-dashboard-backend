@@ -24,7 +24,7 @@ return new class extends Migration
             $table->string('pelaksana_pekerjaan')->nullable();
             $table->string('pic_pelaksana_pekerjaan')->nullable();
             $table->string('dokumen_pelengkap')->nullable();
-            $table->string('info_ke_vendor')->nullable();
+            $table->date('tanggal_info_ke_vendor')->nullable();
             $table->date('tanggal_pengambilan')->nullable();
             $table->string('identitas_pengambil')->nullable();
             $table->date('tanggal_pengembalian')->nullable();

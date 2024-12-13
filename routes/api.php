@@ -1,7 +1,7 @@
 <?php
 
 use App\Http\Controllers\DepartmentController;
-use App\Http\Controllers\DokumenController;
+use App\Http\Controllers\DokumenSpkController;
 use App\Http\Controllers\HariLiburController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -24,10 +24,10 @@ Route::delete('/pengadaan/delete/{pengadaan}', [PengadaanController::class, 'des
 Route::post('pengadaan/import', [PengadaanController::class, 'import']);
 
 // Dokumen
-Route::get('/dokumen', [DokumenController::class, 'index'])->name('dokumen.index');
-Route::post('/dokumen/store', [DokumenController::class, 'store'])->name('dokumen.store');
-Route::put('/dokumen/update/{dokumen}', [DokumenController::class, 'update'])->name('dokumen.update');
-Route::delete('/dokumen/delete/{dokumen}', [DokumenController::class, 'destroy'])->name('dokumen.destroy');
+Route::get('/dokumen', [DokumenSpkController::class, 'index'])->name('dokumen.index');
+Route::post('/dokumen/store', [DokumenSpkController::class, 'store'])->name('dokumen.store');
+Route::put('/dokumen/update/{dokumen}', [DokumenSpkController::class, 'update'])->name('dokumen.update');
+Route::delete('/dokumen/delete/{dokumen}', [DokumenSpkController::class, 'destroy'])->name('dokumen.destroy');
 
 // Project
 Route::get('/project', [ProjectController::class, 'index'])->name('projects.index');

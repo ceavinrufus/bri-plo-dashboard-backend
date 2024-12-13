@@ -22,7 +22,7 @@ class DokumenSpk extends Model
         'pelaksana_pekerjaan', // JSON: Nama, Alamat, No Telp
         'pic_pelaksana_pekerjaan', // JSON: Nama, No HP
         'dokumen_pelengkap', // Array
-        'info_ke_vendor', // JSON: Via, Tanggal
+        'tanggal_info_ke_vendor', // Tanggal
         'tanggal_pengambilan',
         'identitas_pengambil',
         'tanggal_pengembalian',

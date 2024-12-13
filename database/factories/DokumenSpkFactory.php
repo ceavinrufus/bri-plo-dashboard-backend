@@ -50,10 +50,7 @@ class DokumenSpkFactory extends Factory
                 'phone_number' => $this->faker->phoneNumber
             ]),
             'dokumen_pelengkap' => json_encode($dokumenPelengkap),
-            'info_ke_vendor' => json_encode([
-                'via' => $this->faker->text,
-                'tanggal' => $this->faker->optional()->date()
-            ]),
+            'tanggal_info_ke_vendor' => $this->faker->optional()->date(),
             'tanggal_pengambilan' => $this->faker->optional()->date(),
             'identitas_pengambil' => $this->faker->name . ' (' . $this->faker->phoneNumber  . ')',
             'tanggal_pengembalian' => $this->faker->optional()->date(),

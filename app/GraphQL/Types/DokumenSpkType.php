@@ -78,7 +78,7 @@ class DokumenSpkType extends GraphQLType
                 'description' => 'The supporting documents',
                 'rules' => ['required']
             ],
-            'info_ke_vendor' => [
+            'tanggal_info_ke_vendor' => [
                 'type' => Type::string(),
                 'description' => 'Information to the vendor',
                 'rules' => ['required']
