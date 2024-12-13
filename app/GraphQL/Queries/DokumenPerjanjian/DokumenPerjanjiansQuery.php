@@ -1,23 +1,23 @@
 <?php
 
-namespace App\GraphQL\Queries\DokumenSpk;
+namespace App\GraphQL\Queries\DokumenPerjanjian;
 
-use App\Models\DokumenSpk;
+use App\Models\DokumenPerjanjian;
 use GraphQL\Type\Definition\Type;
 use Illuminate\Support\Facades\Log;
 use Rebing\GraphQL\Support\Facades\GraphQL;
 use Rebing\GraphQL\Support\Query;
 
-class DokumenSpksQuery extends Query
+class DokumenPerjanjiansQuery extends Query
 {
     protected $attributes = [
-        'name' => 'dokumen_spks',
-        'description' => 'A query to get a list of Dokumen SPKs, optionally filtered by vendor name'
+        'name' => 'dokumen_perjanjians',
+        'description' => 'A query to get a list of Dokumen Perjanjians, optionally filtered by vendor name'
     ];
 
     public function type(): Type
     {
-        return Type::listOf(GraphQL::type('DokumenSpk'));
+        return Type::listOf(GraphQL::type('DokumenPerjanjian'));
     }
 
     public function args(): array
@@ -45,7 +45,7 @@ class DokumenSpksQuery extends Query
 
     public function resolve($root, $args)
     {
-        $query = DokumenSpk::query();
+        $query = DokumenPerjanjian::query();
 
         if (isset($args['tim_pemrakarsa'])) {
             $query->where('tim_pemrakarsa', $args['tim_pemrakarsa']);
@@ -58,8 +58,6 @@ class DokumenSpksQuery extends Query
                 $dokumen->spk = json_decode($dokumen->spk);
                 $dokumen->pic_legal = json_decode($dokumen->pic_legal);
                 $dokumen->pic_pengadaan = json_decode($dokumen->pic_pengadaan);
-                $dokumen->dokumen_pelengkap = json_decode($dokumen->dokumen_pelengkap);
-                $dokumen->dokumen_yang_dikembalikan = json_decode($dokumen->dokumen_yang_dikembalikan);
             });
     }
 }

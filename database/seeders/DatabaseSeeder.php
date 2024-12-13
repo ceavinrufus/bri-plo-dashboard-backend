@@ -3,6 +3,7 @@
 namespace Database\Seeders;
 
 use App\Models\Department;
+use App\Models\DokumenPerjanjian;
 use App\Models\DokumenSPK;
 use App\Models\NodinIpPengadaan;
 use App\Models\NodinPlo;
@@ -56,8 +57,9 @@ class DatabaseSeeder extends Seeder
             'email' => 'ceavin.dev@gmail.com',
         ]);
 
-        // Pengadaan::factory(15)->create();
-        DokumenSPK::factory(15)->create();
+        // Pengadaan::factory(10)->create();
+        DokumenSPK::factory(10)->create();
+        DokumenPerjanjian::factory(10)->create();
 
         // NodinPlo::factory(20)->create();
         // NodinUser::factory(20)->create();

@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
-class DokumenSpk extends Model
+class DokumenPerjanjian extends Model
 {
     use HasFactory;
 
@@ -21,26 +21,15 @@ class DokumenSpk extends Model
         'jangka_waktu',
         'pelaksana_pekerjaan', // JSON: Nama, Alamat, No Telp
         'pic_pelaksana_pekerjaan', // JSON: Nama, No HP
-        'dokumen_pelengkap', // Array
-        'tanggal_info_ke_vendor', // Tanggal
-        'tanggal_pengambilan',
-        'identitas_pengambil',
-        'tanggal_pengembalian',
-        'dokumen_yang_dikembalikan', // Array
-        'tkdn_percentage',
-        'tanggal_penyerahan_dokumen',
-        'penerima_dokumen',
+        'nomor_kontrak',
+        'tanggal_kontrak',
         'pic_legal_id',
-        'catatan'
     ];
 
     protected $casts = [
         'tanggal_spk' => 'date',
-        'tanggal_info_ke_vendor' => 'date',
         'tanggal_spk_diterima' => 'date',
-        'tanggal_pengambilan' => 'date',
-        'tanggal_pengembalian' => 'date',
-        'tanggal_penyerahan_dokumen' => 'date',
+        'tanggal_kontrak' => 'date',
     ];
 
     public function pic_legal(): BelongsTo

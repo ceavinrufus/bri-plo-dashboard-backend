@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\DepartmentController;
+use App\Http\Controllers\DokumenPerjanjianController;
 use App\Http\Controllers\DokumenSpkController;
 use App\Http\Controllers\HariLiburController;
 use Illuminate\Http\Request;
@@ -23,11 +24,17 @@ Route::put('/pengadaan/update/{pengadaan}', [PengadaanController::class, 'update
 Route::delete('/pengadaan/delete/{pengadaan}', [PengadaanController::class, 'destroy'])->name('pengadaan.destroy');
 Route::post('pengadaan/import', [PengadaanController::class, 'import']);
 
-// Dokumen
-Route::get('/dokumen', [DokumenSpkController::class, 'index'])->name('dokumen.index');
-Route::post('/dokumen/store', [DokumenSpkController::class, 'store'])->name('dokumen.store');
-Route::put('/dokumen/update/{dokumen}', [DokumenSpkController::class, 'update'])->name('dokumen.update');
-Route::delete('/dokumen/delete/{dokumen}', [DokumenSpkController::class, 'destroy'])->name('dokumen.destroy');
+// Dokumen SPK
+Route::get('/dokumen/spk', [DokumenSpkController::class, 'index'])->name('dokumen.spk.index');
+Route::post('/dokumen/spk/store', [DokumenSpkController::class, 'store'])->name('dokumen.spk.store');
+Route::put('/dokumen/spk/update/{dokumen}', [DokumenSpkController::class, 'update'])->name('dokumen.spk.update');
+Route::delete('/dokumen/spk/delete/{dokumen}', [DokumenSpkController::class, 'destroy'])->name('dokumen.spk.destroy');
+
+// Dokumen Perjanjian
+Route::get('/dokumen/perjanjian', [DokumenPerjanjianController::class, 'index'])->name('dokumen.perjanjian.index');
+Route::post('/dokumen/perjanjian/store', [DokumenPerjanjianController::class, 'store'])->name('dokumen.perjanjian.store');
+Route::put('/dokumen/perjanjian/update/{dokumen}', [DokumenPerjanjianController::class, 'update'])->name('dokumen.perjanjian.update');
+Route::delete('/dokumen/perjanjian/delete/{dokumen}', [DokumenPerjanjianController::class, 'destroy'])->name('dokumen.perjanjian.destroy');
 
 // Project
 Route::get('/project', [ProjectController::class, 'index'])->name('projects.index');

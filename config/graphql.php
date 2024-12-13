@@ -85,6 +85,8 @@ return [
                 'users' => App\GraphQL\Queries\User\UsersQuery::class,
                 'dokumen_spk' => App\GraphQL\Queries\DokumenSpk\DokumenSpkQuery::class,
                 'dokumen_spks' => App\GraphQL\Queries\DokumenSpk\DokumenSpksQuery::class,
+                'dokumen_perjanjian' => App\GraphQL\Queries\DokumenPerjanjian\DokumenPerjanjianQuery::class,
+                'dokumen_perjanjians' => App\GraphQL\Queries\DokumenPerjanjian\DokumenPerjanjiansQuery::class,
             ],
             'mutation' => [
                 // 'createPengadaan' => App\GraphQL\Mutations\Pengadaan\CreatePengadaanMutation::class,
@@ -131,6 +133,7 @@ return [
         'User' => App\GraphQL\Types\UserType::class,
         'Price' => App\GraphQL\Types\PriceType::class,
         'DokumenSpk' => App\GraphQL\Types\DokumenSpkType::class,
+        'DokumenPerjanjian' => App\GraphQL\Types\DokumenPerjanjianType::class,
         'ProsesPengadaan' => App\GraphQL\Types\ProsesPengadaanType::class,
     ],
 
