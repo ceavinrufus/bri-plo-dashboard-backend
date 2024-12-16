@@ -25,7 +25,7 @@ class DokumenSpkQuery extends Query
             'id' => [
                 'name' => 'id',
                 'type' => Type::nonNull(Type::id()),
-                'rules' => ['required', 'exists:dokumens,id']
+                'rules' => ['required', 'exists:dokumen_spks,id']
             ],
         ];
     }
@@ -34,6 +34,10 @@ class DokumenSpkQuery extends Query
     {
         $dokumen = DokumenSpk::findOrFail($args['id']);
         $dokumen->spk = json_decode($dokumen->spk);
+        $dokumen->pic_legal = json_decode($dokumen->pic_legal);
+        $dokumen->pic_pengadaan = json_decode($dokumen->pic_pengadaan);
+        $dokumen->dokumen_pelengkap = json_decode($dokumen->dokumen_pelengkap);
+        $dokumen->dokumen_yang_dikembalikan = json_decode($dokumen->dokumen_yang_dikembalikan);
 
         return $dokumen;
     }
