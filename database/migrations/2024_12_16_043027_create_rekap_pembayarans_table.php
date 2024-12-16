@@ -29,7 +29,7 @@ return new class extends Migration
             $table->foreignId('pic_pay_id')->constrained('users')->nullable();
             $table->string('nota_fiat')->nullable();
             $table->date('tanggal_fiat')->nullable();
-            $table->string('sla')->nullable();
+            $table->date('sla')->nullable();
             $table->integer('hari_pengerjaan')->nullable();
             $table->string('status_pembayaran')->nullable();
             $table->date('tanggal_pembayaran')->nullable();

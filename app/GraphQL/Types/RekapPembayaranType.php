@@ -104,7 +104,7 @@ class RekapPembayaranType extends GraphQLType
                 'rules' => ['required']
             ],
             'sla' => [
-                'type' => Type::int(),
+                'type' => Type::string(),
                 'description' => 'The SLA',
                 'rules' => ['required']
             ],

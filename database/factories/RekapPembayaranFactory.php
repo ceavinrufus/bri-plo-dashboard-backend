@@ -50,7 +50,7 @@ class RekapPembayaranFactory extends Factory
             'pic_pay_id' => $this->faker->randomElement($userIDs),
             'nota_fiat' => $this->faker->optional()->text(255),
             'tanggal_fiat' => $this->faker->optional()->date(),
-            'sla' => $this->faker->optional()->text(255),
+            'sla' => $this->faker->date(),
             'hari_pengerjaan' => $this->faker->optional()->numberBetween(1, 365),
             'status_pembayaran' => $this->faker->optional()->text(255),
             'tanggal_pembayaran' => $this->faker->optional()->date(),
