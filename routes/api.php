@@ -8,6 +8,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\PengadaanController;
 use App\Http\Controllers\ProjectController;
+use App\Http\Controllers\RekapPembayaranController;
 use App\Http\Controllers\UserController;
 
 Route::middleware(['auth:sanctum'])->get('/user', function (Request $request) {
@@ -53,3 +54,10 @@ Route::get('/hari-libur', [HariLiburController::class, 'index'])->name('hari-lib
 Route::post('/hari-libur/store', [HariLiburController::class, 'store'])->name('hari-libur.store');
 Route::put('/hari-libur/update/{hariLibur}', [HariLiburController::class, 'update'])->name('hari-libur.update');
 Route::delete('/hari-libur/delete/{hariLibur}', [HariLiburController::class, 'destroy'])->name('hari-libur.destroy');
+
+// Rekap Pembayaran
+Route::get('/rekap-pembayaran', [RekapPembayaranController::class, 'index']);
+Route::post('/rekap-pembayaran/store', [RekapPembayaranController::class, 'store']);
+Route::put('/rekap-pembayaran/update/{rekapPembayaran}', [RekapPembayaranController::class, 'update']);
+Route::delete('/rekap-pembayaran/delete/{rekapPembayaran}', [RekapPembayaranController::class, 'destroy']);
+Route::post('/rekap-pembayaran/import', [RekapPembayaranController::class, 'import']);

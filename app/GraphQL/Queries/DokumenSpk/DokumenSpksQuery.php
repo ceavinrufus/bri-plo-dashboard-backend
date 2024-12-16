@@ -12,7 +12,7 @@ class DokumenSpksQuery extends Query
 {
     protected $attributes = [
         'name' => 'dokumen_spks',
-        'description' => 'A query to get a list of Dokumen SPKs, optionally filtered by vendor name'
+        'description' => 'A query to get a list of Dokumen SPKs, optionally filtered by tim pemrakarsa'
     ];
 
     public function type(): Type

@@ -87,6 +87,8 @@ return [
                 'dokumen_spks' => App\GraphQL\Queries\DokumenSpk\DokumenSpksQuery::class,
                 'dokumen_perjanjian' => App\GraphQL\Queries\DokumenPerjanjian\DokumenPerjanjianQuery::class,
                 'dokumen_perjanjians' => App\GraphQL\Queries\DokumenPerjanjian\DokumenPerjanjiansQuery::class,
+                'rekap_pembayaran' => App\GraphQL\Queries\RekapPembayaran\RekapPembayaranQuery::class,
+                'rekap_pembayarans' => App\GraphQL\Queries\RekapPembayaran\RekapPembayaransQuery::class,
             ],
             'mutation' => [
                 // 'createPengadaan' => App\GraphQL\Mutations\Pengadaan\CreatePengadaanMutation::class,
@@ -135,6 +137,7 @@ return [
         'DokumenSpk' => App\GraphQL\Types\DokumenSpkType::class,
         'DokumenPerjanjian' => App\GraphQL\Types\DokumenPerjanjianType::class,
         'ProsesPengadaan' => App\GraphQL\Types\ProsesPengadaanType::class,
+        'RekapPembayaran' => App\GraphQL\Types\RekapPembayaranType::class,
     ],
 
     // This callable will be passed the Error object for each errors GraphQL catch.
