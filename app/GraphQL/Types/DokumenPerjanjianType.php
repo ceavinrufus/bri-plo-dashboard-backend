@@ -23,7 +23,7 @@ class DokumenPerjanjianType extends GraphQLType
                 'description' => 'The ID of the Dokumen Perjanjian',
                 'rules' => ['required']
             ],
-            'tanggal_spk_diterima' => [
+            'tanggal_permohonan_diterima' => [
                 'type' => Type::string(),
                 'description' => 'The date the SPK was received',
                 'rules' => ['required']

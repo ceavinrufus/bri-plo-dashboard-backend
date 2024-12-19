@@ -22,7 +22,7 @@ class DokumenPerjanjianController extends Controller
     public function store(Request $request)
     {
         $validated = $request->validate([
-            'tanggal_spk_diterima' => 'nullable|date',
+            'tanggal_permohonan_diterima' => 'nullable|date',
             'tim_pemrakarsa' => 'nullable|string|max:255',
             'pic_pengadaan_id' => 'nullable|exists:users,id',
             'nomor_spk' => 'required|string|max:255',
@@ -38,7 +38,7 @@ class DokumenPerjanjianController extends Controller
         ]);
 
         $dokumen = DokumenPerjanjian::create($validated);
-
+        Log::info($dokumen);
         return response()->json([
             'status' => 'success',
             'message' => 'Dokumen SPK data successfully added!',
@@ -49,7 +49,7 @@ class DokumenPerjanjianController extends Controller
     public function update(Request $request, DokumenPerjanjian $dokumen)
     {
         $validated = $request->validate([
-            'tanggal_spk_diterima' => 'nullable|date',
+            'tanggal_permohonan_diterima' => 'nullable|date',
             'tim_pemrakarsa' => 'nullable|string|max:255',
             'pic_pengadaan_id' => 'nullable|exists:users,id',
             'nomor_spk' => 'required|string|max:255',

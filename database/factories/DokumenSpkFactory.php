@@ -28,7 +28,7 @@ class DokumenSpkFactory extends Factory
         );
 
         return [
-            'tanggal_spk_diterima' => $this->faker->optional()->date(),
+            'tanggal_spk_diterima' => $this->faker->date(),
             'tim_pemrakarsa' => $tim,
             'pic_pengadaan_id' => $this->faker->randomElement($userIDs),
             'nomor_spk' => 'SPK.' . $this->faker->randomNumber() . '.P-PLO/' . strtoupper($departemen) . '/' . strtoupper($tim) . '/' . now()->format('m') . '/' . now()->format('Y'),

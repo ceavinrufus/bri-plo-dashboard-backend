@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('dokumen_perjanjians', function (Blueprint $table) {
             $table->id();
-            $table->date('tanggal_spk_diterima')->nullable();
+            $table->date('tanggal_permohonan_diterima')->nullable();
             $table->string('tim_pemrakarsa')->nullable();
             $table->foreignId('pic_pengadaan_id')->constrained('users')->nullable();
             $table->string('nomor_spk');

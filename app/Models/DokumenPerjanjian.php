@@ -11,7 +11,7 @@ class DokumenPerjanjian extends Model
     use HasFactory;
 
     protected $fillable = [
-        'tanggal_spk_diterima',
+        'tanggal_permohonan_diterima',
         'tim_pemrakarsa',
         'pic_pengadaan_id',
         'nomor_spk',
@@ -28,7 +28,7 @@ class DokumenPerjanjian extends Model
 
     protected $casts = [
         // 'tanggal_spk' => 'date',
-        // 'tanggal_spk_diterima' => 'date',
+        // 'tanggal_permohonan_diterima' => 'date',
         // 'tanggal_kontrak' => 'date',
     ];
 
