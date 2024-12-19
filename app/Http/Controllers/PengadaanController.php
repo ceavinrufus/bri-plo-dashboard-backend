@@ -25,17 +25,10 @@ class PengadaanController extends Controller
             // Convert the item to an array
             $itemArray = $item->toArray();
 
-            // Remove unwanted fields
-            unset($itemArray['id']);
-            unset($itemArray['departemen']);
-            unset($itemArray['created_at']);
-            unset($itemArray['updated_at']);
-
             // Place 'nomor' at the start
-            $itemArray = array_merge(['nomor' => $index + 1], $itemArray);
-            $itemArray['nodin_plo'] = $item->nodinPlos;
-            $itemArray['nodin_ip_pengadaan'] = $item->nodinIpPengadaans;
-            $itemArray['nodin_user'] = $item->nodinUsers;
+            $itemArray['nodin_plos'] = $item->nodinPlos;
+            $itemArray['nodin_ip_pengadaans'] = $item->nodinIpPengadaans;
+            $itemArray['nodin_users'] = $item->nodinUsers;
 
             return $itemArray;
         });

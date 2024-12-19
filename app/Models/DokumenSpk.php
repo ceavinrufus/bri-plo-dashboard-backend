@@ -5,6 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class DokumenSpk extends Model
 {
@@ -34,15 +35,6 @@ class DokumenSpk extends Model
         'catatan'
     ];
 
-    protected $casts = [
-        // 'tanggal_spk' => 'date',
-        // 'tanggal_info_ke_vendor' => 'date',
-        // 'tanggal_spk_diterima' => 'date',
-        // 'tanggal_pengambilan' => 'date',
-        // 'tanggal_pengembalian' => 'date',
-        // 'tanggal_penyerahan_dokumen' => 'date',
-    ];
-
     public function pic_legal(): BelongsTo
     {
         return $this->belongsTo(User::class, 'pic_legal_id', 'id');
@@ -51,5 +43,10 @@ class DokumenSpk extends Model
     public function pic_pengadaan(): BelongsTo
     {
         return $this->belongsTo(User::class, 'pic_pengadaan_id', 'id');
+    }
+
+    public function dokumen_jaminans(): HasMany
+    {
+        return $this->hasMany(DokumenJaminan::class);
     }
 }
