@@ -16,6 +16,7 @@ Route::middleware(['auth:sanctum'])->get('/user', function (Request $request) {
 });
 
 Route::get('/users', [UserController::class, 'index']);
+Route::get('/users/tim/{user:tim}', [UserController::class, 'getUsersByTeam']);
 
 // Pengadaan
 Route::get('/pengadaan/departemen/{pengadaan:departemen}', [PengadaanController::class, 'index']);
@@ -60,4 +61,4 @@ Route::get('/rekap-pembayaran', [RekapPembayaranController::class, 'index']);
 Route::post('/rekap-pembayaran/store', [RekapPembayaranController::class, 'store']);
 Route::put('/rekap-pembayaran/update/{rekapPembayaran}', [RekapPembayaranController::class, 'update']);
 Route::delete('/rekap-pembayaran/delete/{rekapPembayaran}', [RekapPembayaranController::class, 'destroy']);
-Route::post('/rekap-pembayaran/import', [RekapPembayaranController::class, 'import']);
+// Route::post('/rekap-pembayaran/import', [RekapPembayaranController::class, 'import']);
