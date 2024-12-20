@@ -10,7 +10,7 @@ use Rebing\GraphQL\Support\Query;
 class DokumenJaminanQuery extends Query
 {
     protected $attributes = [
-        'name' => 'dokumen_jaminan',
+        'name' => 'dokumenJaminan',
         'description' => 'A query to get a specific DokumenJaminan by ID'
     ];
 
@@ -25,13 +25,16 @@ class DokumenJaminanQuery extends Query
             'id' => [
                 'name' => 'id',
                 'type' => Type::nonNull(Type::id()),
-                'rules' => ['required', 'exists:dokumen_jaminan,id']
+                'rules' => ['required', 'exists:dokumen_jaminans,id']
             ],
         ];
     }
 
     public function resolve($root, $args)
     {
-        return DokumenJaminan::findOrFail($args['id']);
+        $dokumen = DokumenJaminan::findOrFail($args['id']);
+        $dokumen->nilai = json_decode($dokumen->nilai);
+
+        return $dokumen;
     }
 }

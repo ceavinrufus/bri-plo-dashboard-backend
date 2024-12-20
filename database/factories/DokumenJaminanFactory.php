@@ -26,7 +26,11 @@ class DokumenJaminanFactory extends Factory
             'penerbit' => $this->faker->company,
             'nomor_jaminan' => $this->faker->unique()->numerify('BG-#####'),
             'dokumen_keabsahan' => $this->faker->word,
-            'nilai' => $this->faker->randomFloat(2, 1000, 100000),
+            'nilai' => json_encode([
+                'amount' => $this->faker->randomFloat(2, 10000, 11000),
+                'currency' => $this->faker->randomElement(['IDR', 'USD', 'EUR']),
+                'rate' => $this->faker->randomFloat(2, 0.1, 1)
+            ]),
             'waktu_mulai' => $this->faker->dateTimeBetween('-1 years', 'now'),
             'waktu_berakhir' => $this->faker->dateTimeBetween('now', '+1 years'),
             'dokumen_spk_id' => $this->faker->randomElement($dokumenSpkIDs),

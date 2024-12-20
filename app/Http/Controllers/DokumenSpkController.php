@@ -20,7 +20,7 @@ class DokumenSpkController extends Controller
             $itemArray = $item->toArray();
 
             // Place 'nomor' at the start
-            $itemArray['dokumen_jaminans'] = $item->dokumen_jaminans;
+            $itemArray['dokumen_jaminans'] = $item->dokumenJaminans;
 
             return $itemArray;
         });
@@ -76,7 +76,7 @@ class DokumenSpkController extends Controller
             // Create associated DokumenJaminan if present
             if (isset($validated['dokumen_jaminans'])) {
                 foreach ($validated['dokumen_jaminans'] as $dokumenJaminanData) {
-                    $dokumen->dokumen_jaminans()->create($dokumenJaminanData);
+                    $dokumen->dokumenJaminans()->create($dokumenJaminanData);
                 }
             }
 
@@ -175,7 +175,7 @@ class DokumenSpkController extends Controller
 
     public function destroy(DokumenSpk $dokumen)
     {
-        $dokumen->dokumen_jaminans()->delete();
+        $dokumen->dokumenJaminans()->delete();
 
         $dokumen->delete();
 

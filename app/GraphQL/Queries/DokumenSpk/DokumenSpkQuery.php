@@ -32,12 +32,16 @@ class DokumenSpkQuery extends Query
 
     public function resolve($root, $args)
     {
-        $dokumen = DokumenSpk::findOrFail($args['id']);
+        $dokumen = DokumenSpk::with(['dokumenJaminans'])->findOrFail($args['id']);
         $dokumen->spk = json_decode($dokumen->spk);
         $dokumen->pic_legal = json_decode($dokumen->pic_legal);
         $dokumen->pic_pengadaan = json_decode($dokumen->pic_pengadaan);
         $dokumen->dokumen_pelengkap = json_decode($dokumen->dokumen_pelengkap);
         $dokumen->dokumen_yang_dikembalikan = json_decode($dokumen->dokumen_yang_dikembalikan);
+        $dokumen->dokumen_jaminans = $dokumen->dokumenJaminans->map(function ($jaminan) {
+            $jaminan->nilai = json_decode($jaminan->nilai);
+            return $jaminan;
+        });
 
         return $dokumen;
     }

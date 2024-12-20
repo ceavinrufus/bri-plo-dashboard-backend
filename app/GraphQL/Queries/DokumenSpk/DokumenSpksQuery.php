@@ -51,7 +51,8 @@ class DokumenSpksQuery extends Query
             $query->where('tim_pemrakarsa', $args['tim_pemrakarsa']);
         }
 
-        return $query->offset($args['offset'])
+        return $query->with(['dokumenJaminans'])
+            ->offset($args['offset'])
             ->limit($args['limit'])
             ->get()
             ->each(function ($dokumen) {
@@ -60,6 +61,10 @@ class DokumenSpksQuery extends Query
                 $dokumen->pic_pengadaan = json_decode($dokumen->pic_pengadaan);
                 $dokumen->dokumen_pelengkap = json_decode($dokumen->dokumen_pelengkap);
                 $dokumen->dokumen_yang_dikembalikan = json_decode($dokumen->dokumen_yang_dikembalikan);
+                $dokumen->dokumen_jaminans = $dokumen->dokumenJaminans->map(function ($jaminan) {
+                    $jaminan->nilai = json_decode($jaminan->nilai);
+                    return $jaminan;
+                });
             });
     }
 }

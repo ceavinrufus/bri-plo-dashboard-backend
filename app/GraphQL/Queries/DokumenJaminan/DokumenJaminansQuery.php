@@ -42,6 +42,9 @@ class DokumenJaminansQuery extends Query
         return DokumenJaminan::query()
             ->offset($args['offset'])
             ->limit($args['limit'])
-            ->get();
+            ->get()
+            ->each(function ($dokumen) {
+                $dokumen->nilai = json_decode($dokumen->nilai);
+            });
     }
 }

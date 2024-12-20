@@ -45,7 +45,7 @@ class DokumenSpk extends Model
         return $this->belongsTo(User::class, 'pic_pengadaan_id', 'id');
     }
 
-    public function dokumen_jaminans(): HasMany
+    public function dokumenJaminans(): HasMany
     {
         return $this->hasMany(DokumenJaminan::class);
     }
