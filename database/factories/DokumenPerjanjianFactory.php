@@ -41,10 +41,7 @@ class DokumenPerjanjianFactory extends Factory
                 'address' => $this->faker->address,
                 'phone_number' => $this->faker->phoneNumber
             ]),
-            'pic_pelaksana_pekerjaan' => json_encode([
-                'name' => $this->faker->name,
-                'phone_number' => $this->faker->phoneNumber
-            ]),
+            'pic_pelaksana_pekerjaan' => $this->faker->name . ' (' . $this->faker->phoneNumber . ')',
             'nomor_kontrak' => $this->faker->randomNumber() . '.K-PLO/' . strtoupper($departemen) . '/LEG/' . now()->format('m') . '/' . now()->format('Y'),
             'tanggal_kontrak' => $this->faker->date(),
             'pic_legal_id' => $this->faker->randomElement($userIDs),
