@@ -16,7 +16,7 @@ Route::middleware(['auth:sanctum'])->get('/user', function (Request $request) {
 });
 
 Route::get('/users', [UserController::class, 'index']);
-Route::get('/users/tim/{user:tim}', [UserController::class, 'getUsersByTeam']);
+Route::get('/users/tim/{tim}', [UserController::class, 'getUsersByTeam']);
 Route::put('/users/update/{user}', [UserController::class, 'update'])->name('users.update');
 
 // Pengadaan

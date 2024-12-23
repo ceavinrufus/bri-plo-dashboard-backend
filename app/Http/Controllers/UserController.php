@@ -24,10 +24,10 @@ class UserController extends Controller
     /**
      * Get users by tim.
      */
-    public function getUsersByTeam(User $user)
+    public function getUsersByTeam($tim)
     {
-        // Fetch users based on the tim
-        $users = User::where('tim', $user->tim)->get();
+        // Fetch users based on the `tim` parameter
+        $users = User::where('tim', $tim)->get();
 
         // Return the users as a JSON response
         return response()->json([
@@ -36,6 +36,7 @@ class UserController extends Controller
             'data' => $users,
         ], 200);
     }
+
 
     /**
      * Update the specified user.

@@ -62,7 +62,7 @@ class DokumenSpkController extends Controller
             'dokumen_jaminans.*.penerbit' => 'nullable|string|max:255',
             'dokumen_jaminans.*.nomor_jaminan' => 'nullable|string|max:255',
             'dokumen_jaminans.*.dokumen_keabsahan' => 'nullable|string|max:255',
-            'dokumen_jaminans.*.nilai' => 'nullable|numeric',
+            'dokumen_jaminans.*.nilai' => 'nullable|json',
             'dokumen_jaminans.*.waktu_mulai' => 'nullable|date',
             'dokumen_jaminans.*.waktu_berakhir' => 'nullable|date',
         ]);
@@ -126,12 +126,13 @@ class DokumenSpkController extends Controller
             'pic_legal_id' => 'nullable|exists:users,id',
             'catatan' => 'nullable|string|max:255',
             'dokumen_jaminans' => 'nullable|array',
+            'dokumen_jaminans.*.id' => 'nullable|exists:dokumen_jaminans,id',
             'dokumen_jaminans.*.type' => 'required_with:dokumen_jaminans|string|max:255',
             'dokumen_jaminans.*.tanggal_diterima' => 'nullable|date',
             'dokumen_jaminans.*.penerbit' => 'nullable|string|max:255',
             'dokumen_jaminans.*.nomor_jaminan' => 'nullable|string|max:255',
             'dokumen_jaminans.*.dokumen_keabsahan' => 'nullable|string|max:255',
-            'dokumen_jaminans.*.nilai' => 'nullable|numeric',
+            'dokumen_jaminans.*.nilai' => 'nullable|json',
             'dokumen_jaminans.*.waktu_mulai' => 'nullable|date',
             'dokumen_jaminans.*.waktu_berakhir' => 'nullable|date',
         ]);
@@ -147,7 +148,7 @@ class DokumenSpkController extends Controller
                         DokumenJaminan::where('id', $dokumenJaminanData['id'])->update($dokumenJaminanData);
                     } else {
                         // Create a new DokumenJaminan
-                        $dokumen->nodinUsers()->create($dokumenJaminanData);
+                        $dokumen->dokumenJaminans()->create($dokumenJaminanData);
                     }
                 }
             }
