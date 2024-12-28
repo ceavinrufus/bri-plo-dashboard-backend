@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\DokumenJaminan;
 use Illuminate\Http\Request;
 use App\Models\DokumenSpk;
+use PhpOffice\PhpSpreadsheet\IOFactory;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
 
@@ -30,6 +31,127 @@ class DokumenSpkController extends Controller
             'message' => 'Data fetched successfully',
             'data' => $data,
         ], 200);
+    }
+
+    public function import(Request $request)
+    {
+        $request->validate([
+            'excel_file' => 'required|file|mimes:xlsx,xls',
+        ]);
+
+        try {
+            $file = $request->file('excel_file');
+            $spreadsheet = IOFactory::load($file->getPathname());
+            $worksheet = $spreadsheet->getActiveSheet();
+            $rows = $worksheet->toArray();
+
+            // Get headers from first row and convert to lowercase
+            $headers = array_map('strtolower', $rows[0]);
+
+            // Remove first row (headers)
+            array_shift($rows);
+
+            $successCount = 0;
+            $errorRows = [];
+
+            DB::beginTransaction();
+
+            foreach ($rows as $index => $row) {
+                try {
+                    // Convert row to associative array
+                    $data = array_combine($headers, $row);
+
+                    // Prepare DokumenSpk data
+                    $dokumenSpkData = [
+                        'tanggal_spk_diterima' => $data['tanggal_spk_diterima'] ?? null,
+                        'tim_pemrakarsa' => $data['tim_pemrakarsa'] ?? null,
+                        'pic_pengadaan_id' => $data['pic_pengadaan_id'] ?? null,
+                        'nomor_spk' => $data['nomor_spk'] ?? null,
+                        'tanggal_spk' => $data['tanggal_spk'] ?? null,
+                        'jenis_pekerjaan' => $data['jenis_pekerjaan'] ?? null,
+                        'spk' => json_encode([
+                            'currency' => $data['currency_spk'] ?? null,
+                            'amount' => $data['nilai_spk'] ?? null,
+                            'rate' => $data['rate_spk'] ?? null,
+                        ]),
+                        'jangka_waktu' => $data['jangka_waktu'] ?? null,
+                        'pelaksana_pekerjaan' => $data['pelaksana_pekerjaan'] ?? null,
+                        'pic_pelaksana_pekerjaan' => $data['pic_pelaksana_pekerjaan'] ?? null,
+                        'dokumen_pelengkap' => $data['dokumen_pelengkap'] ?? null,
+                        'tanggal_info_ke_vendor' => $data['tanggal_info_ke_vendor'] ?? null,
+                        'tanggal_pengambilan' => $data['tanggal_pengambilan'] ?? null,
+                        'identitas_pengambil' => $data['identitas_pengambil'] ?? null,
+                        'tanggal_pengembalian' => $data['tanggal_pengembalian'] ?? null,
+                        'dokumen_yang_dikembalikan' => $data['dokumen_yang_dikembalikan'] ?? null,
+                        'tkdn_percentage' => $data['tkdn_percentage'] ?? null,
+                        'tanggal_penyerahan_dokumen' => $data['tanggal_penyerahan_dokumen'] ?? null,
+                        'penerima_dokumen' => $data['penerima_dokumen'] ?? null,
+                        'pic_legal_id' => $data['pic_legal_id'] ?? null,
+                        'catatan' => $data['catatan'] ?? null,
+                    ];
+
+                    // Create a new DokumenSpk record
+                    $dokumenSpk = DokumenSpk::create($dokumenSpkData);
+
+                    // Prepare DokumenJaminan data
+                    $jaminanTypes = ['uang_muka', 'pembayaran', 'pelaksanaan', 'pemeliharaan'];
+                    $typeMapping = [
+                        'uang_muka' => 'JUM',
+                        'pembayaran' => 'JBayar',
+                        'pelaksanaan' => 'Jampel',
+                        'pemeliharaan' => 'JPelihara',
+                    ];
+                    foreach ($jaminanTypes as $type) {
+                        if (isset($data["tanggal_diterima_jaminan_$type"])) {
+                            $dokumenJaminanData = [
+                                'type' => $typeMapping[$type],
+                                'tanggal_diterima' => $data["tanggal_diterima_jaminan_$type"] ?? null,
+                                'penerbit' => $data["penerbit_jaminan_$type"] ?? null,
+                                'nomor_jaminan' => $data["nomor_jaminan_jaminan_$type"] ?? null,
+                                'dokumen_keabsahan' => $data["dokumen_keabsahan_jaminan_$type"] ?? null,
+                                'nilai' => json_encode([
+                                    'currency' => $data["currency_jaminan_$type"] ?? null,
+                                    'amount' => $data["nilai_jaminan_$type"] ?? null,
+                                    'rate' => $data["rate_jaminan_$type"] ?? null,
+                                ]),
+                                'waktu_mulai' => $data["waktu_mulai_jaminan_$type"] ?? null,
+                                'waktu_berakhir' => $data["waktu_berakhir_jaminan_$type"] ?? null,
+                            ];
+                            $dokumenSpk->dokumenJaminans()->create($dokumenJaminanData);
+                        }
+                    }
+
+                    $successCount++;
+                } catch (\Exception $e) {
+                    $errorRows[] = [
+                        'row' => $index + 2, // Add 2 because: 1 for header, 1 for zero-based index
+                        'error' => $e->getMessage()
+                    ];
+                }
+            }
+
+            if ($successCount > 0) {
+                DB::commit();
+                return response()->json([
+                    'status' => 'success',
+                    'message' => "$successCount records imported successfully",
+                    'errors' => count($errorRows) > 0 ? $errorRows : null,
+                ], 200);
+            } else {
+                DB::rollBack();
+                return response()->json([
+                    'status' => 'error',
+                    'message' => 'No records were imported',
+                    'errors' => $errorRows
+                ], 422);
+            }
+        } catch (\Exception $e) {
+            DB::rollBack();
+            return response()->json([
+                'status' => 'error',
+                'message' => 'Failed to process Excel file: ' . $e->getMessage()
+            ], 500);
+        }
     }
 
     public function store(Request $request)

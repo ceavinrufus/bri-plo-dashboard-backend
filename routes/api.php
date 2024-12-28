@@ -32,6 +32,7 @@ Route::get('/dokumen/spk', [DokumenSpkController::class, 'index'])->name('dokume
 Route::post('/dokumen/spk/store', [DokumenSpkController::class, 'store'])->name('dokumen.spk.store');
 Route::put('/dokumen/spk/update/{dokumen}', [DokumenSpkController::class, 'update'])->name('dokumen.spk.update');
 Route::delete('/dokumen/spk/delete/{dokumen}', [DokumenSpkController::class, 'destroy'])->name('dokumen.spk.destroy');
+Route::post('/dokumen/spk/import', [DokumenSpkController::class, 'import']);
 
 // Dokumen Perjanjian
 Route::get('/dokumen/perjanjian', [DokumenPerjanjianController::class, 'index'])->name('dokumen.perjanjian.index');
