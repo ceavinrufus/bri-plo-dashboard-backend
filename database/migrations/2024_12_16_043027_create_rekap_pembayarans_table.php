@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('rekap_pembayarans', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('pic_pc_id')->constrained('users')->nullable();
+            $table->foreignId('pic_pc_id')->nullable()->constrained('users');
             $table->date('tanggal_terima')->nullable();
             $table->string('nomor_spk')->nullable();
             $table->date('tanggal_spk')->nullable();
@@ -26,7 +26,7 @@ return new class extends Migration
             $table->string('nomor_invoice')->nullable();
             $table->json('invoice')->nullable();
             $table->string('nomor_rekening')->nullable();
-            $table->foreignId('pic_pay_id')->constrained('users')->nullable();
+            $table->foreignId('pic_pay_id')->nullable()->constrained('users');
             $table->string('nota_fiat')->nullable();
             $table->date('tanggal_fiat')->nullable();
             $table->date('sla')->nullable();

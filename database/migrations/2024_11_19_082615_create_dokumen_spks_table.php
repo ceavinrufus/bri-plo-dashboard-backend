@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();
             $table->date('tanggal_spk_diterima')->nullable();
             $table->string('tim_pemrakarsa')->nullable();
-            $table->foreignId('pic_pengadaan_id')->constrained('users')->nullable();
+            $table->foreignId('pic_pengadaan_id')->nullable()->constrained('users');
             $table->string('nomor_spk');
             $table->date('tanggal_spk')->nullable();
             $table->string('jenis_pekerjaan')->nullable();
@@ -32,7 +32,7 @@ return new class extends Migration
             $table->decimal('tkdn_percentage', 5, 2)->nullable();
             $table->date('tanggal_penyerahan_dokumen')->nullable();
             $table->string('penerima_dokumen')->nullable();
-            $table->foreignId('pic_legal_id')->constrained('users')->nullable();
+            $table->foreignId('pic_legal_id')->nullable()->constrained('users');
             $table->text('catatan')->nullable();
             $table->timestamps();
         });

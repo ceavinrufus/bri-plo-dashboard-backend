@@ -41,33 +41,33 @@ class DatabaseSeeder extends Seeder
             'target' => 5.5,
         ]);
 
-        Project::create([
-            'kode' => 'P001',
-            'nama' => 'Proyek Pembangunan Gedung A',
-        ]);
+        // Project::create([
+        //     'kode' => 'P001',
+        //     'nama' => 'Proyek Pembangunan Gedung A',
+        // ]);
 
         // Seed a user
-        User::factory()->create([
-            'name' => 'Ceavin Rufus',
-            'pn' => '99999999',
-            'email' => 'ceavinr@gmail.com',
-        ]);
+        // User::factory()->create([
+        //     'name' => 'Ceavin Rufus',
+        //     'pn' => '99999999',
+        //     'email' => 'ceavinr@gmail.com',
+        // ]);
 
-        User::factory()->admin()->create([
-            'name' => 'Admin',
-            'pn' => '90175686',
-            'email' => 'ceavin.dev@gmail.com',
-        ]);
+        // User::factory()->admin()->create([
+        //     'name' => 'Admin',
+        //     'pn' => '90175686',
+        //     'email' => 'ceavin.dev@gmail.com',
+        // ]);
 
-        Pengadaan::factory(10)->create();
-        NodinPlo::factory(20)->create();
-        NodinUser::factory(20)->create();
-        NodinIpPengadaan::factory(20)->create();
+        // Pengadaan::factory(10)->create();
+        // NodinPlo::factory(20)->create();
+        // NodinUser::factory(20)->create();
+        // NodinIpPengadaan::factory(20)->create();
 
-        DokumenSPK::factory(10)->create();
-        DokumenJaminan::factory(10)->create();
+        // DokumenSPK::factory(10)->create();
+        // DokumenJaminan::factory(10)->create();
 
-        DokumenPerjanjian::factory(10)->create();
-        RekapPembayaran::factory(10)->create();
+        // DokumenPerjanjian::factory(10)->create();
+        // RekapPembayaran::factory(10)->create();
     }
 }

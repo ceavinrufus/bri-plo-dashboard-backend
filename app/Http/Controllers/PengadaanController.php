@@ -110,6 +110,7 @@ class PengadaanController extends Controller
                         'perihal' => $data['perihal'] ?? null,
                         'metode' => $data['metode'] ?? null,
                         'proses_pengadaan' => $data['proses_pengadaan'] ?? null,
+                        'pic_id' => $data['pic_id'] ?? null,
                         'nodin_ip_pengadaans' => empty($data['nodin_ip_pengadaan']) || empty($data['tanggal_nodin_ip_pengadaan']) ? [] : collect(explode(';', $data['nodin_ip_pengadaan']))
                             ->map(function ($nodin, $index) use ($data) {
                                 $tanggalNodin = explode(';', $data['tanggal_nodin_ip_pengadaan'])[$index] ?? '';
