@@ -59,11 +59,15 @@ class DokumenPerjanjianController extends Controller
                         'jenis_pekerjaan' => $data['jenis_pekerjaan'] ?? null,
                         'spk' => json_encode([
                             'currency' => $data['currency_spk'] ?? null,
-                            'amount' => $data['nilai_spk'] ?? null,
-                            'rate' => $data['rate_spk'] ?? null,
+                            'amount' => isset($data['nilai_spk']) ? (float)$data['nilai_spk'] : null,
+                            'rate' => isset($data['rate_spk']) ? (float)$data['rate_spk'] : null,
                         ]),
                         'jangka_waktu' => $data['jangka_waktu'] ?? null,
-                        'pelaksana_pekerjaan' => $data['pelaksana_pekerjaan'] ?? null,
+                        'pelaksana_pekerjaan' => json_encode([
+                            'name' => $data['pelaksana_pekerjaan'] ?? null,
+                            'address' => $data['alamat_pelaksana_pekerjaan'] ?? null,
+                            'phone_number' => $data['no_telp_pelaksana_pekerjaan'] ?? null,
+                        ]),
                         'pic_pelaksana_pekerjaan' => $data['pic_pelaksana_pekerjaan'] ?? null,
                         'nomor_kontrak' => $data['nomor_kontrak'] ?? null,
                         'tanggal_kontrak' => $data['tanggal_kontrak'] ?? null,
