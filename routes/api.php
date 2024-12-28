@@ -39,6 +39,7 @@ Route::get('/dokumen/perjanjian', [DokumenPerjanjianController::class, 'index'])
 Route::post('/dokumen/perjanjian/store', [DokumenPerjanjianController::class, 'store'])->name('dokumen.perjanjian.store');
 Route::put('/dokumen/perjanjian/update/{dokumen}', [DokumenPerjanjianController::class, 'update'])->name('dokumen.perjanjian.update');
 Route::delete('/dokumen/perjanjian/delete/{dokumen}', [DokumenPerjanjianController::class, 'destroy'])->name('dokumen.perjanjian.destroy');
+Route::post('/dokumen/perjanjian/import', [DokumenPerjanjianController::class, 'import']);
 
 // Project
 Route::get('/project', [ProjectController::class, 'index'])->name('projects.index');
