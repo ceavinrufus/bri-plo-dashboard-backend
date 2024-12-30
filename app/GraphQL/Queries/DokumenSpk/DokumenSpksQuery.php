@@ -32,7 +32,6 @@ class DokumenSpksQuery extends Query
                 'name' => 'limit',
                 'type' => Type::int(),
                 'description' => 'Limit the number of results',
-                'defaultValue' => 10,
             ],
             'offset' => [
                 'name' => 'offset',
@@ -51,9 +50,11 @@ class DokumenSpksQuery extends Query
             $query->where('tim_pemrakarsa', $args['tim_pemrakarsa']);
         }
 
+        if (isset($args['limit'])) {
+            $query->offset($args['offset'])->limit($args['limit']);
+        }
+
         return $query->with(['dokumenJaminans'])
-            ->offset($args['offset'])
-            ->limit($args['limit'])
             ->get()
             ->each(function ($dokumen) {
                 $dokumen->spk = json_decode($dokumen->spk);

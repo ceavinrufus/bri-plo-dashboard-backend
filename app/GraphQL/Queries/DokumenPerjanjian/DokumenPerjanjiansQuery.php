@@ -32,7 +32,6 @@ class DokumenPerjanjiansQuery extends Query
                 'name' => 'limit',
                 'type' => Type::int(),
                 'description' => 'Limit the number of results',
-                'defaultValue' => 10,
             ],
             'offset' => [
                 'name' => 'offset',
@@ -51,9 +50,11 @@ class DokumenPerjanjiansQuery extends Query
             $query->where('tim_pemrakarsa', $args['tim_pemrakarsa']);
         }
 
-        return $query->offset($args['offset'])
-            ->limit($args['limit'])
-            ->get()
+        if (isset($args['limit'])) {
+            $query->offset($args['offset'])->limit($args['limit']);
+        }
+
+        return $query->get()
             ->each(function ($dokumen) {
                 $dokumen->spk = json_decode($dokumen->spk);
                 $dokumen->pic_legal = json_decode($dokumen->pic_legal);

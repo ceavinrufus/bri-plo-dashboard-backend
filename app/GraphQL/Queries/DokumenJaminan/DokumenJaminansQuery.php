@@ -26,7 +26,6 @@ class DokumenJaminansQuery extends Query
                 'name' => 'limit',
                 'type' => Type::int(),
                 'description' => 'Limit the number of results',
-                'defaultValue' => 10,
             ],
             'offset' => [
                 'name' => 'offset',
@@ -39,10 +38,13 @@ class DokumenJaminansQuery extends Query
 
     public function resolve($root, $args)
     {
-        return DokumenJaminan::query()
-            ->offset($args['offset'])
-            ->limit($args['limit'])
-            ->get()
+        $query = DokumenJaminan::query();
+
+        if (isset($args['limit'])) {
+            $query->offset($args['offset'])->limit($args['limit']);
+        }
+
+        return $query->get()
             ->each(function ($dokumen) {
                 $dokumen->nilai = json_decode($dokumen->nilai);
             });

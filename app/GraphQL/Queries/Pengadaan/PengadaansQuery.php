@@ -31,7 +31,6 @@ class PengadaansQuery extends Query
                 'name' => 'limit',
                 'type' => Type::int(),
                 'description' => 'Limit the number of results',
-                'defaultValue' => 10,
             ],
             'offset' => [
                 'name' => 'offset',
@@ -50,9 +49,11 @@ class PengadaansQuery extends Query
             $query->where('departemen', $args['departemen']);
         }
 
+        if (isset($args['limit'])) {
+            $query->offset($args['offset'])->limit($args['limit']);
+        }
+
         return $query->with(['nodinPlos', 'nodinUsers', 'nodinIpPengadaans'])
-            ->offset($args['offset'])
-            ->limit($args['limit'])
             ->get()
             ->each(function ($pengadaan) {
                 $pengadaan->nodin_plos = $pengadaan->nodinPlos;

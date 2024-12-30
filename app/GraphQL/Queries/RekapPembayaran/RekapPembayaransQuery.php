@@ -27,7 +27,6 @@ class RekapPembayaransQuery extends Query
                 'name' => 'limit',
                 'type' => Type::int(),
                 'description' => 'Limit the number of results',
-                'defaultValue' => 10,
             ],
             'offset' => [
                 'name' => 'offset',
@@ -42,10 +41,11 @@ class RekapPembayaransQuery extends Query
     {
         $query = RekapPembayaran::query();
 
+        if (isset($args['limit'])) {
+            $query->offset($args['offset'])->limit($args['limit']);
+        }
 
-        return $query->offset($args['offset'])
-            ->limit($args['limit'])
-            ->get()
+        return $query->get()
             ->each(function ($rekapPembayaran) {
                 $rekapPembayaran->spk = json_decode($rekapPembayaran->spk);
                 $rekapPembayaran->invoice = json_decode($rekapPembayaran->invoice);

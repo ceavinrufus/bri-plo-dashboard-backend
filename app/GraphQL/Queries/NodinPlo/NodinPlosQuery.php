@@ -26,7 +26,6 @@ class NodinPlosQuery extends Query
                 'name' => 'limit',
                 'type' => Type::int(),
                 'description' => 'Limit the number of results',
-                'defaultValue' => 10,
             ],
             'offset' => [
                 'name' => 'offset',
@@ -39,9 +38,12 @@ class NodinPlosQuery extends Query
 
     public function resolve($root, $args)
     {
-        return NodinPlo::query()
-            ->offset($args['offset'])
-            ->limit($args['limit'])
-            ->get();
+        $query = NodinPlo::query();
+
+        if (isset($args['limit'])) {
+            $query->offset($args['offset'])->limit($args['limit']);
+        }
+
+        return $query->get();
     }
 }
