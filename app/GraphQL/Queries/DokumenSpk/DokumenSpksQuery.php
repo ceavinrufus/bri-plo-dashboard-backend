@@ -12,7 +12,7 @@ class DokumenSpksQuery extends Query
 {
     protected $attributes = [
         'name' => 'dokumen_spks',
-        'description' => 'A query to get a list of Dokumen SPKs, optionally filtered by tim pemrakarsa'
+        'description' => 'A query to get a list of Dokumen SPKs, optionally filtered by tim pemrakarsa or department',
     ];
 
     public function type(): Type
@@ -27,6 +27,11 @@ class DokumenSpksQuery extends Query
                 'name' => 'tim_pemrakarsa',
                 'type' => Type::string(),
                 'description' => 'Filter by tim pemrakarsa',
+            ],
+            'department' => [
+                'name' => 'department',
+                'type' => Type::string(),
+                'description' => 'Filter by department',
             ],
             'limit' => [
                 'name' => 'limit',
@@ -46,14 +51,26 @@ class DokumenSpksQuery extends Query
     {
         $query = DokumenSpk::query();
 
+        // Filter by tim_pemrakarsa
         if (isset($args['tim_pemrakarsa'])) {
             $query->where('tim_pemrakarsa', $args['tim_pemrakarsa']);
         }
 
+        // Filter by department
+        if (isset($args['department'])) {
+            if ($args['department'] === 'bcp') {
+                $query->whereIn('tim_pemrakarsa', ['bcd', 'bcr']);
+            } elseif ($args['department'] === 'igp') {
+                $query->whereIn('tim_pemrakarsa', ['pts', 'ptg', 'ptt']);
+            }
+        }
+
+        // Apply limit and offset if provided
         if (isset($args['limit'])) {
             $query->offset($args['offset'])->limit($args['limit']);
         }
 
+        // Process and return the data
         return $query->with(['dokumenJaminans'])
             ->get()
             ->each(function ($dokumen) {
