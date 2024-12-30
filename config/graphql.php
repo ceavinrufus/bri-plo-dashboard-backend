@@ -141,6 +141,7 @@ return [
         'DokumenPerjanjian' => App\GraphQL\Types\DokumenPerjanjianType::class,
         'ProsesPengadaan' => App\GraphQL\Types\ProsesPengadaanType::class,
         'RekapPembayaran' => App\GraphQL\Types\RekapPembayaranType::class,
+        'JatuhTempoDokumenSpk' => App\GraphQL\Types\JatuhTempoDokumenSpkType::class
     ],
 
     // This callable will be passed the Error object for each errors GraphQL catch.

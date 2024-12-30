@@ -49,4 +49,9 @@ class DokumenSpk extends Model
     {
         return $this->hasMany(DokumenJaminan::class);
     }
+
+    public function jatuhTempos(): HasMany
+    {
+        return $this->hasMany(JatuhTempoDokumenSpk::class);
+    }
 }

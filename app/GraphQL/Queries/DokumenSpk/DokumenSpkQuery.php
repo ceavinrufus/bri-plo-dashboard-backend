@@ -38,6 +38,7 @@ class DokumenSpkQuery extends Query
         $dokumen->pic_pengadaan = json_decode($dokumen->pic_pengadaan);
         $dokumen->dokumen_pelengkap = json_decode($dokumen->dokumen_pelengkap);
         $dokumen->dokumen_yang_dikembalikan = json_decode($dokumen->dokumen_yang_dikembalikan);
+        $dokumen->jatuh_tempos = json_decode($dokumen->jatuhTempos);
         $dokumen->dokumen_jaminans = $dokumen->dokumenJaminans->map(function ($jaminan) {
             $jaminan->nilai = json_decode($jaminan->nilai);
             return $jaminan;

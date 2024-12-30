@@ -6,6 +6,7 @@ use App\Models\Department;
 use App\Models\DokumenJaminan;
 use App\Models\DokumenPerjanjian;
 use App\Models\DokumenSPK;
+use App\Models\JatuhTempoDokumenSpk;
 use App\Models\NodinIpPengadaan;
 use App\Models\NodinPlo;
 use App\Models\NodinUser;
@@ -53,18 +54,19 @@ class DatabaseSeeder extends Seeder
         //     'email' => 'ceavinr@gmail.com',
         // ]);
 
-        // User::factory()->admin()->create([
-        //     'name' => 'Admin',
-        //     'pn' => '90175686',
-        //     'email' => 'ceavin.dev@gmail.com',
-        // ]);
+        User::factory()->admin()->create([
+            'name' => 'Admin',
+            'pn' => '90175686',
+            'email' => 'ceavin.dev@gmail.com',
+        ]);
 
         // Pengadaan::factory(10)->create();
         // NodinPlo::factory(20)->create();
         // NodinUser::factory(20)->create();
         // NodinIpPengadaan::factory(20)->create();
 
-        // DokumenSPK::factory(10)->create();
+        DokumenSPK::factory(10)->create();
+        JatuhTempoDokumenSpk::factory(10)->create();
         // DokumenJaminan::factory(10)->create();
 
         // DokumenPerjanjian::factory(10)->create();
