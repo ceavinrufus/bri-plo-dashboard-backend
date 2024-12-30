@@ -63,9 +63,9 @@ class RekapPembayaranType extends GraphQLType
                 'description' => 'The SPK details',
                 'rules' => ['required']
             ],
-            'pelaksana_pekerjaan' => [
+            'vendor' => [
                 'type' => Type::string(),
-                'description' => 'The executor of the work',
+                'description' => 'The vendor',
                 'rules' => ['required']
             ],
             'tkdn' => [
