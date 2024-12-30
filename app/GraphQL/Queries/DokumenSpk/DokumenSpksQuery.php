@@ -62,6 +62,8 @@ class DokumenSpksQuery extends Query
                 $query->whereIn('tim_pemrakarsa', ['bcd', 'bcr']);
             } elseif ($args['department'] === 'igp') {
                 $query->whereIn('tim_pemrakarsa', ['pts', 'ptg', 'ptt']);
+            } else {
+                $query->whereRaw('1 = 0');
             }
         }
 
