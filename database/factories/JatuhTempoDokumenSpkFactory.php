@@ -16,8 +16,8 @@ class JatuhTempoDokumenSpkFactory extends Factory
 
         return [
             'keterangan' => $this->faker->sentence,
-            'tanggal_mulai' => $this->faker->date,
-            'tanggal_akhir' => $this->faker->date,
+            'tanggal_mulai' => $tanggalMulai = $this->faker->dateTimeBetween('-1 year', 'now'),
+            'tanggal_akhir' => $this->faker->dateTimeBetween($tanggalMulai, '+1 year'),
             'dokumen_spk_id' =>  $this->faker->randomElement($dokumenIDs), // Use existing Dokumen ID
         ];
     }

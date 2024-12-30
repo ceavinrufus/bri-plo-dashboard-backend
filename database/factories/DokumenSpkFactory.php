@@ -57,6 +57,7 @@ class DokumenSpkFactory extends Factory
             'penerima_dokumen' => $this->faker->optional()->name,
             'pic_legal_id' => $this->faker->randomElement($userIDs),
             'catatan' => $this->faker->optional()->text,
+            'is_pekerjaan_selesai' => $this->faker->optional()->boolean
         ];
     }
 }

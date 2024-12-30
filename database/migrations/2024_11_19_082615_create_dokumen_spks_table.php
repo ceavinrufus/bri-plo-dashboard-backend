@@ -34,6 +34,7 @@ return new class extends Migration
             $table->string('penerima_dokumen')->nullable();
             $table->foreignId('pic_legal_id')->nullable()->constrained('users');
             $table->text('catatan')->nullable();
+            $table->boolean('is_pekerjaan_selesai')->nullable();
             $table->timestamps();
         });
     }

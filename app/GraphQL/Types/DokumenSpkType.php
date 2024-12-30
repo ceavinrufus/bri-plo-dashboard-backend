@@ -128,6 +128,11 @@ class DokumenSpkType extends GraphQLType
                 'description' => 'The notes',
                 'rules' => ['required']
             ],
+            'is_pekerjaan_selesai' => [
+                'type' => Type::boolean(),
+                'description' => 'Indicates if the work is completed',
+                'rules' => ['required']
+            ],
             'jatuh_tempos' => [
                 'type' => Type::listOf(GraphQL::type('JatuhTempoDokumenSpk')),
                 'description' => 'List of jatuh tempos of the Dokumen SPK'

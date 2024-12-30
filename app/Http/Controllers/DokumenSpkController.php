@@ -92,6 +92,7 @@ class DokumenSpkController extends Controller
                         'penerima_dokumen' => $data['penerima_dokumen'] ?? null,
                         'pic_legal_id' => $data['pic_legal_id'] ?? null,
                         'catatan' => $data['catatan'] ?? null,
+                        'is_pekerjaan_selesai' => $data['is_pekerjaan_selesai'] ?? null,
                     ];
 
                     // Create a new DokumenSpk record
@@ -182,6 +183,7 @@ class DokumenSpkController extends Controller
             'penerima_dokumen' => 'nullable|string|max:255',
             'pic_legal_id' => 'nullable|exists:users,id',
             'catatan' => 'nullable|string|max:255',
+            'is_pekerjaan_selesai' => 'nullable|boolean',
             'dokumen_jaminans' => 'nullable|array',
             'dokumen_jaminans.*.type' => 'required_with:dokumen_jaminans|string|max:255',
             'dokumen_jaminans.*.tanggal_diterima' => 'nullable|date',
@@ -251,6 +253,7 @@ class DokumenSpkController extends Controller
             'penerima_dokumen' => 'nullable|string|max:255',
             'pic_legal_id' => 'nullable|exists:users,id',
             'catatan' => 'nullable|string|max:255',
+            'is_pekerjaan_selesai' => 'nullable|boolean',
             'dokumen_jaminans' => 'nullable|array',
             'dokumen_jaminans.*.id' => 'nullable|exists:dokumen_jaminans,id',
             'dokumen_jaminans.*.type' => 'required_with:dokumen_jaminans|string|max:255',
