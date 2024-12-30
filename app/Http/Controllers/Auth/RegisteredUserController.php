@@ -33,7 +33,7 @@ class RegisteredUserController extends Controller
         $user = User::create([
             'name' => $request->name,
             'pn' => $request->pn,
-            'role' => 'guest',
+            'role' => 'maker',
             'departemen' => $request->departemen,
             'tim' => $request->tim,
             'email' => $request->email,
