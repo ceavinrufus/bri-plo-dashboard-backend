@@ -10,6 +10,7 @@ use App\Http\Controllers\PengadaanController;
 use App\Http\Controllers\ProjectController;
 use App\Http\Controllers\RekapPembayaranController;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\JatuhTempoDokumenSpkController;
 
 Route::middleware(['auth:sanctum'])->get('/user', function (Request $request) {
     return $request->user();
@@ -65,3 +66,9 @@ Route::post('/rekap-pembayaran/store', [RekapPembayaranController::class, 'store
 Route::put('/rekap-pembayaran/update/{rekapPembayaran}', [RekapPembayaranController::class, 'update']);
 Route::delete('/rekap-pembayaran/delete/{rekapPembayaran}', [RekapPembayaranController::class, 'destroy']);
 Route::post('/rekap-pembayaran/import', [RekapPembayaranController::class, 'import']);
+
+// Jatuh Tempo Dokumen SPK
+Route::get('/jatuh-tempo-dokumen-spk', [JatuhTempoDokumenSpkController::class, 'index'])->name('jatuh-tempo-dokumen-spk.index');
+Route::post('/jatuh-tempo-dokumen-spk/store', [JatuhTempoDokumenSpkController::class, 'store'])->name('jatuh-tempo-dokumen-spk.store');
+Route::put('/jatuh-tempo-dokumen-spk/update/{jatuhTempoDokumenSpk}', [JatuhTempoDokumenSpkController::class, 'update'])->name('jatuh-tempo-dokumen-spk.update');
+Route::delete('/jatuh-tempo-dokumen-spk/delete/{jatuhTempoDokumenSpk}', [JatuhTempoDokumenSpkController::class, 'destroy'])->name('jatuh-tempo-dokumen-spk.destroy');

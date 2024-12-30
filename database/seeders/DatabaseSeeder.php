@@ -65,8 +65,8 @@ class DatabaseSeeder extends Seeder
         // NodinUser::factory(20)->create();
         // NodinIpPengadaan::factory(20)->create();
 
-        DokumenSPK::factory(10)->create();
-        JatuhTempoDokumenSpk::factory(10)->create();
+        // DokumenSPK::factory(10)->create();
+        // JatuhTempoDokumenSpk::factory(10)->create();
         // DokumenJaminan::factory(10)->create();
 
         // DokumenPerjanjian::factory(10)->create();

@@ -14,6 +14,7 @@ class JatuhTempoDokumenSpk extends Model
         'keterangan', // String
         'tanggal_mulai', // Date
         'tanggal_akhir', // Date
+        'dokumen_spk_id'
     ];
 
     public function dokumenSpk(): BelongsTo
